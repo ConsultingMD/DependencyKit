@@ -51,35 +51,29 @@ class NilComponent: ComponentProtocol, Parented {
     var typeErasedParent: Parented { parent }
 }
 
-class Component<ParentType, InitRequirementsTuple>: ComponentProtocol where ParentType: ComponentProtocol, ParentType: Parented {
+class Component<ParentType>: ComponentProtocol where ParentType: ComponentProtocol, ParentType: Parented {
 
     let parent: ParentType
-    let requirements: InitRequirementsTuple
+
+    init(parent: ParentType) {
+        self.parent = parent
+    }
+}
+
+class ExtraRequirementsComponent<ParentType, ExtraRequirementsTuple>: Component<ParentType> where ParentType: ComponentProtocol, ParentType: Parented {
+
+    let requirements: ExtraRequirementsTuple
 
     init(parent: ParentType,
-         requirements: InitRequirementsTuple) {
-        self.parent = parent
+         requirements: ExtraRequirementsTuple) {
         self.requirements = requirements
+        super.init(parent: parent)
     }
-
 }
 
-extension Component: Parented {
-    var typeErasedParent: Parented { parent }
-}
-
-// Test work
-
-protocol OptionalStorageChatDependency: Dependency {
-    var authenticatedService: AuthenticatedService { get }
-    var storage: Storage? { get }
-}
-
-class ReflectingChatComponent: Component<HomeComponent, Void>, OptionalStorageChatDependency {
-    var authenticatedService: AuthenticatedService { parent.authenticatedService }
-    var storage: Storage? { reflectedFromAncestor(key: "storage", t: Storage.self) }
-
-    func reflectedFromAncestor<T>(key: String, t: T.Type) -> T? {
+extension Component {
+    func reflectedFromAncestor<T>(key: String, type: T.Type) -> T? {
+        // You'd probably want to cache the ancestor for the key-Type
         var current: Parented = self
         var parent = current.typeErasedParent
         repeat {
@@ -91,32 +85,38 @@ class ReflectingChatComponent: Component<HomeComponent, Void>, OptionalStorageCh
     }
 }
 
+extension Component: Parented {
+    var typeErasedParent: Parented { parent }
+}
+
+// Reflection API usage.
+
+protocol OptionalStorageChatDependency: Dependency {
+    var authenticatedService: AuthenticatedService { get }
+    var storage: Storage? { get }
+}
+
+class ReflectingChatComponent: Component<HomeComponent>, OptionalStorageChatDependency {
+    var authenticatedService: AuthenticatedService { parent.authenticatedService }
+    var storage: Storage? { reflectedFromAncestor(key: "storage", type: Storage.self) }
+}
+
 
 // Usage
 
-class LoggedOutComponent: Component<NilComponent, Void>, LoggedOutDependency {
+class LoggedOutComponent: Component<NilComponent>, LoggedOutDependency {
     let unauthenticatedService = UnauthenticatedService()
     let authenticationService = AuthenticationService()
     let storage = Storage()
 }
 
 struct OtherHomeRequirements { let token: String}
-class HomeComponent: Component<LoggedOutComponent, OtherHomeRequirements>, HomeDependency {
+class HomeComponent: ExtraRequirementsComponent<LoggedOutComponent, OtherHomeRequirements>, HomeDependency {
     var token: String { requirements.token }
     var authenticatedService: AuthenticatedService { AuthenticatedService(token: token) }
 }
 
-class ChatComponent: Component<HomeComponent, Void>, ChatDependency {
+class ChatComponent: Component<HomeComponent>, ChatDependency {
     var authenticatedService: AuthenticatedService { parent.authenticatedService }
     var storage: Storage { parent.parent.storage } // in theory we could codegen (or runtime) an 'any-ancestor'
-
-    func test<T>(key: String, t: T.Type) -> T? {
-        if let value = Mirror(reflecting: self).descendant(key) as? T { return value }
-        return nil
-    }
-
-    func testTest() {
-        let x = test(key: "storage", t: Storage.self)
-        x // Storage?
-    }
 }
