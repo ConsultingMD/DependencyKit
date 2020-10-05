@@ -12,7 +12,9 @@ struct AuthenticatedService{
     let token: String
 }
 
-struct Storage {}
+struct Storage {
+    let location = "disk"
+}
 
 // Dependency definitions
 
@@ -120,3 +122,16 @@ class ChatComponent: Component<HomeComponent>, ChatDependency {
     var authenticatedService: AuthenticatedService { parent.authenticatedService }
     var storage: Storage { parent.parent.storage } // in theory we could codegen (or runtime) an 'any-ancestor'
 }
+
+// Test
+
+let loggedOutComponent = LoggedOutComponent(parent: NilComponent())
+loggedOutComponent.authenticationService.tryAuth { (success, value) in
+    if let value = value, success {
+        let homeComponent = HomeComponent(parent: loggedOutComponent, requirements: OtherHomeRequirements(token: value))
+        let chatComponent = ChatComponent(parent: homeComponent)
+        print(chatComponent.storage.location)
+    }
+}
+
+
