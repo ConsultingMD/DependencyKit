@@ -54,9 +54,7 @@ class NilComponent: ComponentProtocol, Parented {
 }
 
 class Component<ParentType>: ComponentProtocol where ParentType: ComponentProtocol, ParentType: Parented {
-
     let parent: ParentType
-
     init(parent: ParentType) {
         self.parent = parent
     }
@@ -73,6 +71,8 @@ class ExtraRequirementsComponent<ParentType, ExtraRequirementsTuple>: Component<
     }
 }
 
+
+// reflected api impl
 extension Component {
     func reflectedFromAncestor<T>(key: String, type: T.Type) -> T? {
         // You'd probably want to cache the ancestor for the key-Type
@@ -89,6 +89,22 @@ extension Component {
 
 extension Component: Parented {
     var typeErasedParent: Parented { parent }
+}
+
+// dyanmic lookup api. slightly better than reflection. requires extra storage.
+@dynamicMemberLookup
+class DynamicAncestorSelector<C: ComponentProtocol, P: ComponentProtocol, R, D: Dependency> {
+    private let component: C
+    init?(component: C, parent: P?) {
+        guard component !== parent else { return nil }
+        self.component = component
+    }
+
+    subscript<R>(dynamicMember property: String) -> R? {
+        // can't use keypath as can't modify to point to new type.
+        // we'd have to store a dict of name-type: dep.
+        return nil
+    }
 }
 
 // Reflection API usage.
