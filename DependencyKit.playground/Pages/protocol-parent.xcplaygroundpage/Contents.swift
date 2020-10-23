@@ -127,12 +127,17 @@ struct AuthenticatedService {
 
 // INTERFACE
 
-protocol LoggedOutProvisions: Provisions {
+protocol StartupProvisions: Provisions {
+    var startupTime: Date { get }
+}
+
+protocol LoggedOutProvisions: StartupProvisions {
     var urlService: URLService { get }
     var identityService: IdentityService { get }
 }
 
 protocol LoggedInProvisions: Provisions {
+    var urlService: URLService { get }
     var authenticatedService: AuthenticatedService { get }
 }
 
@@ -143,6 +148,7 @@ protocol ProfileProvisions: Provisions {
 
 protocol SettingsProvisions: Provisions {
     var systemPermissionManager: SystemPermissionManager { get }
+    var startupTime: Date { get }
 }
 
 // AUTOGEN EXTENSIONS
@@ -157,44 +163,102 @@ protocol SettingsProvisions: Provisions {
 //     func say(_ string: String) { requirements.say(string) }
 // }
 
-extension LoggedInProvisions {
-    // fundamentally if we want to write code w/ extensions it *will* have to have this as an autogen step.
-    var urlService: URLService {
-        // is there a way to get this from parent?
-        UnsecuredService()
+// Path 0:
+// - extend every provision to provide all of its subtrees requirements from their impls.
+// - extend the ComponentObject to fetch non-subclassed definitions from its parent.
+//      - but the ComponentObject can't be parametrized with a concrete impl (or you'd have to write one per path to node).
+//      - so this requires the Requirements generic parameter protocol to be known to implement a protocol asserting it providers the child requirements.
+//          - this may not be possible
+//      - the impl also needs to be extended somehow to call to the requirements IFF it lacks implementation.
+//          - this seems to require per-impl code.
+//         - caveat, if replacing your own implemented protocol's extension provision is possible, this can be skipped.
+
+// Path 1:
+// - extend every component to have all of its subtree's requirements.
+// - this would also mean extending the requirement extension to satisfy it if the it's not already used at that level. (?)
+//extension LoggedOutComponent { // we could have a protocol defining all non-immediate requirements that it fills. but probably not required.
+//    // as the logged out component doesn't use this directly it doesn't define it.
+//    // we must autogen a definition to pass it to the child.
+//    var urlService: URLService {
+//        requirements.urlService
+//    }
+//
+//    var startupTime: Date {
+//        requirements.startupTime
+//    }
+//}
+
+// Path 2:
+// - Each requirement independent, with a protocol name as a token.
+
+// Promising. breaking out into token-base.
+
+// could these be named tokens?
+protocol StartupTimeProviding {
+    var startupTime: Date { get }
+}
+
+protocol Parented {
+    associatedtype ParentRequirements
+    var parentRequirements: ParentRequirements { get }
+}
+extension Parented where ParentRequirements: StartupTimeProviding { // would a class implementing this still be able to provide an override?
+    var startupTime: Date {
+        parentRequirements.startupTime
     }
 }
 
+class TestRootNode: StartupTimeProviding {
+    var startupTime = Date()
+}
+
+class TestChildNode: Parented {
+    typealias ParentRequirements = StartupTimeProviding
+    let parentRequirements: StartupTimeProviding
+    init(parent: StartupTimeProviding) {
+        parentRequirements = parent
+    }
+//    let startupTime = Date.init(timeIntervalSince1970: 0)
+}
+
+extension TestChildNode {
+    var startupTime: Date { parentRequirements.startupTime }
+}
+
+let root = TestRootNode()
+let child = TestChildNode(parent: root)
+print(child.startupTime)
 
 // IMPL
-
-class DevelopmentRootComponent<Requirements: NilProvisions>: ComponentObject<Requirements>,
-                                                             LoggedOutProvisions {
-    let urlService: URLService = UnsecuredService()
-    lazy var identityService = IdentityService(urlService: urlService)
-}
-
-class ProductionRootComponent<Requirements: NilProvisions>: ComponentObject<Requirements>,
-                                                            LoggedOutProvisions {
-    let urlService: URLService = SecuredService()
-    lazy var identityService = IdentityService(urlService: urlService)
-}
-
-class LoggedOutComponent<Requirements: LoggedOutProvisions>: ComponentObject<Requirements>,
-                                                             LoggedInProvisions {
-    lazy var authenticatedService = AuthenticatedService(token: IdentityToken(), urlService: requirements.urlService)
-}
-
-class LoggedInComponent<Requirements: LoggedInProvisions>: ComponentObject<Requirements>,
-                                                           ProfileProvisions, SettingsProvisions {
-    lazy var urlService = requirements.urlService
-    let localFileSystemWriter = LocalFileSystemWriter()
-    let systemPermissionManager = SystemPermissionManager()
-}
-
-
-// USAGE
-
-let rootComponent = DevelopmentRootComponent(requirements: NilComponentProvisions())
-let loggedOutComponent = LoggedOutComponent(requirements: rootComponent)
-//let loggedInComponent = LoggedInComponent(requirements: loggedOutComponent)
+//
+//class DevelopmentRootComponent<Requirements: NilProvisions>: ComponentObject<Requirements>,
+//                                                             LoggedOutProvisions {
+//    let startupTime = Date()
+//    let urlService: URLService = UnsecuredService()
+//    lazy var identityService = IdentityService(urlService: urlService)
+//}
+//
+//class ProductionRootComponent<Requirements: NilProvisions>: ComponentObject<Requirements>,
+//                                                            LoggedOutProvisions {
+//    let startupTime = Date()
+//    let urlService: URLService = SecuredService()
+//    lazy var identityService = IdentityService(urlService: urlService)
+//}
+//
+//class LoggedOutComponent<Requirements: LoggedOutProvisions>: ComponentObject<Requirements>,
+//                                                             LoggedInProvisions {
+//    lazy var authenticatedService = AuthenticatedService(token: IdentityToken(), urlService: requirements.urlService)
+//}
+//
+////class LoggedInComponent<Requirements: LoggedInProvisions>: ComponentObject<Requirements>,
+////                                                           ProfileProvisions, SettingsProvisions {
+////    let localFileSystemWriter = LocalFileSystemWriter()
+////    let systemPermissionManager = SystemPermissionManager()
+////}
+//
+//
+//// USAGE
+//
+//let rootComponent = DevelopmentRootComponent(requirements: NilComponentProvisions())
+//let loggedOutComponent = LoggedOutComponent(requirements: rootComponent)
+////let loggedInComponent = LoggedInComponent(requirements: loggedOutComponent)

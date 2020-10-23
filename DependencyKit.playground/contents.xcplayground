@@ -3,5 +3,7 @@
     <pages>
         <page name='protocol-parent'/>
         <page name='basic-parent'/>
+        <page name='token-base-test'/>
+        <page name='token-base'/>
     </pages>
 </playground>

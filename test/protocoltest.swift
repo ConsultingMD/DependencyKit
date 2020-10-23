@@ -157,7 +157,7 @@ protocol SettingsProvisions: Provisions {
 //     func say(_ string: String) { requirements.say(string) }
 // }
 
-extension LoggedInProvisions {
+extension LoggedOutComponent: LoggedInProvisions {
     // fundamentally if we want to write code w/ extensions it *will* have to have this as an autogen step.
     var urlService: URLService {
         // is there a way to get this from parent?
