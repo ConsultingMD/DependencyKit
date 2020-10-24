@@ -62,7 +62,7 @@ protocol LevelThreeDependency:
 class RootComponent: Component<EmptyDependency>,
                      ChildDependency {
     let name = "Root"
-    let startupTime = Date()
+    let startupTime = Date(timeIntervalSince1970: 0)
 }
 
 class ChildComponent<T: ChildDependency>: Component<T>,
@@ -81,15 +81,15 @@ class LevelThreeComponent<T: LevelThreeDependency>: Component<T> {
 // MARK: Codegen, type extension
 // TODO: ... with extensions
 extension RootComponent: DIStartupTime {}
-extension ChildDependency {
-    var startupTime: Date { self.startupTime }
+
+extension ChildComponent: DIStartupTime where T: EmptyDependency {
+    var startupTime: Date { Date() }
 }
-//extension ChildComponent: DIStartupTime {}
 extension LevelTwoDependency {
-    var startupTime: Date { self.startupTime }
+    // SOMEHOW, we need to get a value into the dependency
 }
-extension LevelTwoComponent: DIStartupTime {
-    var startupTime: Date { dependency.startupTime } // THESE INFIN LOOP
+extension LevelTwoComponent: DIStartupTime where LevelTwoComponent.DependencyType: LevelTwoDependency {
+    var startupTime: Date { dependency.startupTime }
 }
 
 // MARK: Usage
