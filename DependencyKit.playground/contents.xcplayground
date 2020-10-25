@@ -5,5 +5,7 @@
         <page name='basic-parent'/>
         <page name='token-base-test'/>
         <page name='token-base'/>
+        <page name='token-base-dependency-mod'/>
+        <page name='back-to-basics'/>
     </pages>
 </playground>

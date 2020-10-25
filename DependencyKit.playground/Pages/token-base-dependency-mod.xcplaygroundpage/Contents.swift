@@ -7,12 +7,12 @@ protocol EmptyDependency {}
 class EmptyComponent: EmptyDependency {}
 
 protocol DependencyContainer {
-    associatedtype DependencyType
-    var dependency: DependencyType { get }
+    associatedtype T
+    var dependency: T { get }
 }
 
 class Component<T>: DependencyContainer {
-    typealias DependencyType = T
+    typealias T = T
     let dependency: T
     init(dependency: T) {
         self.dependency = dependency
@@ -32,28 +32,28 @@ protocol DIMood { var mood: Mood { get } }
 // MARK: - Client Code
 
 // MARK: Codegen, Type Tokens
-extension DependencyContainer where DependencyType: DIName {
+extension DependencyContainer where T: DIName {
     var name: String { dependency.name }
 }
-extension DependencyContainer where DependencyType: DIStartupTime {
+extension DependencyContainer where T: DIStartupTime {
     var startupTime: Date { dependency.startupTime }
 }
-extension DependencyContainer where DependencyType: DIMood {
+extension DependencyContainer where T: DIMood {
     var mood: Mood { dependency.mood }
 }
 
 // MARK: Definitions
 
-protocol ChildDependency:
+protocol ChildDependency: DependencyContainer,
     DIName
 {}
 
-protocol LevelTwoDependency:
+protocol LevelTwoDependency: DependencyContainer,
     DIName,
     DIMood
 {}
 
-protocol LevelThreeDependency:
+protocol LevelThreeDependency: DependencyContainer,
 //    DIStartupTime,
     DIName
 {}
@@ -80,24 +80,42 @@ class LevelThreeComponent<T: LevelThreeDependency>: Component<T> {
 
 // MARK: Codegen, type extension
 // TODO: ... with extensions
-extension RootComponent: DIStartupTime {}
 
-extension ChildComponent: DIStartupTime where T: EmptyDependency {
-    var startupTime: Date { Date() }
-}
-extension LevelTwoDependency {
-    // SOMEHOW, we need to get a value into the dependency
-}
-//extension LevelTwoComponent: DIStartupTime where LevelTwoComponent.DependencyType: LevelTwoDependency {
+//// That this works to extend level 2 to meet LevelThreeDependency, suggests this could be doable
+//extension LevelTwoComponent: DIStartupTime where T: LevelTwoDependency {
+//    var startupTime: Date { Date() }
+//}
+
+//// The following two extensions are sufficient to make LevelTwoComponent conform to LevelThreeDependency
+//extension LevelTwoDependency {
+//    var startupTime: Date { Date() }
+//}
+//extension LevelTwoComponent: DIStartupTime where T: LevelTwoDependency {
 //    var startupTime: Date { dependency.startupTime }
 //}
+
+//extension ChildDependency where T == RootComponent {
+//    var startupTime: Date { dependency.startupTime }
+//}
+//
+//extension LevelTwoDependency where T: ChildDependency, T.T: RootComponent {
+//    var startupTime: Date { dependency.startupTime }
+//}
+//extension LevelTwoComponent: DIStartupTime where T: LevelTwoDependency, T.T: ChildDependency, T.T.T: RootComponent {
+//    var startupTime: Date { dependency.startupTime }
+//}
+//
+//extension RootComponent: DIStartupTime {}
+//extension ChildComponent: DIStartupTime where T: DIStartupTime {}
+//extension LevelTwoComponent: DIStartupTime where T: DIStartupTime {}
+
 
 // MARK: Usage
 
 let root = RootComponent(dependency: EmptyComponent())
 let child = ChildComponent(dependency: root)
 let levelTwo = LevelTwoComponent(dependency: child)
-//let levelThree = LevelThreeComponent(dependency: levelTwo)
+let levelThree = LevelThreeComponent(dependency: levelTwo)
 
 print(child.name)
 print(levelTwo.name)
@@ -106,11 +124,3 @@ print(levelTwo.mood)
 
 //: [Next](@next)
 
-
-//extension ChildComponent where T == RootComponent {
-//    var startupTime: Date { dependency.startupTime }
-//}
-
-//extension LevelTwoComponent where T == ChildComponent<RootComponent> {
-//    var startupTime: Date { dependency.startupTime }
-//}
