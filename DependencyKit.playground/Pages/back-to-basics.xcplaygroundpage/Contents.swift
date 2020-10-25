@@ -3,9 +3,14 @@
 import Foundation
 
 // MARK: Framework
-protocol Dependency {}
+protocol Dependency {
+    associatedtype T
+    var dependency: T { get }
+}
 protocol EmptyDependency: Dependency {}
-class EmptyComponent: EmptyDependency {}
+class EmptyComponent: EmptyDependency {
+    lazy var dependency = self
+}
 
 class Component<T>: Dependency {
     let dependency: T
@@ -23,6 +28,24 @@ protocol DIStartupTime { var startupTime: Date { get } }
 protocol DIName { var name: String { get } }
 protocol DIRootName { var rootName: String { get } }
 protocol DIMood { var mood: Mood { get } }
+protocol DIFinalThoughts { var finalThoughts: String { get } }
+
+
+extension Dependency where T: DIRootName {
+    var rootName: String { dependency.rootName }
+}
+extension Dependency where T: DIName {
+    var name: String { dependency.name }
+}
+extension Dependency where T: DIStartupTime {
+    var startupTime: Date { dependency.startupTime }
+}
+extension Dependency where T: DIMood {
+    var mood: Mood { dependency.mood }
+}
+extension Dependency where T: DIFinalThoughts {
+    var finalThoughts: String { dependency.finalThoughts }
+}
 
 
 // MARK: Use
@@ -33,9 +56,10 @@ class RootComponent: Component<EmptyDependency>,
     let rootName = "Root"
     let name = "Root"
     let startupTime = Date(timeIntervalSince1970: 0)
+    let finalThoughts = "This feels rather verbose."
 }
 
-extension RootComponent: LevelOneChildDependencies {}
+extension RootComponent: LevelOneFill {}
 
 // MARK: LevelOne
 
@@ -43,10 +67,10 @@ protocol LevelOneDependency: Dependency,
     DIName,
     DIRootName
 {}
-protocol LevelOneChildDependencies: Dependency,
-                                    DIStartupTime {}
+// TODO: can we factor this in anywhere?
+typealias LevelOneFill = DIStartupTime & DIFinalThoughts
 
-class LevelOneComponent<T: LevelOneDependency & LevelOneChildDependencies>: Component<T>,
+class LevelOneComponent<T: LevelOneDependency & LevelOneFill>: Component<T>,
                                                 LevelTwoDependency {
     let mood = Mood.happy
     let name = "NOT ROOT"
@@ -68,12 +92,8 @@ class LevelOneComponent<T: LevelOneDependency & LevelOneChildDependencies>: Comp
 }
 
 extension LevelOneComponent:
-    DIStartupTime,
-    DIRootName
-{
-    var startupTime: Date { dependency.startupTime }
-    var rootName: String { dependency.rootName}
-}
+    LevelOneFill
+{}
 
 // MARK: LevelTwo
 
@@ -83,7 +103,8 @@ protocol LevelTwoDependency: Dependency,
     DIMood,
     DIStartupTime
 {}
-class LevelTwoComponent<T: LevelTwoDependency>: Component<T>,
+typealias LevelTwoFill = DIFinalThoughts
+class LevelTwoComponent<T: LevelTwoDependency & LevelTwoFill>: Component<T>,
                                                 LevelThreeDependency{
     func show() {
         print(
@@ -97,10 +118,16 @@ class LevelTwoComponent<T: LevelTwoDependency>: Component<T>,
             """)
     }
 }
+extension LevelTwoComponent:
+    LevelTwoFill
+{}
+
 
 // MARK: LevelThree
 
-protocol LevelThreeDependency {}
+protocol LevelThreeDependency:
+    DIFinalThoughts
+{}
 
 // MARK: Invocation
 let empty = EmptyComponent()
