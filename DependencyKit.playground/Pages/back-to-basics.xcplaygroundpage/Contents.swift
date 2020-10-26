@@ -3,6 +3,7 @@
 import Foundation
 
 // MARK: Framework
+protocol Empty{}
 protocol Dependency {
     associatedtype T
     var dependency: T { get }
@@ -20,17 +21,14 @@ class Component<T>: Dependency {
 }
 
 // MARK: Types
-enum Mood {
-    case happy
-}
-
 protocol DIStartupTime { var startupTime: Date { get } }
 protocol DIName { var name: String { get } }
 protocol DIRootName { var rootName: String { get } }
-protocol DIMood { var mood: Mood { get } }
+protocol DIMood { var mood: Bool { get } }
 protocol DIFinalThoughts { var finalThoughts: String { get } }
 
 
+// MARK: - AUTOGEN CODE
 extension Dependency where T: DIRootName {
     var rootName: String { dependency.rootName }
 }
@@ -41,14 +39,31 @@ extension Dependency where T: DIStartupTime {
     var startupTime: Date { dependency.startupTime }
 }
 extension Dependency where T: DIMood {
-    var mood: Mood { dependency.mood }
+    var mood: Bool { dependency.mood }
 }
 extension Dependency where T: DIFinalThoughts {
     var finalThoughts: String { dependency.finalThoughts }
 }
 
+protocol DependencyFill {
+    typealias Root = Empty & DIStartupTime & DIFinalThoughts
+    typealias LevelOne = Empty & DIStartupTime & DIFinalThoughts
+    typealias LevelTwo = Empty & DIFinalThoughts
+    typealias LevelThree = Empty
+}
+protocol DependencyBase {
+    typealias Root = Dependency & DependencyFill.Root
+    typealias LevelOne = Dependency & DependencyFill.LevelOne
+    typealias LevelTwo = Dependency & DependencyFill.LevelTwo
+    typealias LevelThree = Dependency & DependencyFill.LevelThree
+}
 
-// MARK: Use
+extension RootComponent: DependencyFill.Root {}
+extension LevelOneComponent: DependencyFill.LevelOne {}
+extension LevelTwoComponent: DependencyFill.LevelTwo {}
+extension LevelThreeComponent: DependencyFill.LevelThree {}
+
+// MARK: - Consumer's manual code
 
 // MARK: Root
 class RootComponent: Component<EmptyDependency>,
@@ -59,82 +74,60 @@ class RootComponent: Component<EmptyDependency>,
     let finalThoughts = "This feels rather verbose."
 }
 
-extension RootComponent: LevelOneFill {}
 
 // MARK: LevelOne
-
-protocol LevelOneDependency: Dependency,
+protocol LevelOneDependency: DependencyBase.LevelOne,
     DIName,
     DIRootName
 {}
-// TODO: can we factor this in anywhere?
-typealias LevelOneFill = DIStartupTime & DIFinalThoughts
 
-class LevelOneComponent<T: LevelOneDependency & LevelOneFill>: Component<T>,
+class LevelOneComponent<T: LevelOneDependency>: Component<T>,
                                                 LevelTwoDependency {
-    let mood = Mood.happy
-    let name = "NOT ROOT"
-
-    func show() {
-        print(
-            """
-            owned
-                mood: \(mood)
-            override:
-                name: \(dependency.name)
-            direct:
-                rootName: \(dependency.rootName)
-            indirect:
-                startupTime: \(dependency.startupTime)
-
-            """)
-    }
+    let mood = true // initial value
+    let name = "Overriden value"
 }
 
-extension LevelOneComponent:
-    LevelOneFill
-{}
-
 // MARK: LevelTwo
-
-protocol LevelTwoDependency: Dependency,
-    DIName,
-    DIRootName,
+protocol LevelTwoViewControllerDependencies:
     DIMood,
     DIStartupTime
 {}
-typealias LevelTwoFill = DIFinalThoughts
-class LevelTwoComponent<T: LevelTwoDependency & LevelTwoFill>: Component<T>,
-                                                LevelThreeDependency{
-    func show() {
-        print(
-            """
-            direct:
-                name: \(dependency.name)
-                mood: \(dependency.mood)
-                startupTime: \(dependency.startupTime)
-                rootName: \(dependency.rootName)
-
-            """)
-    }
-}
-extension LevelTwoComponent:
-    LevelTwoFill
+protocol LevelTwoViewModelDependencies:
+    DIName,
+    DIRootName,
+    DIMood
 {}
+protocol LevelTwoDependency: DependencyBase.LevelTwo,
+                             LevelTwoViewModelDependencies,
+                             LevelTwoViewControllerDependencies
+{}
+class LevelTwoComponent<T: LevelTwoDependency>: Component<T>,
+                                                LevelTwoViewModelDependencies,
+                                                LevelThreeDependency {
+    // My dependencies are exposed without further action
+}
 
 
 // MARK: LevelThree
-
-protocol LevelThreeDependency:
+protocol LevelThreeDependency: DependencyBase.LevelThree,
     DIFinalThoughts
 {}
+class LevelThreeComponent<T: LevelThreeDependency>: Component<T> {
+    func show() {
+        // carried from root
+        print(dependency.finalThoughts)
+    }
+
+}
 
 // MARK: Invocation
 let empty = EmptyComponent()
 let root = RootComponent(dependency: empty)
 let levelOne = LevelOneComponent(dependency: root)
 let levelTwo = LevelTwoComponent(dependency: levelOne)
-levelOne.show()
-levelTwo.show()
+let levelTwoDepPassedToConsumerAtThisLevel: LevelTwoViewModelDependencies = levelTwo
+print(levelTwoDepPassedToConsumerAtThisLevel.rootName)
+let levelThree = LevelThreeComponent(dependency: levelTwo)
+levelThree.show()
 
 //: [Next](@next)
