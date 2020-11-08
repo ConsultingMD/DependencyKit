@@ -12,7 +12,13 @@ protocol EmptyDependency: Dependency {}
 class EmptyComponent: EmptyDependency {
     lazy var dependency = self
 }
-
+protocol DependencyBase {
+    // This is a code generation hook.
+    // Dependencies should initially conform to this.
+    // Code generation will create a DependencyFill and corresponding DependencyBase extension type.
+    // The user code conformance will then be swapped out.
+    typealias NEW_TO_GENERATE = Dependency
+}
 class Component<T>: Dependency {
     let dependency: T
     init(dependency: T) {
@@ -51,7 +57,8 @@ protocol DependencyFill {
     typealias LevelTwo = Empty & DIFinalThoughts
     typealias LevelThree = Empty
 }
-protocol DependencyBase {
+
+extension DependencyBase {
     typealias Root = Dependency & DependencyFill.Root
     typealias LevelOne = Dependency & DependencyFill.LevelOne
     typealias LevelTwo = Dependency & DependencyFill.LevelTwo
@@ -63,7 +70,7 @@ extension LevelOneComponent: DependencyFill.LevelOne {}
 extension LevelTwoComponent: DependencyFill.LevelTwo {}
 extension LevelThreeComponent: DependencyFill.LevelThree {}
 
-// MARK: - Consumer's manual code
+// MARRK: - Consumer's manual code
 
 // MARK: Root
 class RootComponent: Component<EmptyDependency>,
