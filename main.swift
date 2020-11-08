@@ -18,10 +18,3 @@ print(levelTwoDepPassedToConsumerAtThisLevel.rootName)
 // LevelThree can only be instantiated with a component like LevelTwo, which satisfies its dependencies.
 let levelThree = LevelThreeComponent(dependency: levelTwo)
 levelThree.show()
-
-// swiftc Framework/*.swift DemoApplication/*.swift DemoApplication/GeneratedCode/*.swift main.swift
-// ./main
-// > Root
-// > Overriden value
-// > Root
-// > Could this be less verbose?
