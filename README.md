@@ -1,6 +1,7 @@
 # DependencyKit
 
 DependencyKit is an attempt to make a fully typesafe, lightweight, dependency injection framework for Swift.
+DependencyKit is inspired by Uber's excellent [Needle](https://github.com/uber/needle) framework, and aims to extend its core aim of first class type safety by avoiding a reliance on an unsafe internal runtime.
 
 ## Status
 This is a proof of concept intended to show:
@@ -26,7 +27,7 @@ This project has two primary directions of work:
 2. Fundamentals investigation
     * Generic/Protocol usage improvements. (e.g. Is it possible to remove the DependencyBase.NEW_TO_GENERATE conformance requirement for new Dependencies?)
     * Codegen minimization / simplification. (i.e. What compromises or improvements could be made to decrease the code generation burden?)
-    * Performance Profiling. (How does compile time and usage compare to other frameworks such as [Needle](https://github.com/uber/needle)? Across what project sizes?)
+    * Performance Profiling. (How does compile time and usage compare to other frameworks? Across what project sizes?)
     
 Input as issues or PRs is more than welcome.
 
