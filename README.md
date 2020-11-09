@@ -1,7 +1,6 @@
 # DependencyKit
 
 DependencyKit is an attempt to make a fully typesafe, lightweight, dependency injection framework for Swift.
-DependencyKit is inspired by Uber's excellent [Needle](https://github.com/uber/needle) framework, and aims to extend its core aim of first class type safety by avoiding a reliance on an unsafe internal runtime.
 
 ## Status
 This is a proof of concept intended to show:
@@ -40,3 +39,6 @@ Overriden value
 Root
 Could this be less verbose?
 ```
+## Related Projects
+
+DependencyKit is inspired by Uber's excellent [Needle](https://github.com/uber/needle) framework, and aims to extend its core aim of first class type safety by avoiding a reliance on an unsafe internal runtime.
