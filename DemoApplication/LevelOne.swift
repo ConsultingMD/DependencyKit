@@ -5,8 +5,9 @@ import Foundation
 // When initially manually written, this dependency conformed to DependencyBase.NEW_TO_GENERATE.
 // Code generation would switch conformances (to DependencyBase.LevelOne) once the level's 'Fills' are created.
 protocol LevelOneDependency: DependencyBase.LevelOne,
-    DIName,
-    DIRootName
+    DISessionToken,
+    DIAppName,
+    DICurrentTime
 {}
 
 // The LevelOnceComponent collects values from its dependencies, allows the Application code to override them,
@@ -14,6 +15,6 @@ protocol LevelOneDependency: DependencyBase.LevelOne,
 // LevelOneComponent provides the required fields for to LevelTwo, and so conforms to LevelTwoDependency.
 class LevelOneComponent<T: LevelOneDependency>: Component<T>,
                                                 LevelTwoDependency {
-    let mood = true // initial value
-    let name = "Overriden value"
+    let boolIndicator = true // initial value
+    let sessionToken: String? = UUID().uuidString
 }
