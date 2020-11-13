@@ -20,7 +20,7 @@ This project has two primary directions of work:
     * Code generation implementation & tooling integration. (The current 'generated code' is all hand written.)
     * Runtime dependency integration (i.e. The ability to instantiate a Component at runtime with a value known only at runtime. Auth tokens are a good usage example.)
     * Intermodule API testing. (What needs to be public? What needs to be imported? Should code generation be in module or centralized to DependencyKit?)
-    * Thread safety. (No attempt has been made to devlop a threading story. Ideally off-main instantiation should be safe for a subset of well defined cases.)
+    * Thread safety. (No attempt has been made to develop a threading story. Ideally off-main instantiation should be safe for a subset of well defined cases.)
     * API considerations & niceties. (Is the current [Types](https://github.com/adam-zethraeus/DependencyKit/blob/mainline/DemoApplication/Types.swift) configuration necessary? Is it desirable? Should property wrappers, or even codegen, be used minimize passthrough code?)
 2. **Fundamentals investigation**
     * Generic/Protocol usage improvements. (e.g. Is it possible to remove the `DependencyBase.NEW_TO_GENERATE` conformance requirement for new Dependencies?)
