@@ -30,6 +30,9 @@ This project has two primary directions of work:
 Input as issues or PRs is more than welcome.
 
 ## Demo usage
+
+Compare the following output with [main.swift](https://github.com/adam-zethraeus/DependencyKit/blob/mainline/main.swift).
+
 ```
 ❯ swiftc Framework/*.swift DemoApplication/*.swift DemoApplication/GeneratedCode/*.swift main.swift
 ❯ ./main
