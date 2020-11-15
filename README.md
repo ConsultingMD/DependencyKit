@@ -96,3 +96,5 @@ Compare the following output with [main.swift](https://github.com/adam-zethraeus
 
 DependencyKit is inspired by Uber's excellent [Needle](https://github.com/uber/needle) framework, and aims to extend its core aim of first class type safety by avoiding a reliance on an unsafe internal runtime.
 
+[Weaver](https://github.com/scribd/Weaver) is another iOS DI framework which prioritizes type safety.
+
