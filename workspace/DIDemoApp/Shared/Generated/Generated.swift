@@ -22,20 +22,20 @@ extension Dependency where T: DIMessage {
 }
 
 protocol DependencyFill {
-    typealias Root = Empty & DIStartupTime & DIMessage
-    typealias LevelOne = Empty & DIStartupTime & DIMessage
-    typealias LevelTwo = Empty  & DIStartupTime & DICurrentTime & DIMessage
-    typealias LevelThree = Empty & DISessionToken & DIAppName & DIStartupTime & DICurrentTime & DIBoolIndicator
+    typealias RootDependency = Empty & DIStartupTime & DIMessage
+    typealias LevelOneDependency = Empty & DIStartupTime & DIMessage
+    typealias LevelTwoDependency = Empty  & DIStartupTime & DICurrentTime & DIMessage
+    typealias LevelThreeDependency = Empty & DISessionToken & DIAppName & DIStartupTime & DICurrentTime & DIBoolIndicator
 }
 
-extension DependencyBase {
-    typealias Root = Dependency & DependencyFill.Root
-    typealias LevelOne = Dependency & DependencyFill.LevelOne
-    typealias LevelTwo = Dependency & DependencyFill.LevelTwo
-    typealias LevelThree = Dependency & DependencyFill.LevelThree
+extension Dependency {
+    typealias RootDependency = Dependency & DependencyFill.RootDependency
+    typealias LevelOneDependency = Dependency & DependencyFill.LevelOneDependency
+    typealias LevelTwoDependency = Dependency & DependencyFill.LevelTwoDependency
+    typealias LevelThreeDependency = Dependency & DependencyFill.LevelThreeDependency
 }
 
-extension RootComponent: DependencyFill.Root {}
-extension LevelOneComponent: DependencyFill.LevelOne {}
-extension LevelTwoComponent: DependencyFill.LevelTwo {}
-extension LevelThreeComponent: DependencyFill.LevelThree {}
+extension RootComponent: DependencyFill.RootDependency {}
+extension LevelOneComponent: DependencyFill.LevelOneDependency {}
+extension LevelTwoComponent: DependencyFill.LevelTwoDependency {}
+extension LevelThreeComponent: DependencyFill.LevelThreeDependency {}

@@ -3,9 +3,9 @@ import Foundation
 
 // Definition of what is required to instantiate the LevelOneComponent.
 // DIName and DIRootName refer to types specified in Types.swift
-// When initially manually written, this dependency conformed to DependencyBase.NEW_TO_GENERATE.
-// Code generation would switch conformances (to DependencyBase.LevelOne) once the level's 'Fills' are created.
-protocol LevelOneDependency: DependencyBase.LevelOne,
+// When initially manually written, this dependency conformed to Dependency.
+// Code generation switches conformances (to Dependency.LevelOneDependency) once the level's 'Fill' is created.
+protocol LevelOneDependency: Dependency.LevelOneDependency,
     DISessionToken,
     DIAppName,
     DICurrentTime

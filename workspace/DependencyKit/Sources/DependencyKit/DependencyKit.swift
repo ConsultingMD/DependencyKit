@@ -1,9 +1,9 @@
 import Foundation
 
-// MARK: - Internal Only
-
-/// The internal abstract base representation of a dependency type.
-/// Application code should never have to conform directly to it.
+/// **This is a code generation hook.**
+/// Dependency protocols should be initially written to conform to this `Dependency` protocol.
+/// Code generation will create a `DependencyFill` and swap conformance to a  `Dependency` extension type.
+/// e.g. `protocol MyDependency: Dependency {}` → `protocol MyDependency: Dependency.MyDependency`
 public protocol Dependency {
     associatedtype T
     var dependency: T { get }
@@ -14,14 +14,6 @@ public protocol Dependency {
 public protocol Empty {}
 
 // MARK: - Bases for application code
-
-/// Dependencies should conform to a DependencyBase, initially the NEW_TO_GENERATE codegen hook.
-public protocol DependencyBase {
-    /// This is a code generation hook.
-    /// Code generation will create a DependencyFill and corresponding DependencyBase extension type.
-    /// The user code conformance will then be swapped out.
-    typealias NEW_TO_GENERATE = Dependency
-}
 
 /// The Component base class. Components should directly inherit this.
 open class Component<T>: Dependency {

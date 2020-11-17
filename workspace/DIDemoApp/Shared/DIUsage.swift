@@ -51,7 +51,7 @@ class DIUsage {
                     protocol LevelTwoViewModelDependencies: DISessionToken, DIAppName {}
 
                 It groups these dependencies:
-                    protocol LevelTwoDependency: DependencyBase.LevelTwo,
+                    protocol LevelTwoDependency: Dependency.LevelTwoDependency,
                                                  LevelTwoViewModelDependencies,
                                                  LevelTwoViewControllerDependencies
                                                  {}
