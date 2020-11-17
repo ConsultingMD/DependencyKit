@@ -26,6 +26,7 @@ This project has two primary directions of work:
     * Generic/Protocol usage improvements.
     * Codegen minimization / simplification. (i.e. What compromises or improvements could be made to decrease the code generation burden?)
     * Performance Profiling. (How does compile time and usage compare to other frameworks? Across what project sizes?)
+
 Input as issues or PRs is more than welcome.
 
 ## Demo usage
