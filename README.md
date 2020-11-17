@@ -30,11 +30,9 @@ Input as issues or PRs is more than welcome.
 
 ## Demo usage
 
-Compare the following output with [main.swift](https://github.com/adam-zethraeus/DependencyKit/blob/mainline/main.swift).
+The [usage example](https://github.com/adam-zethraeus/DependencyKit/blob/main/workspace/DIDemoApp/Shared/DIUsage.swift) returns the following:
 
 ```
-❯ swiftc Framework/*.swift DemoApplication/*.swift DemoApplication/GeneratedCode/*.swift main.swift
-❯ ./main
     The RootComponent sets up:
         - root.appName: String                  = DependencyKit
         - root.sessionToken: String?            = nil
