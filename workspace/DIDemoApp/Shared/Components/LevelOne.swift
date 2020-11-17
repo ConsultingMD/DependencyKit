@@ -1,3 +1,4 @@
+import DependencyKit
 import Foundation
 
 // Definition of what is required to instantiate the LevelOneComponent.

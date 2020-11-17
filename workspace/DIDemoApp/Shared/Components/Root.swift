@@ -1,3 +1,4 @@
+import DependencyKit
 import Foundation
 
 // The entrypoint to the Demo Application.

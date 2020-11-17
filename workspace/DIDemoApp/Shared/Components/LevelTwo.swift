@@ -1,3 +1,4 @@
+import DependencyKit
 import Foundation
 
 // In this example a hypothetical ViewController at Level Two specifies this dependency.
