@@ -21,12 +21,11 @@ This project has two primary directions of work:
     * Runtime dependency integration (i.e. The ability to instantiate a Component at runtime with a value known only at runtime. Auth tokens are a good usage example.)
     * Intermodule API testing. (What needs to be public? What needs to be imported? Should code generation be in module or centralized to DependencyKit?)
     * Thread safety. (No attempt has been made to develop a threading story. Ideally off-main instantiation should be safe for a subset of well defined cases.)
-    * API considerations & niceties. (Is the current [Types](https://github.com/adam-zethraeus/DependencyKit/blob/mainline/DemoApplication/Types.swift) configuration necessary? Is it desirable? Should property wrappers, or even codegen, be used minimize passthrough code?)
+    * API considerations & niceties. (Is the current single use [Types](https://github.com/adam-zethraeus/DependencyKit/blob/mainline/DemoApplication/Types.swift) config desirable or should passthroughs be generated for larger sets of grouped fields? Should property wrappers, or even codegen, be used minimize passthrough code?)
 2. **Fundamentals investigation**
-    * Generic/Protocol usage improvements. (e.g. Is it possible to remove the `DependencyBase.NEW_TO_GENERATE` conformance requirement for new Dependencies?)
+    * Generic/Protocol usage improvements.
     * Codegen minimization / simplification. (i.e. What compromises or improvements could be made to decrease the code generation burden?)
     * Performance Profiling. (How does compile time and usage compare to other frameworks? Across what project sizes?)
-    
 Input as issues or PRs is more than welcome.
 
 ## Demo usage
@@ -58,7 +57,7 @@ Compare the following output with [main.swift](https://github.com/adam-zethraeus
         protocol LevelTwoViewModelDependencies: DISessionToken, DIAppName {}
 
     It groups these dependencies:
-        protocol LevelTwoDependency: DependencyBase.LevelTwo,
+        protocol LevelTwoDependency: Dependency.LevelTwoDependency,
                                      LevelTwoViewModelDependencies,
                                      LevelTwoViewControllerDependencies
                                      {}
