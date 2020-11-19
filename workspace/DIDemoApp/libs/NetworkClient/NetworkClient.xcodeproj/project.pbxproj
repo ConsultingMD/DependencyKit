@@ -13,7 +13,6 @@
 		23A1A97E25665657009E847C /* NetworkClientMac.h in Headers */ = {isa = PBXBuildFile; fileRef = 23A1A97C25665657009E847C /* NetworkClientMac.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		23A1A9842566567C009E847C /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A1A96225665505009E847C /* NetworkClient.swift */; };
 		23A1A9872566567F009E847C /* NetworkMonitorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A1A9672566551F009E847C /* NetworkMonitorInterface.swift */; };
-		23A1A98A25665681009E847C /* NetworkClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 23A1A94725665456009E847C /* NetworkClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,7 +97,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23A1A98A25665681009E847C /* NetworkClient.h in Headers */,
 				23A1A97E25665657009E847C /* NetworkClientMac.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
