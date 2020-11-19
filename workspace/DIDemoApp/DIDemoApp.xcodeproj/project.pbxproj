@@ -8,31 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		23A1A97125665578009E847C /* NetworkClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A1A95425665457009E847C /* NetworkClient.framework */; };
-		23A1A97225665578009E847C /* NetworkClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 23A1A95425665457009E847C /* NetworkClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		23A1A9932566569D009E847C /* NetworkClientMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A1A99125665699009E847C /* NetworkClientMac.framework */; };
-		23A1A9942566569D009E847C /* NetworkClientMac.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 23A1A99125665699009E847C /* NetworkClientMac.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		23B775972564421200D5CC4B /* Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B775962564421200D5CC4B /* Generated.swift */; };
-		23B775982564421200D5CC4B /* Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B775962564421200D5CC4B /* Generated.swift */; };
 		23B7759E256442F400D5CC4B /* DependencyKit in Frameworks */ = {isa = PBXBuildFile; productRef = 23B7759D256442F400D5CC4B /* DependencyKit */; };
-		23B775A0256442FD00D5CC4B /* DependencyKit in Frameworks */ = {isa = PBXBuildFile; productRef = 23B7759F256442FD00D5CC4B /* DependencyKit */; };
 		23FF9EDB25643C3900266ABE /* DIDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9EC825643C3800266ABE /* DIDemoApp.swift */; };
-		23FF9EDC25643C3900266ABE /* DIDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9EC825643C3800266ABE /* DIDemoApp.swift */; };
 		23FF9EDD25643C3900266ABE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9EC925643C3800266ABE /* ContentView.swift */; };
-		23FF9EDE25643C3900266ABE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9EC925643C3800266ABE /* ContentView.swift */; };
 		23FF9EDF25643C3900266ABE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23FF9ECA25643C3800266ABE /* Assets.xcassets */; };
-		23FF9EE025643C3900266ABE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23FF9ECA25643C3800266ABE /* Assets.xcassets */; };
 		23FF9F0625643CB400266ABE /* LevelOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F0225643CB400266ABE /* LevelOne.swift */; };
-		23FF9F0725643CB400266ABE /* LevelOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F0225643CB400266ABE /* LevelOne.swift */; };
 		23FF9F0825643CB400266ABE /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F0325643CB400266ABE /* Root.swift */; };
-		23FF9F0925643CB400266ABE /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F0325643CB400266ABE /* Root.swift */; };
 		23FF9F0A25643CB400266ABE /* LevelTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F0425643CB400266ABE /* LevelTwo.swift */; };
-		23FF9F0B25643CB400266ABE /* LevelTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F0425643CB400266ABE /* LevelTwo.swift */; };
 		23FF9F0C25643CB400266ABE /* LevelThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F0525643CB400266ABE /* LevelThree.swift */; };
-		23FF9F0D25643CB400266ABE /* LevelThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F0525643CB400266ABE /* LevelThree.swift */; };
 		23FF9F1425643D0500266ABE /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F1325643D0500266ABE /* Types.swift */; };
-		23FF9F1525643D0500266ABE /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F1325643D0500266ABE /* Types.swift */; };
 		23FF9F1725643FBF00266ABE /* DIUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F1625643FBF00266ABE /* DIUsage.swift */; };
-		23FF9F1825643FBF00266ABE /* DIUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F1625643FBF00266ABE /* DIUsage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,41 +38,16 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		23A1A97325665578009E847C /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				23A1A97225665578009E847C /* NetworkClient.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		23A1A9952566569D009E847C /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				23A1A9942566569D009E847C /* NetworkClientMac.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		23A1A90F256652DD009E847C /* NetworkClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NetworkClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		23A1A94F25665456009E847C /* NetworkClient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NetworkClient.xcodeproj; path = NetworkClient/NetworkClient.xcodeproj; sourceTree = "<group>"; };
+		23A1A9BD25668591009E847C /* DIDemoApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DIDemoApp.entitlements; sourceTree = "<group>"; };
 		23B775962564421200D5CC4B /* Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generated.swift; sourceTree = "<group>"; };
 		23FF9EC825643C3800266ABE /* DIDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIDemoApp.swift; sourceTree = "<group>"; };
 		23FF9EC925643C3800266ABE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		23FF9ECA25643C3800266ABE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		23FF9ECF25643C3900266ABE /* DIDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DIDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23FF9ED225643C3900266ABE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		23FF9ED725643C3900266ABE /* DIDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DIDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23FF9ED925643C3900266ABE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		23FF9EDA25643C3900266ABE /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		23FF9F0225643CB400266ABE /* LevelOne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelOne.swift; sourceTree = "<group>"; };
@@ -104,15 +65,6 @@
 			files = (
 				23A1A97125665578009E847C /* NetworkClient.framework in Frameworks */,
 				23B7759E256442F400D5CC4B /* DependencyKit in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		23FF9ED425643C3900266ABE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				23A1A9932566569D009E847C /* NetworkClientMac.framework in Frameworks */,
-				23B775A0256442FD00D5CC4B /* DependencyKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +107,7 @@
 		23FF9EC225643C3800266ABE = {
 			isa = PBXGroup;
 			children = (
+				23A1A9BD25668591009E847C /* DIDemoApp.entitlements */,
 				23A1A8C225663CED009E847C /* libs */,
 				23FF9EC725643C3800266ABE /* Shared */,
 				23FF9ED125643C3900266ABE /* iOS */,
@@ -182,7 +135,6 @@
 			isa = PBXGroup;
 			children = (
 				23FF9ECF25643C3900266ABE /* DIDemoApp.app */,
-				23FF9ED725643C3900266ABE /* DIDemoApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -233,7 +185,6 @@
 				23FF9ECB25643C3900266ABE /* Sources */,
 				23FF9ECC25643C3900266ABE /* Frameworks */,
 				23FF9ECD25643C3900266ABE /* Resources */,
-				23A1A97325665578009E847C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -247,27 +198,6 @@
 			productReference = 23FF9ECF25643C3900266ABE /* DIDemoApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		23FF9ED625643C3900266ABE /* DIDemoApp (macOS) */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 23FF9EE625643C3900266ABE /* Build configuration list for PBXNativeTarget "DIDemoApp (macOS)" */;
-			buildPhases = (
-				23FF9ED325643C3900266ABE /* Sources */,
-				23FF9ED425643C3900266ABE /* Frameworks */,
-				23FF9ED525643C3900266ABE /* Resources */,
-				23A1A9952566569D009E847C /* Embed Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "DIDemoApp (macOS)";
-			packageProductDependencies = (
-				23B7759F256442FD00D5CC4B /* DependencyKit */,
-			);
-			productName = "DIDemoApp (macOS)";
-			productReference = 23FF9ED725643C3900266ABE /* DIDemoApp.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -278,9 +208,6 @@
 				LastUpgradeCheck = 1220;
 				TargetAttributes = {
 					23FF9ECE25643C3900266ABE = {
-						CreatedOnToolsVersion = 12.0;
-					};
-					23FF9ED625643C3900266ABE = {
 						CreatedOnToolsVersion = 12.0;
 					};
 				};
@@ -305,7 +232,6 @@
 			projectRoot = "";
 			targets = (
 				23FF9ECE25643C3900266ABE /* DIDemoApp (iOS) */,
-				23FF9ED625643C3900266ABE /* DIDemoApp (macOS) */,
 			);
 		};
 /* End PBXProject section */
@@ -336,14 +262,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		23FF9ED525643C3900266ABE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				23FF9EE025643C3900266ABE /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -360,22 +278,6 @@
 				23FF9F0C25643CB400266ABE /* LevelThree.swift in Sources */,
 				23FF9F0A25643CB400266ABE /* LevelTwo.swift in Sources */,
 				23FF9F0625643CB400266ABE /* LevelOne.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		23FF9ED325643C3900266ABE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				23FF9EDE25643C3900266ABE /* ContentView.swift in Sources */,
-				23FF9F1825643FBF00266ABE /* DIUsage.swift in Sources */,
-				23FF9F0925643CB400266ABE /* Root.swift in Sources */,
-				23FF9F1525643D0500266ABE /* Types.swift in Sources */,
-				23B775982564421200D5CC4B /* Generated.swift in Sources */,
-				23FF9EDC25643C3900266ABE /* DIDemoApp.swift in Sources */,
-				23FF9F0D25643CB400266ABE /* LevelThree.swift in Sources */,
-				23FF9F0B25643CB400266ABE /* LevelTwo.swift in Sources */,
-				23FF9F0725643CB400266ABE /* LevelOne.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,6 +404,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DIDemoApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QC68T7ZF53;
 				ENABLE_PREVIEWS = YES;
@@ -514,6 +417,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "zerog-code.DIDemoApp";
 				PRODUCT_NAME = DIDemoApp;
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -524,6 +428,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DIDemoApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QC68T7ZF53;
 				ENABLE_PREVIEWS = YES;
@@ -536,61 +441,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "zerog-code.DIDemoApp";
 				PRODUCT_NAME = DIDemoApp;
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		23FF9EE725643C3900266ABE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = QC68T7ZF53;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = macOS/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "zerog-code.DIDemoApp";
-				PRODUCT_NAME = DIDemoApp;
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		23FF9EE825643C3900266ABE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = QC68T7ZF53;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = macOS/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "zerog-code.DIDemoApp";
-				PRODUCT_NAME = DIDemoApp;
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -615,23 +469,10 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		23FF9EE625643C3900266ABE /* Build configuration list for PBXNativeTarget "DIDemoApp (macOS)" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				23FF9EE725643C3900266ABE /* Debug */,
-				23FF9EE825643C3900266ABE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		23B7759D256442F400D5CC4B /* DependencyKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DependencyKit;
-		};
-		23B7759F256442FD00D5CC4B /* DependencyKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DependencyKit;
 		};
