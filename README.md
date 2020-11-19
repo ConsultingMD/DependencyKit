@@ -1,3 +1,4 @@
+![Icon](https://raw.githubusercontent.com/adam-zethraeus/DependencyKit/main/icon.svg)
 # DependencyKit
 
 DependencyKit is an attempt to make a fully typesafe, lightweight, dependency injection framework for Swift.
