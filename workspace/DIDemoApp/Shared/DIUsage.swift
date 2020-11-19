@@ -1,5 +1,6 @@
 import DependencyKit
 import Foundation
+import NetworkClient
 
 class DIUsage {
     init() {}
