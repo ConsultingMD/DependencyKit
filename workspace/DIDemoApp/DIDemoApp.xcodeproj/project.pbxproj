@@ -62,12 +62,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		23A1A8C225663CED009E847C /* libs */ = {
+		23A1A8C225663CED009E847C /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
 				23A1A94F25665456009E847C /* NetworkClient.xcodeproj */,
 			);
-			path = libs;
+			path = Libraries;
 			sourceTree = "<group>";
 		};
 		23A1A95025665456009E847C /* Products */ = {
@@ -98,9 +98,9 @@
 			isa = PBXGroup;
 			children = (
 				23A1A9BD25668591009E847C /* DIDemoApp.entitlements */,
-				23A1A8C225663CED009E847C /* libs */,
+				23FF9ED225643C3900266ABE /* Info.plist */,
+				23A1A8C225663CED009E847C /* Libraries */,
 				23FF9EC725643C3800266ABE /* Shared */,
-				23FF9ED125643C3900266ABE /* iOS */,
 				23FF9ED025643C3900266ABE /* Products */,
 				23B7759C256442F400D5CC4B /* Frameworks */,
 			);
@@ -126,14 +126,6 @@
 				23FF9ECF25643C3900266ABE /* DIDemoApp.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		23FF9ED125643C3900266ABE /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				23FF9ED225643C3900266ABE /* Info.plist */,
-			);
-			path = iOS;
 			sourceTree = "<group>";
 		};
 		23FF9EE925643C5D00266ABE /* Components */ = {
@@ -381,7 +373,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QC68T7ZF53;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = iOS/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -405,7 +397,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QC68T7ZF53;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = iOS/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -36,7 +36,6 @@
 			children = (
 				23A1A94625665456009E847C /* NetworkClient */,
 				23A1A94525665456009E847C /* Products */,
-				23A1A9AC25668469009E847C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,13 +56,6 @@
 				23A1A94825665456009E847C /* Info.plist */,
 			);
 			path = NetworkClient;
-			sourceTree = "<group>";
-		};
-		23A1A9AC25668469009E847C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
