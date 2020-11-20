@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "23FF9ECE25643C3900266ABE"
-               BuildableName = "DIDemoApp.app"
-               BlueprintName = "DIDemoApp (iOS)"
-               ReferencedContainer = "container:DIDemoApp.xcodeproj">
+               BlueprintIdentifier = "23A1AA29256824FE009E847C"
+               BuildableName = "DependencyKit.framework"
+               BlueprintName = "DependencyKit"
+               ReferencedContainer = "container:DependencyKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -40,16 +40,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "23FF9ECE25643C3900266ABE"
-            BuildableName = "DIDemoApp.app"
-            BlueprintName = "DIDemoApp (iOS)"
-            ReferencedContainer = "container:DIDemoApp.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -57,16 +47,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "23FF9ECE25643C3900266ABE"
-            BuildableName = "DIDemoApp.app"
-            BlueprintName = "DIDemoApp (iOS)"
-            ReferencedContainer = "container:DIDemoApp.xcodeproj">
+            BlueprintIdentifier = "23A1AA29256824FE009E847C"
+            BuildableName = "DependencyKit.framework"
+            BlueprintName = "DependencyKit"
+            ReferencedContainer = "container:DependencyKit.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

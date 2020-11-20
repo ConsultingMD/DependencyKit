@@ -7,136 +7,101 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		23A1A94925665456009E847C /* NetworkClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 23A1A94725665456009E847C /* NetworkClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		23A1A96325665505009E847C /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A1A96225665505009E847C /* NetworkClient.swift */; };
-		23A1A9682566551F009E847C /* NetworkMonitorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A1A9672566551F009E847C /* NetworkMonitorInterface.swift */; };
-		23A1A9E825677AD2009E847C /* NetworkClientComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A1A9E725677AD2009E847C /* NetworkClientComponent.swift */; };
-		23A1AA542568269C009E847C /* DependencyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A1AA532568269C009E847C /* DependencyKit.framework */; };
-		23A1AA552568269C009E847C /* DependencyKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 23A1AA532568269C009E847C /* DependencyKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		23A1AA2F256824FE009E847C /* DependencyKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 23A1AA2D256824FE009E847C /* DependencyKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		23A1AA3A2568252F009E847C /* DependencyKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A1AA392568252F009E847C /* DependencyKit.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		23A1AA49256825FB009E847C /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				23A1AA552568269C009E847C /* DependencyKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		23A1A94425665456009E847C /* NetworkClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NetworkClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		23A1A94725665456009E847C /* NetworkClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkClient.h; sourceTree = "<group>"; };
-		23A1A94825665456009E847C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		23A1A96225665505009E847C /* NetworkClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
-		23A1A9672566551F009E847C /* NetworkMonitorInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkMonitorInterface.swift; sourceTree = "<group>"; };
-		23A1A9E725677AD2009E847C /* NetworkClientComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientComponent.swift; sourceTree = "<group>"; };
-		23A1AA532568269C009E847C /* DependencyKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DependencyKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		23A1AA2A256824FE009E847C /* DependencyKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DependencyKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		23A1AA2D256824FE009E847C /* DependencyKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DependencyKit.h; sourceTree = "<group>"; };
+		23A1AA2E256824FE009E847C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		23A1AA392568252F009E847C /* DependencyKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyKit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		23A1A94125665456009E847C /* Frameworks */ = {
+		23A1AA27256824FE009E847C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23A1AA542568269C009E847C /* DependencyKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		23A1A93A25665456009E847C = {
+		23A1AA20256824FE009E847C = {
 			isa = PBXGroup;
 			children = (
-				23A1A94625665456009E847C /* NetworkClient */,
-				23A1A94525665456009E847C /* Products */,
-				23A1A9EB25677BA3009E847C /* Frameworks */,
+				23A1AA2C256824FE009E847C /* DependencyKit */,
+				23A1AA2B256824FE009E847C /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		23A1A94525665456009E847C /* Products */ = {
+		23A1AA2B256824FE009E847C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				23A1A94425665456009E847C /* NetworkClient.framework */,
+				23A1AA2A256824FE009E847C /* DependencyKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		23A1A94625665456009E847C /* NetworkClient */ = {
+		23A1AA2C256824FE009E847C /* DependencyKit */ = {
 			isa = PBXGroup;
 			children = (
-				23A1A96225665505009E847C /* NetworkClient.swift */,
-				23A1A9E725677AD2009E847C /* NetworkClientComponent.swift */,
-				23A1A9672566551F009E847C /* NetworkMonitorInterface.swift */,
-				23A1A94725665456009E847C /* NetworkClient.h */,
-				23A1A94825665456009E847C /* Info.plist */,
+				23A1AA2D256824FE009E847C /* DependencyKit.h */,
+				23A1AA2E256824FE009E847C /* Info.plist */,
+				23A1AA392568252F009E847C /* DependencyKit.swift */,
 			);
-			path = NetworkClient;
-			sourceTree = "<group>";
-		};
-		23A1A9EB25677BA3009E847C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				23A1AA532568269C009E847C /* DependencyKit.framework */,
-			);
-			name = Frameworks;
+			path = DependencyKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		23A1A93F25665456009E847C /* Headers */ = {
+		23A1AA25256824FE009E847C /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23A1A94925665456009E847C /* NetworkClient.h in Headers */,
+				23A1AA2F256824FE009E847C /* DependencyKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		23A1A94325665456009E847C /* NetworkClient */ = {
+		23A1AA29256824FE009E847C /* DependencyKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 23A1A94C25665456009E847C /* Build configuration list for PBXNativeTarget "NetworkClient" */;
+			buildConfigurationList = 23A1AA32256824FE009E847C /* Build configuration list for PBXNativeTarget "DependencyKit" */;
 			buildPhases = (
-				23A1A93F25665456009E847C /* Headers */,
-				23A1A94025665456009E847C /* Sources */,
-				23A1A94125665456009E847C /* Frameworks */,
-				23A1A94225665456009E847C /* Resources */,
-				23A1AA49256825FB009E847C /* Embed Frameworks */,
+				23A1AA25256824FE009E847C /* Headers */,
+				23A1AA26256824FE009E847C /* Sources */,
+				23A1AA27256824FE009E847C /* Frameworks */,
+				23A1AA28256824FE009E847C /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = NetworkClient;
-			packageProductDependencies = (
-			);
-			productName = NetworkClient;
-			productReference = 23A1A94425665456009E847C /* NetworkClient.framework */;
+			name = DependencyKit;
+			productName = DependencyKit;
+			productReference = 23A1AA2A256824FE009E847C /* DependencyKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		23A1A93B25665456009E847C /* Project object */ = {
+		23A1AA21256824FE009E847C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 1220;
 				TargetAttributes = {
-					23A1A94325665456009E847C = {
+					23A1AA29256824FE009E847C = {
 						CreatedOnToolsVersion = 12.2;
+						LastSwiftMigration = 1220;
 					};
 				};
 			};
-			buildConfigurationList = 23A1A93E25665456009E847C /* Build configuration list for PBXProject "NetworkClient" */;
+			buildConfigurationList = 23A1AA24256824FE009E847C /* Build configuration list for PBXProject "DependencyKit" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -144,18 +109,18 @@
 				en,
 				Base,
 			);
-			mainGroup = 23A1A93A25665456009E847C;
-			productRefGroup = 23A1A94525665456009E847C /* Products */;
+			mainGroup = 23A1AA20256824FE009E847C;
+			productRefGroup = 23A1AA2B256824FE009E847C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				23A1A94325665456009E847C /* NetworkClient */,
+				23A1AA29256824FE009E847C /* DependencyKit */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		23A1A94225665456009E847C /* Resources */ = {
+		23A1AA28256824FE009E847C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -165,20 +130,18 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		23A1A94025665456009E847C /* Sources */ = {
+		23A1AA26256824FE009E847C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23A1A9E825677AD2009E847C /* NetworkClientComponent.swift in Sources */,
-				23A1A96325665505009E847C /* NetworkClient.swift in Sources */,
-				23A1A9682566551F009E847C /* NetworkMonitorInterface.swift in Sources */,
+				23A1AA3A2568252F009E847C /* DependencyKit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		23A1A94A25665456009E847C /* Debug */ = {
+		23A1AA30256824FE009E847C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -231,7 +194,6 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -243,7 +205,7 @@
 			};
 			name = Debug;
 		};
-		23A1A94B25665456009E847C /* Release */ = {
+		23A1AA31256824FE009E847C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -290,7 +252,6 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -302,47 +263,50 @@
 			};
 			name = Release;
 		};
-		23A1A94D25665456009E847C /* Debug */ = {
+		23A1AA33256824FE009E847C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = QC68T7ZF53;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = NetworkClient/Info.plist;
+				INFOPLIST_FILE = DependencyKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "zerog-code.NetworkClient";
+				PRODUCT_BUNDLE_IDENTIFIER = "zerog-code.DependencyKit";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		23A1A94E25665456009E847C /* Release */ = {
+		23A1AA34256824FE009E847C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = QC68T7ZF53;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = NetworkClient/Info.plist;
+				INFOPLIST_FILE = DependencyKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "zerog-code.NetworkClient";
+				PRODUCT_BUNDLE_IDENTIFIER = "zerog-code.DependencyKit";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -353,25 +317,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		23A1A93E25665456009E847C /* Build configuration list for PBXProject "NetworkClient" */ = {
+		23A1AA24256824FE009E847C /* Build configuration list for PBXProject "DependencyKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				23A1A94A25665456009E847C /* Debug */,
-				23A1A94B25665456009E847C /* Release */,
+				23A1AA30256824FE009E847C /* Debug */,
+				23A1AA31256824FE009E847C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		23A1A94C25665456009E847C /* Build configuration list for PBXNativeTarget "NetworkClient" */ = {
+		23A1AA32256824FE009E847C /* Build configuration list for PBXNativeTarget "DependencyKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				23A1A94D25665456009E847C /* Debug */,
-				23A1A94E25665456009E847C /* Release */,
+				23A1AA33256824FE009E847C /* Debug */,
+				23A1AA34256824FE009E847C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 23A1A93B25665456009E847C /* Project object */;
+	rootObject = 23A1AA21256824FE009E847C /* Project object */;
 }

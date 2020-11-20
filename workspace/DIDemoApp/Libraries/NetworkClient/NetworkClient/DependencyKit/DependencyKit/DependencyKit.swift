@@ -9,7 +9,7 @@ public protocol Dependency {
     var dependency: T { get }
 }
 
-/// The internal abstract representation of 'nothing'. 
+/// The internal abstract representation of 'nothing'.
 /// Application code should never have to conform directly to it.
 public protocol Empty {}
 

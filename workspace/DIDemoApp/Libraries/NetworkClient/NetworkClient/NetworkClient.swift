@@ -1,10 +1,3 @@
-//
-//  NetworkClient.swift
-//  NetworkClient
-//
-//  Created by az on 2020-11-18.
-//
-
 import Combine
 import Foundation
 

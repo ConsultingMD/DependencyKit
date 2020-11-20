@@ -1,10 +1,3 @@
-//
-//  NetworkMonitorInterface.swift
-//  NetworkClient
-//
-//  Created by az on 2020-11-18.
-//
-
 import Foundation
 
 public enum NetworkResolution {
