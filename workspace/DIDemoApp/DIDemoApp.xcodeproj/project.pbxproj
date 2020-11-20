@@ -88,12 +88,12 @@
 			path = Config;
 			sourceTree = "<group>";
 		};
-		23B7759B2564424300D5CC4B /* Generated */ = {
+		23B7759B2564424300D5CC4B /* __generated__ */ = {
 			isa = PBXGroup;
 			children = (
 				23B775962564421200D5CC4B /* Generated.swift */,
 			);
-			path = Generated;
+			path = __generated__;
 			sourceTree = "<group>";
 		};
 		23B7759C256442F400D5CC4B /* Frameworks */ = {
@@ -118,7 +118,7 @@
 		23FF9EC725643C3800266ABE /* App */ = {
 			isa = PBXGroup;
 			children = (
-				23B7759B2564424300D5CC4B /* Generated */,
+				23B7759B2564424300D5CC4B /* __generated__ */,
 				23FF9F1225643CF800266ABE /* Types */,
 				23FF9EE925643C5D00266ABE /* Components */,
 				23FF9EC825643C3800266ABE /* DIDemoApp.swift */,
