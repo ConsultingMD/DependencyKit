@@ -8,7 +8,8 @@ import Foundation
 protocol LevelOneDependency: Dependency.LevelOneDependency,
     DISessionToken,
     DIAppName,
-    DICurrentTime
+    DICurrentTime,
+    DINetworkClient
 {}
 
 // The LevelOnceComponent collects values from its dependencies, allows the Application code to override them,

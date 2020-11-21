@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		235FB5942569D032000B575A /* TimingNetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235FB5932569D032000B575A /* TimingNetworkMonitor.swift */; };
 		23A1AA4D25682607009E847C /* NetworkClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A1A95425665457009E847C /* NetworkClient.framework */; };
 		23A1AA4E25682607009E847C /* NetworkClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 23A1A95425665457009E847C /* NetworkClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		23A1AA5125682673009E847C /* DependencyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A1AA5025682673009E847C /* DependencyKit.framework */; };
@@ -15,8 +16,8 @@
 		23FF9EDB25643C3900266ABE /* DIDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9EC825643C3800266ABE /* DIDemoApp.swift */; };
 		23FF9EDD25643C3900266ABE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9EC925643C3800266ABE /* ContentView.swift */; };
 		23FF9EDF25643C3900266ABE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23FF9ECA25643C3800266ABE /* Assets.xcassets */; };
-		23FF9F0625643CB400266ABE /* LevelOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F0225643CB400266ABE /* LevelOne.swift */; };
-		23FF9F0825643CB400266ABE /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F0325643CB400266ABE /* Root.swift */; };
+		23FF9F0625643CB400266ABE /* LevelOneComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F0225643CB400266ABE /* LevelOneComponent.swift */; };
+		23FF9F0825643CB400266ABE /* RootComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F0325643CB400266ABE /* RootComponent.swift */; };
 		23FF9F0A25643CB400266ABE /* LevelTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F0425643CB400266ABE /* LevelTwo.swift */; };
 		23FF9F0C25643CB400266ABE /* LevelThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F0525643CB400266ABE /* LevelThree.swift */; };
 		23FF9F1425643D0500266ABE /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F1325643D0500266ABE /* Types.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		235FB5932569D032000B575A /* TimingNetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimingNetworkMonitor.swift; sourceTree = "<group>"; };
 		23A1A94F25665456009E847C /* NetworkClient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NetworkClient.xcodeproj; path = NetworkClient/NetworkClient.xcodeproj; sourceTree = "<group>"; };
 		23A1A9BD25668591009E847C /* DIDemoApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DIDemoApp.entitlements; sourceTree = "<group>"; };
 		23A1AA5025682673009E847C /* DependencyKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DependencyKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,8 +60,8 @@
 		23FF9ECA25643C3800266ABE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		23FF9ECF25643C3900266ABE /* DemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23FF9ED225643C3900266ABE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		23FF9F0225643CB400266ABE /* LevelOne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelOne.swift; sourceTree = "<group>"; };
-		23FF9F0325643CB400266ABE /* Root.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Root.swift; sourceTree = "<group>"; };
+		23FF9F0225643CB400266ABE /* LevelOneComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelOneComponent.swift; sourceTree = "<group>"; };
+		23FF9F0325643CB400266ABE /* RootComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootComponent.swift; sourceTree = "<group>"; };
 		23FF9F0425643CB400266ABE /* LevelTwo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelTwo.swift; sourceTree = "<group>"; };
 		23FF9F0525643CB400266ABE /* LevelThree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelThree.swift; sourceTree = "<group>"; };
 		23FF9F1325643D0500266ABE /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
@@ -79,6 +81,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		235FB58E2569CF85000B575A /* DI */ = {
+			isa = PBXGroup;
+			children = (
+				23B7759B2564424300D5CC4B /* __generated__ */,
+				23FF9F1225643CF800266ABE /* Types */,
+			);
+			path = DI;
+			sourceTree = "<group>";
+		};
+		235FB58F2569CF97000B575A /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				23FF9F0325643CB400266ABE /* RootComponent.swift */,
+				235FB5932569D032000B575A /* TimingNetworkMonitor.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		235FB5902569CFCA000B575A /* LevelOne */ = {
+			isa = PBXGroup;
+			children = (
+				23FF9F0225643CB400266ABE /* LevelOneComponent.swift */,
+			);
+			path = LevelOne;
+			sourceTree = "<group>";
+		};
+		235FB5912569CFD8000B575A /* LevelTwo */ = {
+			isa = PBXGroup;
+			children = (
+				23FF9F0425643CB400266ABE /* LevelTwo.swift */,
+			);
+			path = LevelTwo;
+			sourceTree = "<group>";
+		};
+		235FB5922569CFE5000B575A /* LevelThree */ = {
+			isa = PBXGroup;
+			children = (
+				23FF9F0525643CB400266ABE /* LevelThree.swift */,
+			);
+			path = LevelThree;
+			sourceTree = "<group>";
+		};
 		23A1A8C225663CED009E847C /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -135,8 +179,7 @@
 		23FF9EC725643C3800266ABE /* App */ = {
 			isa = PBXGroup;
 			children = (
-				23B7759B2564424300D5CC4B /* __generated__ */,
-				23FF9F1225643CF800266ABE /* Types */,
+				235FB58E2569CF85000B575A /* DI */,
 				23FF9EE925643C5D00266ABE /* Components */,
 				23FF9EC825643C3800266ABE /* DIDemoApp.swift */,
 				23FF9EC925643C3800266ABE /* ContentView.swift */,
@@ -156,10 +199,10 @@
 		23FF9EE925643C5D00266ABE /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				23FF9F0225643CB400266ABE /* LevelOne.swift */,
-				23FF9F0525643CB400266ABE /* LevelThree.swift */,
-				23FF9F0425643CB400266ABE /* LevelTwo.swift */,
-				23FF9F0325643CB400266ABE /* Root.swift */,
+				235FB58F2569CF97000B575A /* Root */,
+				235FB5902569CFCA000B575A /* LevelOne */,
+				235FB5912569CFD8000B575A /* LevelTwo */,
+				235FB5922569CFE5000B575A /* LevelThree */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -261,13 +304,14 @@
 			files = (
 				23FF9EDD25643C3900266ABE /* ContentView.swift in Sources */,
 				23FF9F1725643FBF00266ABE /* DIUsage.swift in Sources */,
-				23FF9F0825643CB400266ABE /* Root.swift in Sources */,
+				23FF9F0825643CB400266ABE /* RootComponent.swift in Sources */,
 				23FF9F1425643D0500266ABE /* Types.swift in Sources */,
 				23B775972564421200D5CC4B /* Generated.swift in Sources */,
 				23FF9EDB25643C3900266ABE /* DIDemoApp.swift in Sources */,
 				23FF9F0C25643CB400266ABE /* LevelThree.swift in Sources */,
+				235FB5942569D032000B575A /* TimingNetworkMonitor.swift in Sources */,
 				23FF9F0A25643CB400266ABE /* LevelTwo.swift in Sources */,
-				23FF9F0625643CB400266ABE /* LevelOne.swift in Sources */,
+				23FF9F0625643CB400266ABE /* LevelOneComponent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

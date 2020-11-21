@@ -2,7 +2,7 @@ import Combine
 import Foundation
 
 public protocol NetworkClient {
-    func get(url: URL) -> AnyPublisher<Data, Error>
+    func get(url: URL) -> AnyPublisher<(data: Data, response: URLResponse), URLError>
 }
 
 
@@ -14,14 +14,17 @@ public struct MonitoredNetworkClient: NetworkClient {
         self.monitor = monitor
     }
     
-    public func get(url: URL) -> AnyPublisher<Data, Error> {
+    public func get(url: URL) -> AnyPublisher<(data: Data, response: URLResponse), URLError> {
         let event = UUID()
         monitor.requested(url: url, event: event)
-        let publisher = PassthroughSubject<Data, Error>()
-        DispatchQueue.main.async {
-            publisher.send(Data())
-            monitor.resolved(url: url, event: event, resolution: .success)
-        }
+        let publisher = URLSession.shared
+            .dataTaskPublisher(for: url)
+            .handleEvents { _ in
+                monitor.requested(url: url, event: event)
+            } receiveOutput: { _ in
+                monitor.resolved(url: url, event: event)
+            }
+
         return publisher.eraseToAnyPublisher()
     }
 
@@ -29,11 +32,9 @@ public struct MonitoredNetworkClient: NetworkClient {
 
 
 public struct StandardNetworkClient: NetworkClient {
-    public func get(url: URL) -> AnyPublisher<Data, Error> {
-        let publisher = PassthroughSubject<Data, Error>()
-        DispatchQueue.main.async {
-            publisher.send(Data())
-        }
-        return publisher.eraseToAnyPublisher()
+    public func get(url: URL) -> AnyPublisher<(data: Data, response: URLResponse), URLError> {
+        URLSession.shared
+            .dataTaskPublisher(for: url)
+            .eraseToAnyPublisher()
     }
 }

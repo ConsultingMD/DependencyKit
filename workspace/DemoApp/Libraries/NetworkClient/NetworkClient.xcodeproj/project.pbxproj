@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		235FB5892569CBE4000B575A /* Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235FB5882569CBE4000B575A /* Generated.swift */; };
+		235FB58C2569CCB1000B575A /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235FB58B2569CCB1000B575A /* Types.swift */; };
 		23A1A94925665456009E847C /* NetworkClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 23A1A94725665456009E847C /* NetworkClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		23A1A96325665505009E847C /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A1A96225665505009E847C /* NetworkClient.swift */; };
 		23A1A9682566551F009E847C /* NetworkMonitorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A1A9672566551F009E847C /* NetworkMonitorInterface.swift */; };
@@ -30,6 +32,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		235FB5882569CBE4000B575A /* Generated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generated.swift; sourceTree = "<group>"; };
+		235FB58B2569CCB1000B575A /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		23A1A94425665456009E847C /* NetworkClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NetworkClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		23A1A94725665456009E847C /* NetworkClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkClient.h; sourceTree = "<group>"; };
 		23A1A94825665456009E847C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -51,6 +55,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		235FB5872569CBC9000B575A /* __generated__ */ = {
+			isa = PBXGroup;
+			children = (
+				235FB5882569CBE4000B575A /* Generated.swift */,
+			);
+			path = __generated__;
+			sourceTree = "<group>";
+		};
+		235FB58A2569CC74000B575A /* DI */ = {
+			isa = PBXGroup;
+			children = (
+				235FB5872569CBC9000B575A /* __generated__ */,
+				235FB58B2569CCB1000B575A /* Types.swift */,
+			);
+			path = DI;
+			sourceTree = "<group>";
+		};
 		23A1A93A25665456009E847C = {
 			isa = PBXGroup;
 			children = (
@@ -71,8 +92,9 @@
 		23A1A94625665456009E847C /* NetworkClient */ = {
 			isa = PBXGroup;
 			children = (
-				23A1A96225665505009E847C /* NetworkClient.swift */,
+				235FB58A2569CC74000B575A /* DI */,
 				23A1A9E725677AD2009E847C /* NetworkClientComponent.swift */,
+				23A1A96225665505009E847C /* NetworkClient.swift */,
 				23A1A9672566551F009E847C /* NetworkMonitorInterface.swift */,
 				23A1A94725665456009E847C /* NetworkClient.h */,
 				23A1A94825665456009E847C /* Info.plist */,
@@ -170,7 +192,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				23A1A9E825677AD2009E847C /* NetworkClientComponent.swift in Sources */,
+				235FB5892569CBE4000B575A /* Generated.swift in Sources */,
 				23A1A96325665505009E847C /* NetworkClient.swift in Sources */,
+				235FB58C2569CCB1000B575A /* Types.swift in Sources */,
 				23A1A9682566551F009E847C /* NetworkMonitorInterface.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

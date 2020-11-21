@@ -1,9 +1,23 @@
+import Combine
 import DependencyKit
 import Foundation
 import NetworkClient
 
 class DIUsage {
+    static let instance = DIUsage()
+    var disposeBag = [AnyCancellable]()
     init() {}
+    
+    func multiModuleTest() -> [String] {
+        let root = RootComponent(dependency: EmptyComponent())
+        root.networkClient.get(url: URL(string: "https://google.com")!)
+            .sink { _ in }
+                receiveValue: { _ in }
+            .store(in: &disposeBag)
+
+        return ["prints to console"]
+    }
+    
     func diagnostic() -> [String] {
         var output: [String] = []
         // Instantiate a Root which requires no real dependency.

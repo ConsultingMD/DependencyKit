@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        let usage = DIUsage()
+        _ = DIUsage.instance.multiModuleTest()
+        let usage = DIUsage.instance
         let diagnostic = usage.diagnostic()
         return Text(diagnostic.joined(separator: "\n"))
             .padding()
