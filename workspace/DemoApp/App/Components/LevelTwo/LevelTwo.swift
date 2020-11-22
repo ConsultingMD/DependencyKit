@@ -27,4 +27,7 @@ class LevelTwoComponent<T: LevelTwoDependency>: Component<T>,
                                                 LevelThreeDependency {
     // Let's flip this false for funsies.
     let boolIndicator = false
+    
+    // MARK: subcomponents
+    var levelThreeComponent: LevelThreeComponent<LevelTwoComponent> { LevelThreeComponent(dependency: self) }
 }

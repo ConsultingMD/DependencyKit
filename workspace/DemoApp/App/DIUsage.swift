@@ -39,7 +39,7 @@ class DIUsage: ObservableObject {
             """)
 
         // LevelOne can only be instantiated with a component like root, which satisfies its dependencies.
-        let levelOne = LevelOneComponent(dependency: root)
+        let levelOne = root.levelOneComponent
         output.append(
             """
                 The LevelOneComponent sets up:
@@ -57,7 +57,7 @@ class DIUsage: ObservableObject {
             """)
 
         // LevelTwo can only be instantiated with a component like LevelOne, which satisfies its dependencies.
-        let levelTwo = LevelTwoComponent(dependency: levelOne)
+        let levelTwo = levelOne.levelTwoComponent
         output.append(
             """
                 The LevelTwoComponent declares some dependencies:
@@ -94,7 +94,7 @@ class DIUsage: ObservableObject {
 
             """)
 
-        let levelThree = LevelThreeComponent(dependency: levelTwo)
+        let levelThree = levelTwo.levelThreeComponent
         output.append(
             """
                 The LevelThreeComponent adds a method which exposes the DIMessage, and overrides the DIBoolIndicator:
@@ -110,7 +110,7 @@ class DIUsage: ObservableObject {
             """)
 
         // Since LevelThree collects all of the dependencies in its construction chain, it can be used to create another instance of LevelOneComponent
-        let levelOneAgain = LevelOneComponent(dependency: levelThree)
+        let levelOneAgain = levelThree.levelOneComponent
         output.append(
             """
                 The second instance of the LevelOneComponent,levelOneAgain, runs again. As such it overrides DIBoolIndicator and DISessionToken:

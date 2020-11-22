@@ -16,4 +16,7 @@ class LevelThreeComponent<T: LevelThreeDependency>: Component<T>,
         return dependency.messageToCarryThrough
     }
 
+    // MARK: subcomponents
+    var levelOneComponent: LevelOneComponent<LevelThreeComponent> { LevelOneComponent(dependency: self) }
+    
 }

@@ -19,4 +19,7 @@ class LevelOneComponent<T: LevelOneDependency>: Component<T>,
                                                 LevelTwoDependency {
     let boolIndicator = true // initial value
     let sessionToken: String? = UUID().uuidString
+    
+    // MARK: subcomponents
+    var levelTwoComponent: LevelTwoComponent<LevelOneComponent> { LevelTwoComponent(dependency: self) }
 }

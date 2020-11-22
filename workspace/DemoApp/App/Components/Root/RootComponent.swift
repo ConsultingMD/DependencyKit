@@ -6,7 +6,7 @@ import NetworkClient
 // This Component has no requirements (annotated as EmptyDependency).
 // It explicitly satisfies Level One's requirements (LevelOneDependency) providing fields conforming to DIName, and DIRootName.
 // It also has other properties which might be used at the root level and/or satisfy requirements beyond Level One.
-class RootComponent: Component<EmptyDependency>,
+class RootComponent<T: EmptyDependency>: Component<T>,
                      NetworkClientDependency,
                      LevelOneDependency {
     
@@ -20,7 +20,6 @@ class RootComponent: Component<EmptyDependency>,
     var networkClient: NetworkClient { networkComponent.buildClient() }
     
     // MARK: subcomponents
-    // TODO: futz a bit to get better syntax here. This would nest type parameterization.
     var networkComponent: NetworkClientComponent<RootComponent> { NetworkClientComponent(dependency: self) }
     var levelOneComponent: LevelOneComponent<RootComponent> { LevelOneComponent(dependency: self) }
 }

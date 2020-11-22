@@ -27,7 +27,7 @@ extension Dependency where T: DINetworkClient {
 
 protocol DependencyFill {
     typealias LevelOneDependency = Empty & DIStartupTime & DIMessage
-    typealias LevelTwoDependency = Empty  & DIStartupTime & DICurrentTime & DIMessage & DINetworkClient
+    typealias LevelTwoDependency = Empty & DIStartupTime & DICurrentTime & DIMessage & DINetworkClient
     typealias LevelThreeDependency = Empty & DISessionToken & DIAppName & DIStartupTime & DICurrentTime & DIBoolIndicator & DINetworkClient
 }
 
