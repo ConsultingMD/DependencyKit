@@ -1,17 +1,11 @@
-//
-//  DIDemoAppApp.swift
-//  Shared
-//
-//  Created by az on 2020-11-17.
-//
-
 import SwiftUI
 
 @main
 struct DIDemoApp: App {
+    @StateObject private var usage = DIUsage()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(usage: usage)
         }
     }
 }

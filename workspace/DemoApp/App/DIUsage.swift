@@ -3,8 +3,7 @@ import DependencyKit
 import Foundation
 import NetworkClient
 
-class DIUsage {
-    static let instance = DIUsage()
+class DIUsage: ObservableObject {
     var disposeBag = [AnyCancellable]()
     init() {}
     
