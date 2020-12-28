@@ -5,6 +5,6 @@
       location = "group:DemoApp/Libraries/NetworkClient/NetworkClient/DependencyKit/DependencyKit.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:/Users/az/dev/DependencyKit/workspace/DemoApp/DemoApp.xcodeproj">
+      location = "group:DemoApp/DemoApp.xcodeproj">
    </FileRef>
 </Workspace>

@@ -16,6 +16,7 @@
 		23A1AA2D256824FE009E847C /* DependencyKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DependencyKit.h; sourceTree = "<group>"; };
 		23A1AA2E256824FE009E847C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		23A1AA392568252F009E847C /* DependencyKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyKit.swift; sourceTree = "<group>"; };
+		23C2CE8925991C0F00DA7B6B /* Injected.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = Injected.stencil; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,11 +49,20 @@
 		23A1AA2C256824FE009E847C /* DependencyKit */ = {
 			isa = PBXGroup;
 			children = (
+				23C2CE8825991BBE00DA7B6B /* Templates */,
 				23A1AA2D256824FE009E847C /* DependencyKit.h */,
 				23A1AA2E256824FE009E847C /* Info.plist */,
 				23A1AA392568252F009E847C /* DependencyKit.swift */,
 			);
 			path = DependencyKit;
+			sourceTree = "<group>";
+		};
+		23C2CE8825991BBE00DA7B6B /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				23C2CE8925991C0F00DA7B6B /* Injected.stencil */,
+			);
+			path = Templates;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

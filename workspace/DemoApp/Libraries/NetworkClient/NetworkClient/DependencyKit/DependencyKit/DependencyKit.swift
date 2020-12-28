@@ -9,8 +9,12 @@ public protocol Dependency {
     var dependency: T { get }
 }
 
+/// **This is a code generation hook.**
+/// Protocols defining injected items should conform to this.
+public protocol Injected {}
+
 /// The internal abstract representation of 'nothing'.
-/// Application code should never have to conform directly to it.
+/// Application code should **never** conform directly to it as it is used as a code generation hook.
 public protocol Empty {}
 
 // MARK: - Bases for application code
