@@ -2,7 +2,7 @@
 import DependencyKit
 import Foundation
 
-extension Dependency where T: DINetworkMonitorInterface {
+extension DependencyProvider where T: DINetworkMonitorInterface {
     var networkMonitor: NetworkMonitorInterface? { dependency.networkMonitor }
 }
 

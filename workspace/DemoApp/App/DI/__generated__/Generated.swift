@@ -3,25 +3,25 @@ import DependencyKit
 import Foundation
 import NetworkClient
 
-extension Dependency where T:DIAppName {
+extension DependencyProvider where T:DIAppName {
     var appName: String { dependency.appName }
 }
-extension Dependency where T:DIBoolIndicator {
+extension DependencyProvider where T:DIBoolIndicator {
     var boolIndicator: Bool { dependency.boolIndicator }
 }
-extension Dependency where T:DICurrentTime {
+extension DependencyProvider where T:DICurrentTime {
     var currentTime: Date { dependency.currentTime }
 }
-extension Dependency where T:DIMessage {
+extension DependencyProvider where T:DIMessage {
     var messageToCarryThrough: String { dependency.messageToCarryThrough }
 }
-extension Dependency where T:DINetworkClient {
+extension DependencyProvider where T:DINetworkClient {
     var networkClient: NetworkClient { dependency.networkClient }
 }
-extension Dependency where T:DISessionToken {
+extension DependencyProvider where T:DISessionToken {
     var sessionToken: String? { dependency.sessionToken }
 }
-extension Dependency where T:DIStartupTime {
+extension DependencyProvider where T:DIStartupTime {
     var startupTime: Date { dependency.startupTime }
 }
 

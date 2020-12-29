@@ -4,7 +4,7 @@ import Foundation
 /// Dependency protocols should be initially written to conform to this `Dependency` protocol.
 /// Code generation will create a `DependencyFill` and swap conformance to a  `Dependency` extension type.
 /// e.g. `protocol MyDependency: Dependency {}` → `protocol MyDependency: Dependency.MyDependency`
-public protocol Dependency {
+public protocol DependencyProvider {
     associatedtype T
     var dependency: T { get }
 }
@@ -20,7 +20,7 @@ public protocol Empty {}
 // MARK: - Bases for application code
 
 /// The Component base class. Components should directly inherit this.
-open class Component<T>: Dependency {
+open class Component<T>: DependencyProvider {
     public let dependency: T
     public init(dependency: T) {
         self.dependency = dependency
@@ -29,7 +29,7 @@ open class Component<T>: Dependency {
 
 /// A special Dependency representing that nothign is provided or required.
 /// Root components should use this to indicate they are fully self-standing.
-public protocol EmptyDependency: Dependency {}
+public protocol EmptyDependency: DependencyProvider {}
 
 /// A special component to be provided as a Dependency to root level Components.
 public class EmptyComponent: EmptyDependency {
