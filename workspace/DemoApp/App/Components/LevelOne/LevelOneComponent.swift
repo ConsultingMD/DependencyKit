@@ -5,7 +5,7 @@ import Foundation
 // DIName and DIRootName refer to types specified in Types.swift
 // When initially manually written, this dependency conformed to Dependency.
 // Code generation switches conformances (to Dependency.LevelOneDependency) once the level's 'Fill' is created.
-protocol LevelOneDependency: Dependency.LevelOneDependency,
+protocol LevelOneDependency: DependencyFill.LevelOne,
     DISessionToken,
     DIAppName,
     DICurrentTime,

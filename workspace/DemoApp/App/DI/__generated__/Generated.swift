@@ -26,17 +26,7 @@ extension Dependency where T:DIStartupTime {
 }
 
 protocol DependencyFill {
-    typealias LevelOneDependency = Empty & DIStartupTime & DIMessage
-    typealias LevelTwoDependency = Empty & DIStartupTime & DICurrentTime & DIMessage & DINetworkClient
-    typealias LevelThreeDependency = Empty & DISessionToken & DIAppName & DIStartupTime & DICurrentTime & DIBoolIndicator & DINetworkClient
+    typealias LevelOne = Empty & DIStartupTime & DIMessage
+    typealias LevelTwo = Empty & DIStartupTime & DICurrentTime & DIMessage & DINetworkClient
+    typealias LevelThree = Empty & DISessionToken & DIAppName & DIStartupTime & DICurrentTime & DIBoolIndicator & DINetworkClient
 }
-
-extension Dependency {
-    typealias LevelOneDependency = Dependency & DependencyFill.LevelOneDependency
-    typealias LevelTwoDependency = Dependency & DependencyFill.LevelTwoDependency
-    typealias LevelThreeDependency = Dependency & DependencyFill.LevelThreeDependency
-}
-
-extension LevelOneComponent: DependencyFill.LevelOneDependency {}
-extension LevelTwoComponent: DependencyFill.LevelTwoDependency {}
-extension LevelThreeComponent: DependencyFill.LevelThreeDependency {}

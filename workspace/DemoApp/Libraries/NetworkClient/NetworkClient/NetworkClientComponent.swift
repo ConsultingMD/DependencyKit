@@ -1,7 +1,7 @@
 import DependencyKit
 import Foundation
 
-public protocol NetworkClientDependency: Dependency.NetworkClientDependency,
+public protocol NetworkClientDependency: DependencyFill.NetworkClient,
                                          DINetworkMonitorInterface {}
 
 public class NetworkClientComponent<T: NetworkClientDependency>: Component<T> {

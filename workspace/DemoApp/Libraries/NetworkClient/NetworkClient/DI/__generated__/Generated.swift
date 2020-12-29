@@ -7,11 +7,5 @@ extension Dependency where T: DINetworkMonitorInterface {
 }
 
 public protocol DependencyFill {
-    typealias NetworkClientDependency = Empty
+    typealias NetworkClient = Empty
 }
-
-public extension Dependency {
-    typealias NetworkClientDependency = Dependency
-}
-
-extension NetworkClientComponent: DependencyFill.NetworkClientDependency {}
