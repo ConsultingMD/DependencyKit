@@ -19,3 +19,6 @@ public class NilResource: NilRequirement {
     public lazy var injected = self
     public init(){}
 }
+
+
+public protocol GeneratedRequirements_ {}

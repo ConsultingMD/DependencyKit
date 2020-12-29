@@ -25,8 +25,6 @@ extension Requirements where I:StartupTimeDependency {
     var startupTime: Date { injected.startupTime }
 }
 
-protocol DependencyFill {
-    typealias LevelOne = NilDependency & StartupTimeDependency & MessageDependency
-    typealias LevelTwo = NilDependency & StartupTimeDependency & CurrentTimeDependency & MessageDependency & NetworkClientDependency
-    typealias LevelThree = NilDependency & SessionTokenDependency & AppNameDependency & StartupTimeDependency & CurrentTimeDependency & BoolIndicatorDependency & NetworkClientDependency
-}
+typealias GeneratedRequirements_LevelOne = NilDependency & StartupTimeDependency & MessageDependency
+typealias GeneratedRequirements_LevelTwo = NilDependency & StartupTimeDependency & CurrentTimeDependency & MessageDependency & NetworkClientDependency
+typealias GeneratedRequirements_LevelThree = NilDependency & SessionTokenDependency & AppNameDependency & StartupTimeDependency & CurrentTimeDependency & BoolIndicatorDependency & NetworkClientDependency

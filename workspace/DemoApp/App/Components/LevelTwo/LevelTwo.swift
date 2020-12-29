@@ -15,7 +15,7 @@ protocol LevelTwoViewModelDependencies:
     {}
 
 // LevelTwoDependency simply merges the dependencies already defined for the ViewModel and ViewController at this level.
-protocol LevelTwoRequirements: DependencyFill.LevelTwo,
+protocol LevelTwoRequirements: GeneratedRequirements_LevelTwo,
                              LevelTwoViewModelDependencies,
                              LevelTwoViewControllerDependencies
                              {}

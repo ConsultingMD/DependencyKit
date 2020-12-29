@@ -1,7 +1,7 @@
 import DependencyKit
 import Foundation
 
-public protocol NetworkClientRequirements: DependencyFill.NetworkClient,
+public protocol NetworkClientRequirements: GeneratedRequirements_NetworkClient,
                                          NetworkMonitorInterfaceDependency {}
 
 public class NetworkClientResource<T: NetworkClientRequirements>: Resource<T> {

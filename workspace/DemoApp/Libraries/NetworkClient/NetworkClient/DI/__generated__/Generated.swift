@@ -6,6 +6,5 @@ extension Requirements where I: NetworkMonitorInterfaceDependency {
     var networkMonitor: NetworkMonitorInterface? { injected.networkMonitor }
 }
 
-public protocol DependencyFill {
-    typealias NetworkClient = NilDependency
-}
+
+public typealias GeneratedRequirements_NetworkClient = NilDependency
