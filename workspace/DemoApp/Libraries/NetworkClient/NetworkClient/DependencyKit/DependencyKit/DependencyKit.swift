@@ -20,5 +20,5 @@ public class NilResource: NilRequirement {
     public init(){}
 }
 
-
+@available(*, deprecated, message: "Once code generation has run, the currently conforming protocol '<Name>Requirements' should instead conform to GeneratedRequirements_<Name>")
 public protocol GeneratedRequirements_ {}
