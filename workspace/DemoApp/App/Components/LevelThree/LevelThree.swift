@@ -2,21 +2,21 @@ import DependencyKit
 import Foundation
 
 // Level Three requires a 'FinalThoughts' type.
-protocol LevelThreeDependency: DependencyFill.LevelThree,
-    DIMessage
+protocol LevelThreeRequirements: DependencyFill.LevelThree,
+    MessageDependency
 {}
 
 // The Component defines a method on itself that isn't required by any downstream dependencies.
 // The method has access to 'finalThoughts' which is defined only in RootComponent, and passed down through codegnenerated Fills.
-class LevelThreeComponent<T: LevelThreeDependency>: Component<T>,
-                                                    LevelOneDependency {
+class LevelThreeResource<T: LevelThreeRequirements>: Resource<T>,
+                                                    LevelOneRequirements {
 
     func showMessageFromRoot() -> String {
         // We passed this from root without writing any explicit code.
-        return dependency.messageToCarryThrough
+        return injected.messageToCarryThrough
     }
 
     // MARK: subcomponents
-    var levelOneComponent: LevelOneComponent<LevelThreeComponent> { LevelOneComponent(dependency: self) }
+    var levelOneComponent: LevelOneResource<LevelThreeResource> { LevelOneResource(dependency: self) }
     
 }

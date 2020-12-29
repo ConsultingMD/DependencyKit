@@ -3,30 +3,30 @@ import DependencyKit
 import Foundation
 import NetworkClient
 
-extension DependencyProvider where T:DIAppName {
-    var appName: String { dependency.appName }
+extension Requirements where I:AppNameDependency {
+    var appName: String { injected.appName }
 }
-extension DependencyProvider where T:DIBoolIndicator {
-    var boolIndicator: Bool { dependency.boolIndicator }
+extension Requirements where I:BoolIndicatorDependency {
+    var boolIndicator: Bool { injected.boolIndicator }
 }
-extension DependencyProvider where T:DICurrentTime {
-    var currentTime: Date { dependency.currentTime }
+extension Requirements where I:CurrentTimeDependency {
+    var currentTime: Date { injected.currentTime }
 }
-extension DependencyProvider where T:DIMessage {
-    var messageToCarryThrough: String { dependency.messageToCarryThrough }
+extension Requirements where I:MessageDependency {
+    var messageToCarryThrough: String { injected.messageToCarryThrough }
 }
-extension DependencyProvider where T:DINetworkClient {
-    var networkClient: NetworkClient { dependency.networkClient }
+extension Requirements where I:NetworkClientDependency {
+    var networkClient: NetworkClient { injected.networkClient }
 }
-extension DependencyProvider where T:DISessionToken {
-    var sessionToken: String? { dependency.sessionToken }
+extension Requirements where I:SessionTokenDependency {
+    var sessionToken: String? { injected.sessionToken }
 }
-extension DependencyProvider where T:DIStartupTime {
-    var startupTime: Date { dependency.startupTime }
+extension Requirements where I:StartupTimeDependency {
+    var startupTime: Date { injected.startupTime }
 }
 
 protocol DependencyFill {
-    typealias LevelOne = Empty & DIStartupTime & DIMessage
-    typealias LevelTwo = Empty & DIStartupTime & DICurrentTime & DIMessage & DINetworkClient
-    typealias LevelThree = Empty & DISessionToken & DIAppName & DIStartupTime & DICurrentTime & DIBoolIndicator & DINetworkClient
+    typealias LevelOne = NilDependency & StartupTimeDependency & MessageDependency
+    typealias LevelTwo = NilDependency & StartupTimeDependency & CurrentTimeDependency & MessageDependency & NetworkClientDependency
+    typealias LevelThree = NilDependency & SessionTokenDependency & AppNameDependency & StartupTimeDependency & CurrentTimeDependency & BoolIndicatorDependency & NetworkClientDependency
 }

@@ -12,7 +12,7 @@
 		23A1A94925665456009E847C /* NetworkClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 23A1A94725665456009E847C /* NetworkClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		23A1A96325665505009E847C /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A1A96225665505009E847C /* NetworkClient.swift */; };
 		23A1A9682566551F009E847C /* NetworkMonitorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A1A9672566551F009E847C /* NetworkMonitorInterface.swift */; };
-		23A1A9E825677AD2009E847C /* NetworkClientComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A1A9E725677AD2009E847C /* NetworkClientComponent.swift */; };
+		23A1A9E825677AD2009E847C /* NetworkClientResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A1A9E725677AD2009E847C /* NetworkClientResource.swift */; };
 		23A1AA542568269C009E847C /* DependencyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A1AA532568269C009E847C /* DependencyKit.framework */; };
 		23A1AA552568269C009E847C /* DependencyKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 23A1AA532568269C009E847C /* DependencyKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -39,7 +39,7 @@
 		23A1A94825665456009E847C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		23A1A96225665505009E847C /* NetworkClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		23A1A9672566551F009E847C /* NetworkMonitorInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkMonitorInterface.swift; sourceTree = "<group>"; };
-		23A1A9E725677AD2009E847C /* NetworkClientComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientComponent.swift; sourceTree = "<group>"; };
+		23A1A9E725677AD2009E847C /* NetworkClientResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientResource.swift; sourceTree = "<group>"; };
 		23A1AA532568269C009E847C /* DependencyKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DependencyKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -93,7 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				235FB58A2569CC74000B575A /* DI */,
-				23A1A9E725677AD2009E847C /* NetworkClientComponent.swift */,
+				23A1A9E725677AD2009E847C /* NetworkClientResource.swift */,
 				23A1A96225665505009E847C /* NetworkClient.swift */,
 				23A1A9672566551F009E847C /* NetworkMonitorInterface.swift */,
 				23A1A94725665456009E847C /* NetworkClient.h */,
@@ -191,7 +191,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23A1A9E825677AD2009E847C /* NetworkClientComponent.swift in Sources */,
+				23A1A9E825677AD2009E847C /* NetworkClientResource.swift in Sources */,
 				235FB5892569CBE4000B575A /* Generated.swift in Sources */,
 				23A1A96325665505009E847C /* NetworkClient.swift in Sources */,
 				235FB58C2569CCB1000B575A /* Types.swift in Sources */,

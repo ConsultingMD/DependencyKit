@@ -2,10 +2,10 @@
 import DependencyKit
 import Foundation
 
-extension DependencyProvider where T: DINetworkMonitorInterface {
-    var networkMonitor: NetworkMonitorInterface? { dependency.networkMonitor }
+extension Requirements where I: NetworkMonitorInterfaceDependency {
+    var networkMonitor: NetworkMonitorInterface? { injected.networkMonitor }
 }
 
 public protocol DependencyFill {
-    typealias NetworkClient = Empty
+    typealias NetworkClient = NilDependency
 }

@@ -6,9 +6,9 @@ import NetworkClient
 // This Component has no requirements (annotated as EmptyDependency).
 // It explicitly satisfies Level One's requirements (LevelOneDependency) providing fields conforming to DIName, and DIRootName.
 // It also has other properties which might be used at the root level and/or satisfy requirements beyond Level One.
-class RootComponent<T: EmptyDependency>: Component<T>,
-                     NetworkClientDependency,
-                     LevelOneDependency {
+class RootResource<T: NilRequirement>: Resource<T>,
+                     NetworkClientRequirements,
+                     LevelOneRequirements {
     
     // MARK: dependency provisions
     let appName = "DependencyKit"
@@ -20,6 +20,6 @@ class RootComponent<T: EmptyDependency>: Component<T>,
     var networkClient: NetworkClient { networkComponent.buildClient() }
     
     // MARK: subcomponents
-    var networkComponent: NetworkClientComponent<RootComponent> { NetworkClientComponent(dependency: self) }
-    var levelOneComponent: LevelOneComponent<RootComponent> { LevelOneComponent(dependency: self) }
+    var networkComponent: NetworkClientResource<RootResource> { NetworkClientResource(dependency: self) }
+    var levelOneComponent: LevelOneResource<RootResource> { LevelOneResource(dependency: self) }
 }

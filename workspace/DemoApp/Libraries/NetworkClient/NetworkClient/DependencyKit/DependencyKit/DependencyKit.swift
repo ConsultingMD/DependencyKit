@@ -1,38 +1,21 @@
 import Foundation
 
-/// **This is a code generation hook.**
-/// Dependency protocols should be initially written to conform to this `Dependency` protocol.
-/// Code generation will create a `DependencyFill` and swap conformance to a  `Dependency` extension type.
-/// e.g. `protocol MyDependency: Dependency {}` → `protocol MyDependency: Dependency.MyDependency`
-public protocol DependencyProvider {
-    associatedtype T
-    var dependency: T { get }
+public protocol Dependency {}
+public protocol NilDependency: Dependency {}
+
+public protocol Requirements {
+    associatedtype I
+    var injected: I { get }
 }
+public protocol NilRequirement: Requirements {}
 
-/// **This is a code generation hook.**
-/// Protocols defining injected items should conform to this.
-public protocol Injected {}
-
-/// The internal abstract representation of 'nothing'.
-/// Application code should **never** conform directly to it as it is used as a code generation hook.
-public protocol Empty {}
-
-// MARK: - Bases for application code
-
-/// The Component base class. Components should directly inherit this.
-open class Component<T>: DependencyProvider {
-    public let dependency: T
-    public init(dependency: T) {
-        self.dependency = dependency
+open class Resource<I>: Requirements {
+    public let injected: I
+    public init(dependency: I) {
+        self.injected = dependency
     }
 }
-
-/// A special Dependency representing that nothign is provided or required.
-/// Root components should use this to indicate they are fully self-standing.
-public protocol EmptyDependency: DependencyProvider {}
-
-/// A special component to be provided as a Dependency to root level Components.
-public class EmptyComponent: EmptyDependency {
-    public lazy var dependency = self
+public class NilResource: NilRequirement {
+    public lazy var injected = self
     public init(){}
 }
