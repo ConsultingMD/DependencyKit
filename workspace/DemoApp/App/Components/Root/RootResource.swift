@@ -20,6 +20,6 @@ class RootResource<T: NilRequirement>: Resource<T>,
     var networkClient: NetworkClient { networkComponent.buildClient() }
     
     // MARK: subcomponents
-    var networkComponent: NetworkClientResource<RootResource> { NetworkClientResource(dependency: self) }
-    var levelOneComponent: LevelOneResource<RootResource> { LevelOneResource(dependency: self) }
+    var networkComponent: NetworkClientResource<RootResource> { NetworkClientResource(injecting: self) }
+    var levelOneComponent: LevelOneResource<RootResource> { LevelOneResource(injecting: self) }
 }

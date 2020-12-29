@@ -7,4 +7,4 @@ extension Requirements where I: NetworkMonitorInterfaceDependency {
 }
 
 
-public typealias _NetworkClientRequirements = NilDependency
+public typealias NetworkClientRequirements_CODEGEN = NilDependency

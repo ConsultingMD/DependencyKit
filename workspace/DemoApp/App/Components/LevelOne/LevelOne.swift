@@ -3,7 +3,7 @@ import Foundation
 
 
 protocol LevelOneRequirements:
-    _Generated, _LevelOneRequirements,
+    Requirements, LevelOneRequirements_CODEGEN,
     SessionTokenDependency,
     AppNameDependency,
     CurrentTimeDependency,
@@ -17,5 +17,5 @@ class LevelOneResource<T: LevelOneRequirements>: Resource<T>,
     let sessionToken: String? = UUID().uuidString
     
     // MARK: subcomponents
-    var levelTwoComponent: LevelTwoResource<LevelOneResource> { LevelTwoResource(dependency: self) }
+    var levelTwoComponent: LevelTwoResource<LevelOneResource> { LevelTwoResource(injecting: self) }
 }

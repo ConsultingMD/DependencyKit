@@ -8,7 +8,7 @@ class DIUsage: ObservableObject {
     init() {}
     
     func multiModuleTest() -> [String] {
-        let root = RootResource(dependency: NilResource())
+        let root = RootResource(injecting: NilResource())
         root.networkClient.get(url: URL(string: "https://google.com")!)
             .sink { _ in }
                 receiveValue: { _ in }
@@ -20,7 +20,7 @@ class DIUsage: ObservableObject {
     func diagnostic() -> [String] {
         var output: [String] = []
         // Instantiate a Root which requires no real dependency.
-        let root = RootResource(dependency: NilResource())
+        let root = RootResource(injecting: NilResource())
         output.append(
             """
                 The RootComponent sets up:

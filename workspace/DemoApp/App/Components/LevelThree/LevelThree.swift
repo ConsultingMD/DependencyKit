@@ -3,7 +3,7 @@ import Foundation
 
 // Level Three requires a 'FinalThoughts' type.
 protocol LevelThreeRequirements:
-    _Generated, _LevelThreeRequirements,
+    Requirements, LevelThreeRequirements_CODEGEN,
     MessageDependency
 {}
 
@@ -18,6 +18,6 @@ class LevelThreeResource<T: LevelThreeRequirements>: Resource<T>,
     }
 
     // MARK: subcomponents
-    var levelOneComponent: LevelOneResource<LevelThreeResource> { LevelOneResource(dependency: self) }
+    var levelOneComponent: LevelOneResource<LevelThreeResource> { LevelOneResource(injecting: self) }
     
 }

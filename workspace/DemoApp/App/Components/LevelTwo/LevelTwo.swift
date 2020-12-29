@@ -16,7 +16,7 @@ protocol LevelTwoViewModelDependencies:
 
 // LevelTwoDependency simply merges the dependencies already defined for the ViewModel and ViewController at this level.
 protocol LevelTwoRequirements:
-    _Generated, _LevelTwoRequirements,
+    Requirements, LevelTwoRequirements_CODEGEN,
     LevelTwoViewModelDependencies,
     LevelTwoViewControllerDependencies
 {}
@@ -30,5 +30,5 @@ class LevelTwoResource<T: LevelTwoRequirements>: Resource<T>,
     let boolIndicator = false
     
     // MARK: subcomponents
-    var levelThreeComponent: LevelThreeResource<LevelTwoResource> { LevelThreeResource(dependency: self) }
+    var levelThreeComponent: LevelThreeResource<LevelTwoResource> { LevelThreeResource(injecting: self) }
 }
