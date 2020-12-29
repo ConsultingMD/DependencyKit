@@ -1,7 +1,9 @@
 import DependencyKit
 import Foundation
 
-protocol LevelOneRequirements: GeneratedRequirements_LevelOne,
+
+protocol LevelOneRequirements:
+    _Generated, _LevelOneRequirements,
     SessionTokenDependency,
     AppNameDependency,
     CurrentTimeDependency,

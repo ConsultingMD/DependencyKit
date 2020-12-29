@@ -15,10 +15,11 @@ protocol LevelTwoViewModelDependencies:
     {}
 
 // LevelTwoDependency simply merges the dependencies already defined for the ViewModel and ViewController at this level.
-protocol LevelTwoRequirements: GeneratedRequirements_LevelTwo,
-                             LevelTwoViewModelDependencies,
-                             LevelTwoViewControllerDependencies
-                             {}
+protocol LevelTwoRequirements:
+    _Generated, _LevelTwoRequirements,
+    LevelTwoViewModelDependencies,
+    LevelTwoViewControllerDependencies
+{}
 
 // The Component defines its requirement as a LevelTwoDependency.
 // It needs no additional implementation to satisfy its downstream dependencies (LevelThreeDependency).

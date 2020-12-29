@@ -2,7 +2,8 @@ import DependencyKit
 import Foundation
 
 // Level Three requires a 'FinalThoughts' type.
-protocol LevelThreeRequirements: GeneratedRequirements_LevelThree,
+protocol LevelThreeRequirements:
+    _Generated, _LevelThreeRequirements,
     MessageDependency
 {}
 
