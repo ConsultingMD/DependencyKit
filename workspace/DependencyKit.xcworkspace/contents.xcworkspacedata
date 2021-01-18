@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:DemoApp/Libraries/NetworkClient/NetworkClient/DependencyKit/DependencyKit.xcodeproj">
+      location = "group:DemoApp/Libraries/DependencyKit/DependencyKit.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:DemoApp/DemoApp.xcodeproj">
