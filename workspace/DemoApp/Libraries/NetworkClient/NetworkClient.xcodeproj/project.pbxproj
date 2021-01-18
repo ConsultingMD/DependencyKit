@@ -13,18 +13,18 @@
 		23A1A96325665505009E847C /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A1A96225665505009E847C /* NetworkClient.swift */; };
 		23A1A9682566551F009E847C /* NetworkMonitorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A1A9672566551F009E847C /* NetworkMonitorInterface.swift */; };
 		23A1A9E825677AD2009E847C /* NetworkClientResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A1A9E725677AD2009E847C /* NetworkClientResource.swift */; };
-		23A1AA542568269C009E847C /* DependencyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A1AA532568269C009E847C /* DependencyKit.framework */; };
-		23A1AA552568269C009E847C /* DependencyKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 23A1AA532568269C009E847C /* DependencyKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F71F075625B64E3000E633A0 /* DependencyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F71F075525B64E3000E633A0 /* DependencyKit.framework */; };
+		F71F075725B64E3000E633A0 /* DependencyKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F71F075525B64E3000E633A0 /* DependencyKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		23A1AA49256825FB009E847C /* Embed Frameworks */ = {
+		F71F075825B64E3000E633A0 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				23A1AA552568269C009E847C /* DependencyKit.framework in Embed Frameworks */,
+				F71F075725B64E3000E633A0 /* DependencyKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -41,6 +41,7 @@
 		23A1A9672566551F009E847C /* NetworkMonitorInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkMonitorInterface.swift; sourceTree = "<group>"; };
 		23A1A9E725677AD2009E847C /* NetworkClientResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientResource.swift; sourceTree = "<group>"; };
 		23A1AA532568269C009E847C /* DependencyKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DependencyKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F71F075525B64E3000E633A0 /* DependencyKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DependencyKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,7 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23A1AA542568269C009E847C /* DependencyKit.framework in Frameworks */,
+				F71F075625B64E3000E633A0 /* DependencyKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +106,7 @@
 		23A1A9EB25677BA3009E847C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F71F075525B64E3000E633A0 /* DependencyKit.framework */,
 				23A1AA532568269C009E847C /* DependencyKit.framework */,
 			);
 			name = Frameworks;
@@ -132,7 +134,7 @@
 				23A1A94025665456009E847C /* Sources */,
 				23A1A94125665456009E847C /* Frameworks */,
 				23A1A94225665456009E847C /* Resources */,
-				23A1AA49256825FB009E847C /* Embed Frameworks */,
+				F71F075825B64E3000E633A0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

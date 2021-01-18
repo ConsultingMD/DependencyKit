@@ -10,8 +10,6 @@
 		235FB5942569D032000B575A /* TimingNetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235FB5932569D032000B575A /* TimingNetworkMonitor.swift */; };
 		23A1AA4D25682607009E847C /* NetworkClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A1A95425665457009E847C /* NetworkClient.framework */; };
 		23A1AA4E25682607009E847C /* NetworkClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 23A1A95425665457009E847C /* NetworkClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		23A1AA5125682673009E847C /* DependencyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A1AA5025682673009E847C /* DependencyKit.framework */; };
-		23A1AA5225682673009E847C /* DependencyKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 23A1AA5025682673009E847C /* DependencyKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		23B775972564421200D5CC4B /* Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B775962564421200D5CC4B /* Generated.swift */; };
 		23FF9EDB25643C3900266ABE /* DIDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9EC825643C3800266ABE /* DIDemoApp.swift */; };
 		23FF9EDD25643C3900266ABE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9EC925643C3800266ABE /* ContentView.swift */; };
@@ -22,6 +20,8 @@
 		23FF9F0C25643CB400266ABE /* LevelThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F0525643CB400266ABE /* LevelThree.swift */; };
 		23FF9F1425643D0500266ABE /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F1325643D0500266ABE /* Types.swift */; };
 		23FF9F1725643FBF00266ABE /* DIUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F1625643FBF00266ABE /* DIUsage.swift */; };
+		F71F075B25B64E5C00E633A0 /* DependencyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F71F074E25B64D0800E633A0 /* DependencyKit.framework */; };
+		F71F075C25B64E5C00E633A0 /* DependencyKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F71F074E25B64D0800E633A0 /* DependencyKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +32,13 @@
 			remoteGlobalIDString = 23A1A94425665456009E847C;
 			remoteInfo = NetworkClient;
 		};
+		F71F074D25B64D0800E633A0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F71F074925B64D0800E633A0 /* DependencyKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 23A1AA2A256824FE009E847C;
+			remoteInfo = DependencyKit;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,7 +48,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				23A1AA5225682673009E847C /* DependencyKit.framework in Embed Frameworks */,
+				F71F075C25B64E5C00E633A0 /* DependencyKit.framework in Embed Frameworks */,
 				23A1AA4E25682607009E847C /* NetworkClient.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -66,6 +73,7 @@
 		23FF9F0525643CB400266ABE /* LevelThree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelThree.swift; sourceTree = "<group>"; };
 		23FF9F1325643D0500266ABE /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		23FF9F1625643FBF00266ABE /* DIUsage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DIUsage.swift; sourceTree = "<group>"; };
+		F71F074925B64D0800E633A0 /* DependencyKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DependencyKit.xcodeproj; path = DependencyKit/DependencyKit.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23A1AA5125682673009E847C /* DependencyKit.framework in Frameworks */,
+				F71F075B25B64E5C00E633A0 /* DependencyKit.framework in Frameworks */,
 				23A1AA4D25682607009E847C /* NetworkClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -126,6 +134,7 @@
 		23A1A8C225663CED009E847C /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				F71F074925B64D0800E633A0 /* DependencyKit.xcodeproj */,
 				23A1A94F25665456009E847C /* NetworkClient.xcodeproj */,
 			);
 			path = Libraries;
@@ -215,6 +224,14 @@
 			path = Types;
 			sourceTree = "<group>";
 		};
+		F71F074A25B64D0800E633A0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F71F074E25B64D0800E633A0 /* DependencyKit.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -265,6 +282,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = F71F074A25B64D0800E633A0 /* Products */;
+					ProjectRef = F71F074925B64D0800E633A0 /* DependencyKit.xcodeproj */;
+				},
+				{
 					ProductGroup = 23A1A95025665456009E847C /* Products */;
 					ProjectRef = 23A1A94F25665456009E847C /* NetworkClient.xcodeproj */;
 				},
@@ -282,6 +303,13 @@
 			fileType = wrapper.framework;
 			path = NetworkClient.framework;
 			remoteRef = 23A1A95325665457009E847C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F71F074E25B64D0800E633A0 /* DependencyKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = DependencyKit.framework;
+			remoteRef = F71F074D25B64D0800E633A0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

@@ -3,19 +3,19 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		23A1AA2F256824FE009E847C /* DependencyKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 23A1AA2D256824FE009E847C /* DependencyKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		23A1AA3A2568252F009E847C /* DependencyKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A1AA392568252F009E847C /* DependencyKit.swift */; };
+		F71F075225B64D8900E633A0 /* DependencyKit in Frameworks */ = {isa = PBXBuildFile; productRef = F71F075125B64D8900E633A0 /* DependencyKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		23A1AA2A256824FE009E847C /* DependencyKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DependencyKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		23A1AA2D256824FE009E847C /* DependencyKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DependencyKit.h; sourceTree = "<group>"; };
 		23A1AA2E256824FE009E847C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		23A1AA392568252F009E847C /* DependencyKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyKit.swift; sourceTree = "<group>"; };
+		F782DD2425B64F040064385B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -23,6 +23,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F71F075225B64D8900E633A0 /* DependencyKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -34,6 +35,7 @@
 			children = (
 				23A1AA2C256824FE009E847C /* DependencyKit */,
 				23A1AA2B256824FE009E847C /* Products */,
+				F71F075025B64D8900E633A0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -50,9 +52,16 @@
 			children = (
 				23A1AA2D256824FE009E847C /* DependencyKit.h */,
 				23A1AA2E256824FE009E847C /* Info.plist */,
-				23A1AA392568252F009E847C /* DependencyKit.swift */,
+				F782DD2425B64F040064385B /* README.md */,
 			);
 			path = DependencyKit;
+			sourceTree = "<group>";
+		};
+		F71F075025B64D8900E633A0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +92,9 @@
 			dependencies = (
 			);
 			name = DependencyKit;
+			packageProductDependencies = (
+				F71F075125B64D8900E633A0 /* DependencyKit */,
+			);
 			productName = DependencyKit;
 			productReference = 23A1AA2A256824FE009E847C /* DependencyKit.framework */;
 			productType = "com.apple.product-type.framework";
@@ -134,7 +146,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23A1AA3A2568252F009E847C /* DependencyKit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +347,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F71F075125B64D8900E633A0 /* DependencyKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DependencyKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 23A1AA21256824FE009E847C /* Project object */;
 }
