@@ -12,7 +12,7 @@ protocol LevelOneRequirements:
 
 
 class LevelOneResource<T: LevelOneRequirements>: Resource<T>,
-                                                LevelTwoRequirements {
+                                                 LevelTwoRequirements {
     let boolIndicator = true // initial value
     let sessionToken: String? = UUID().uuidString
     

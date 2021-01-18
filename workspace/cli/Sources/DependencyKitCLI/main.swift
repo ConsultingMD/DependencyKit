@@ -11,5 +11,24 @@ let args = DepGen.parseOrExit()
 let file = args.file
 let url = URL(fileURLWithPath: file)
 let sourceFile = try SyntaxParser.parse(url)
-let incremented = AddOneToIntegerLiterals().visit(sourceFile)
-print(incremented)
+let visitor = TestSyntaxVisitor()
+visitor.walk(sourceFile)
+
+
+
+/*
+ 
+ let sourceFile = try SyntaxParser.parse(url)
+ 
+ let envVarRewriter = EnvironmentVariableLiteralRewriter(
+                         environment: ProcessInfo.processInfo.environment,
+                         ignoredLiteralValues: varLiteralsToIgnore,
+                         logger: logger
+                      )
+ let result = envVarRewriter.visit(sourceFile)
+ 
+ var contents: String = ""
+ result.write(to: &contents)
+ 
+ try contents.write(to: url, atomically: true, encoding: .utf8)
+ */

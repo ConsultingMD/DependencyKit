@@ -1,0 +1,1 @@
+xcrun swiftc -frontend -emit-syntax  ../DemoApp/App/Components/LevelThree/LevelThree.swift

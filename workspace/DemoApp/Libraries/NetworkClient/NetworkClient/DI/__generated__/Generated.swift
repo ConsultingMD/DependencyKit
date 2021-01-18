@@ -2,7 +2,7 @@
 import DependencyKit
 import Foundation
 
-extension Requirements where I: NetworkMonitorInterfaceDependency {
+public extension Requirements where I: NetworkMonitorInterfaceDependency {
     var networkMonitor: NetworkMonitorInterface? { injected.networkMonitor }
 }
 
