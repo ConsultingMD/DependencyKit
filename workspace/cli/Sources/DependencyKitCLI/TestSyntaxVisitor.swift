@@ -18,4 +18,9 @@ class TestSyntaxVisitor: SyntaxVisitor {
         return super.visit(token)
     }
     
+    override func visit(_ token: TokenSyntax) -> SyntaxVisitorContinueKind {
+        print("%% \(token.description)")
+        return super.visit(token)
+    }
+    
 }
