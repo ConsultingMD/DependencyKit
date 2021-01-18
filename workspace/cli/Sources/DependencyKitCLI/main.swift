@@ -7,6 +7,16 @@ struct DepGen: ParsableArguments {
     var modules: [String] = []
 }
 
+struct FrameworkPrimitives {
+	static let importString = "DependencyKit"
+	static let dependencyProtocolString = "Dependency"
+	static let nilDependencyProtocolString = "NilDependency"
+	static let requirementsProtocolString = "Requirements"
+	static let nilRequirementsProtocolString = "NilRequirements"
+	static let resourceClassString = "Resource"
+	static let nilResourceClassString = "NilResource"
+}
+
 struct Module {
 	let name: String
 	let path: URL
