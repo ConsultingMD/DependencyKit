@@ -1,7 +1,0 @@
-sources:
-  - "./DemoApp"
-templates:
-  - "./DemoApp/Libraries/NetworkClient/NetworkClient/DependencyKit/DependencyKit/Templates"
-output:
-  "./Generated"
-
