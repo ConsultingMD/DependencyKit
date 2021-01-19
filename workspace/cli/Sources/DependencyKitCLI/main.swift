@@ -1,77 +1,15 @@
-import ArgumentParser
 import Foundation
-import SwiftSyntax
-
-struct DepGen: ParsableArguments {
-	@Argument(help: "A list of paths to module source roots. Each root folder must have the same name one would use to import the module.")
-    var modules: [String] = []
-}
-
-struct FrameworkPrimitives {
-	static let importString = "DependencyKit"
-	static let dependencyProtocolString = "Dependency"
-	static let nilDependencyProtocolString = "NilDependency"
-	static let requirementsProtocolString = "Requirements"
-	static let nilRequirementsProtocolString = "NilRequirements"
-	static let resourceClassString = "Resource"
-	static let nilResourceClassString = "NilResource"
-}
-
-struct Module {
-	let name: String
-	let path: URL
-	let generationPath: URL?
-}
-
-struct Field {
-	let name: String
-	let type: String
-	let access: String
-}
-
-struct Requirement {
-	let fields: [Field]
-	let codegenName: String
-}
-
-struct Resource {
-	let access: String
-	let genericRequirement: Requirement
-	let conformedRequirements: [Requirement]
-	let directProvisions: [Field]
-	let module: Module
-}
-
-struct ResourceInstantiation {
-	let module: Module
-	let constructedResource: Resource
-	let injectedResource: Resource
-}
+import Yams
 
 let args = DepGen.parseOrExit()
-
-
-// let file = args.file
-// let url = URL(fileURLWithPath: file)
-// let sourceFile = try SyntaxParser.parse(url)
-// let visitor = TestSyntaxVisitor()
-// visitor.walk(sourceFile)
-
-
-
-/*
- 
- let sourceFile = try SyntaxParser.parse(url)
- 
- let envVarRewriter = EnvironmentVariableLiteralRewriter(
-                         environment: ProcessInfo.processInfo.environment,
-                         ignoredLiteralValues: varLiteralsToIgnore,
-                         logger: logger
-                      )
- let result = envVarRewriter.visit(sourceFile)
- 
- var contents: String = ""
- result.write(to: &contents)
- 
- try contents.write(to: url, atomically: true, encoding: .utf8)
- */
+let yamlConfigPath = args.config
+let fileURL = URL(fileURLWithPath: yamlConfigPath)
+let data = try! Data(contentsOf: fileURL)
+let decoder = YAMLDecoder()
+let decoded = try decoder.decode(ConfigFileModel.self, from: data)
+let currDir = URL(string: FileManager.default.currentDirectoryPath)!
+let files = decoded.modules
+    .flatMap { FileEnumerator.find(currDir.appendingPathComponent($0.path)) }
+    .filter { $0.pathExtension == "swift" }
+    .filter { !$0.pathComponents.contains(Constants.codegenDirectory) }
+print(files)
