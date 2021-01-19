@@ -1,5 +1,7 @@
 modules:
   - name: DemoApp
     path: workspace/DemoApp/App
+    codegenDirectory: DI/__generated__
   - name: NetworkClient
-    path: workspace/DemoApp/Libraries/NetworkClient
+    path: workspace/DemoApp/Libraries/NetworkClient/NetworkClient
+    codegenDirectory: DI/__generated__
