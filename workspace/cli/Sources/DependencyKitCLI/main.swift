@@ -1,4 +1,5 @@
 import Foundation
+import SwiftSyntax
 import Yams
 
 let args = DepGen.parseOrExit()
@@ -21,5 +22,22 @@ if files.count != Set(files).count {
 
         """)
 }
-
+print("")
+print("### FILES")
 print(files)
+let file = files[3]
+print("")
+print("### SINGLE FILE")
+print(file)
+let sourceFile = try SyntaxParser.parse(file)
+print("")
+print("### SOURCEFILE")
+print(sourceFile)
+print("")
+print("""
+    ### RESULT ###
+    ##############
+
+    """)
+let visitor = TestSyntaxVisitor()
+visitor.walk(sourceFile)
