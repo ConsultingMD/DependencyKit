@@ -19,5 +19,9 @@ class LevelThreeResource<T: LevelThreeRequirements>: Resource<T>,
 
     // MARK: subcomponents
     var levelOneComponent: LevelOneResource<LevelThreeResource> { LevelOneResource(injecting: self) }
+ 
+    func thing() -> NetworkClientDependency {
+        LevelOneResource<LevelThreeResource>(injecting: self)
+    }
     
 }
