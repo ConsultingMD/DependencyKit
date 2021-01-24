@@ -9,10 +9,9 @@ struct Module: Hashable, CustomStringConvertible {
 struct Dependency: Hashable, CustomStringConvertible {
     let identifier: String
     let access: String?
-    let fieldName: String
-    let fieldType: String
+    let fields: [Field]
     
-    var description: String { "\(access.map{$0 + " "} ?? "")protocol \(identifier): Dependency { var \(fieldName): \(fieldType) { get } }" }
+    var description: String { "\(access.map{$0 + " "} ?? "")protocol \(identifier): Dependency { \(fields) }" }
 }
 
 struct Field: Hashable, CustomStringConvertible {

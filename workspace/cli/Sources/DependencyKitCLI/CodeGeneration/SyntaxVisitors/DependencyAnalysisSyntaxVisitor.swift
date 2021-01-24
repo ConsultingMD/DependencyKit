@@ -43,7 +43,33 @@ class DependencyAnalysisSyntaxVisitor: SyntaxVisitor {
         else { return super.visit(token) }
 
         let identifier = token.identifier.text
+        typealias TypeAccumulator = (var: String?, type: String?, optional: Bool, kind: SwiftSyntax.TokenKind?)
         
+        let fields = token.members.members.map { member -> TypeAccumulator in
+            let acc: TypeAccumulator  = (var: nil, type: nil, optional: false, kind: nil)
+            return member.tokens.reduce(acc) { acc, curr in
+                switch (acc.kind, curr.tokenKind) {
+                case (.some(TokenKind.varKeyword), TokenKind.identifier(let variableIdentifier)):
+                    return (variableIdentifier, acc.type, acc.optional, curr.tokenKind)
+                case (.some(TokenKind.colon), TokenKind.identifier(let typeIdentifier)):
+                    return (acc.var, typeIdentifier, acc.optional, curr.tokenKind)
+                case (.some(TokenKind.identifier(let type)), TokenKind.postfixQuestionMark):
+                    if type == acc.type { // we must have collected the type already
+                        return (acc.var, acc.type, true, curr.tokenKind)
+                    } else {
+                        return (acc.var, acc.type, acc.optional, curr.tokenKind)
+                    }
+                default:
+                    return (acc.var, acc.type, acc.optional, curr.tokenKind)
+                }
+            }
+        }.map { acc -> Field in
+            guard let varIdentifier = acc.var,
+                  let typeIdentifier = acc.type
+            else { fatalError("unparseable field") }
+            return Field(identifier: varIdentifier, type: typeIdentifier + (acc.optional ? "?" : ""), access: nil)
+        }
+
         if inherited.contains(FrameworkConstants.dependencyProtocolString) {
             precondition(inherited.count <= 1 && modifiers.count <= 1,
                          "Dependencies should only be declared in the form: \n" +
@@ -51,8 +77,7 @@ class DependencyAnalysisSyntaxVisitor: SyntaxVisitor {
             dependencies.insert(
                 Dependency(identifier: identifier,
                            access: modifiers.first,
-                           fieldName: "UNKNOWN",
-                           fieldType: "UNKNOWN")
+                           fields: fields)
             )
         }
 
