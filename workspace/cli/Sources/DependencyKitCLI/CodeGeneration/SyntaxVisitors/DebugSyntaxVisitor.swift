@@ -3,8 +3,10 @@ import SwiftSyntax
 
 class DebugSyntaxVisitor: SyntaxVisitor {
 
+    var acc = ""
+    
     override func visit(_ token: ImportDeclSyntax) -> SyntaxVisitorContinueKind {
-        print("""
+        acc += """
             %%% IMPORT %%%
             %%%%%%%%%%%%%%
 
@@ -12,40 +14,39 @@ class DebugSyntaxVisitor: SyntaxVisitor {
 
             path: >"\(String(describing: token.path))"<
 
-            """)
+            """
         
         return super.visit(token)
     }
     
     override func visit(_ token: ProtocolDeclSyntax) -> SyntaxVisitorContinueKind {
         // For both Dependency & Requirement
-        print("""
+        acc += """
         %%% PROTOCOL %%%
         %%%%%%%%%%%%%%%%
 
         (access) modifiers: >"\(String(describing:token.modifiers?.withoutTrivia().flatMap{$0.withoutTrivia().tokens.map{$0.text}}))"<
-
+        identifier: >"\(String(describing: token.identifier.text))"<
         inheritanceClause: >"\(String(describing: token.inheritanceClause?.inheritedTypeCollection.withoutTrivia().flatMap{$0.withoutTrivia().tokens.map{ $0.text }}))"<
 
-        """)
+        """
         return super.visit(token)
     }
     
     override func visit(_ token: ClassDeclSyntax) -> SyntaxVisitorContinueKind {
         // For both Dependency & Requirement
-        print("""
+        acc += """
         %%% CLASS %%%
         %%%%%%%%%%%%%
 
         (access) modifiers: >"\(String(describing:token.modifiers?.withoutTrivia().flatMap{$0.children.flatMap{$0.tokens.map{$0.text}}}))"<
-
+        identifier: >"\(String(describing: token.identifier.text))"<
         generic: >"\(String(describing:
                                 token.genericParameterClause?.genericParameterList.children.flatMap { $0.tokens.map{ $0.text }}
                         ))"<
-
         inheritanceClause: >"\(String(describing: token.inheritanceClause?.inheritedTypeCollection.withoutTrivia().flatMap{$0.withoutTrivia().tokens.map{ $0.text }}))"<
 
-        """)
+        """
         return super.visit(token)
     }
     
@@ -55,15 +56,14 @@ class DebugSyntaxVisitor: SyntaxVisitor {
         
         // We shouldn't have to look for access modifiers on the storage of the
         // instances because the access of the declarations should do.
-        print("""
+        acc += """
         %%% TYPE %%%
         %%%%%%%%%%%%%
 
         name: >"\(String(describing: token.name.text))"<"
-
         generic: >"\(String(describing: token.genericArgumentClause?.arguments.withoutTrivia().children.flatMap{$0.tokens.map{$0.text}}))"<
         
-        """)
+        """
         return super.visit(token)
     }
 
@@ -85,7 +85,7 @@ class DebugSyntaxVisitor: SyntaxVisitor {
         // or anything that allows us to distinguish the semantics of the contained
         // identifiers by anything other than position relative to other syntax.
         // SwiftSyntax.TokenKind.leftAngle, SwiftSyntax.TokenKind.colon, etc.
-        print("""
+        acc += """
         %%% INVOCATIONS %%%
         %%%%%%%%%%%%%%%%%%%
 
@@ -95,8 +95,13 @@ class DebugSyntaxVisitor: SyntaxVisitor {
         arguments: >"\(String(describing: token.argumentList.tokens.map{$0.text}))"<
         arguments: >"\(String(describing: token.argumentList.tokens.map{$0.tokenKind}))"<
 
-        """)
+        """
         return super.visit(token)
     }
     
+}
+
+
+extension DebugSyntaxVisitor: CustomStringConvertible {
+    var description: String { acc }
 }

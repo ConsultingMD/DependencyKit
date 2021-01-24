@@ -7,7 +7,7 @@ let moduleConfigurations = configReader.readModuleConfigurations()
 let readers = moduleConfigurations.map(ModuleReader.init(config:))
 readers.forEach {
     $0.read()
-    print($0.info())
+    $0.printInfo()
 }
 
 

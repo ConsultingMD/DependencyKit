@@ -37,7 +37,7 @@ class ConfigurationReader {
             }
         assert(files.application.count == Set(files.application).count)
         assert(files.codegen.count <= 1)
-        return ModuleConfiguration(module: Module(name: module.name),
+        return ModuleConfiguration(module: Module(identifier: module.name),
                                    files: files.application,
                                    codegenFile: files.codegen.first ?? codegenFile)
     }
