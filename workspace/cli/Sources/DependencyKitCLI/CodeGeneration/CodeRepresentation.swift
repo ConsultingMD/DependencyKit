@@ -36,7 +36,6 @@ struct Resource: Hashable, CustomStringConvertible {
     let identifier: String
 	let genericIdentifier: String
 	let conformanceIdentifiers: [String]
-	let fields: [String]//[Field]
     
     var description: String { "\(access.map{$0 + " "} ?? "")class \(identifier)<T: \(genericIdentifier)>: Resource<T>\(conformanceIdentifiers.reduce(""){ $0 + ", " + $1 }) {/* ... */}" }
 }

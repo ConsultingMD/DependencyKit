@@ -143,12 +143,13 @@ class DependencyAnalysisSyntaxVisitor: SyntaxVisitor {
                      "Requirements must be declared in the form: \n" +
                      "[public] protocol MyRequirements: Requirements, MyReqStubFor_\(CodegenConstants.codegenProtocolSuffix), MyDependency1, MyDependency2, MyDependencyEtc {}")
         
+        typealias TypeAccumulator = (var: String?, type: String?, optional: Bool, kind: SwiftSyntax.TokenKind?)
+        
         resources.insert(
             Resource(access: modifiers.first,
                      identifier: identifier,
                      genericIdentifier: genericConstraint.first!,
-                     conformanceIdentifiers: protocolConformance,
-                     fields: ["UNKNOWN"])
+                     conformanceIdentifiers: protocolConformance)
         )
         
         return super.visit(token)
