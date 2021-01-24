@@ -1,7 +1,7 @@
 import Foundation
 import SwiftSyntax
 
-class TestSyntaxVisitor: SyntaxVisitor {
+class DebugSyntaxVisitor: SyntaxVisitor {
 
     override func visit(_ token: ImportDeclSyntax) -> SyntaxVisitorContinueKind {
         print("""
