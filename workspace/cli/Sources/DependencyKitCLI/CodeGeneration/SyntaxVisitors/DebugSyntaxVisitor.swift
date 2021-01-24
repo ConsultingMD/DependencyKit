@@ -52,7 +52,7 @@ class DebugSyntaxVisitor: SyntaxVisitor {
     
     override func visit(_ token: SimpleTypeIdentifierSyntax) -> SyntaxVisitorContinueKind {
         
-        // Look for explicit declarations
+        // Look for all type uses
         
         // We shouldn't have to look for access modifiers on the storage of the
         // instances because the access of the declarations should do.

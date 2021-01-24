@@ -32,12 +32,14 @@ struct Requirement: Hashable, CustomStringConvertible {
     var description: String { "\(access.map{$0 + " "} ?? "")protocol \(identifier): Requirements, \(codegenProtocolIdentifier)\(dependencyIdentifiers.reduce(""){ $0 + ", " + $1 }) {}"}
 }
 
-struct Resource {
-	let access: String
-	let genericRequirement: Requirement
-	let conformedRequirements: [Requirement]
-	let directProvisions: [Field]
-	let module: Module
+struct Resource: Hashable, CustomStringConvertible {
+	let access: String?
+    let identifier: String
+	let genericIdentifier: String
+	let conformanceIdentifiers: [String]
+	let fields: [String]//[Field]
+    
+    var description: String { "\(access.map{$0 + " "} ?? "")class \(identifier)<T: \(genericIdentifier)>: Resource<T>\(conformanceIdentifiers.reduce(""){ $0 + ", " + $1 }) {/* ... */}" }
 }
 
 struct ResourceInstantiation {
