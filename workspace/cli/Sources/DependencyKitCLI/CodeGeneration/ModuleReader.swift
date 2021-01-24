@@ -23,4 +23,13 @@ class ModuleReader {
         parseSources().forEach { visitor.walk($0) }
     }
     
+    func info() -> String {
+        let header = "MODULE: \(config.module.name)"
+        return String(repeating: "#", count: header.count + 4) + "\n"
+            + "# \(header) #\n"
+            + String(repeating: "#", count: header.count + 4) + "\n"
+            + "# imports: \n"
+            + Array(visitor.imports).reduce("") { $0 + "# - \($1) \n" }
+    }
+    
 }
