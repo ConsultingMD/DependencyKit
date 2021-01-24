@@ -28,19 +28,29 @@ class DependencyAnalysisSyntaxVisitor: SyntaxVisitor {
                 .tokens
                 .reduce(into: [String](), { out, curr in
                     if case .identifier(let name) = curr.tokenKind { out.append(name) }
-                })
+                }),
+              case let modifiers = token
+                .modifiers?
+                .tokens
+                .reduce(into: [String](), { out, curr in
+                    switch curr.tokenKind {
+                  case .publicKeyword, .privateKeyword, .internalKeyword, .fileprivateKeyword:
+                      out.append(curr.text)
+                  default:
+                      break
+                  }
+              }) ?? []
         else { return super.visit(token) }
-        
-        let modifiers = token.modifiers?.withoutTrivia().flatMap{$0.withoutTrivia().tokens.map{$0.text}}
+
         let identifier = token.identifier.text
         
         if inherited.contains(FrameworkConstants.dependencyProtocolString) {
-            precondition(inherited.count <= 1 && modifiers?.count ?? 0 <= 1,
+            precondition(inherited.count <= 1 && modifiers.count <= 1,
                          "Dependencies should only be declared in the form: \n" +
                          "[public] protocol Identifier: Dependency { var name: Type { get } }")
             dependencies.insert(
                 Dependency(identifier: identifier,
-                           access: modifiers?.first,
+                           access: modifiers.first,
                            fieldName: "UNKNOWN",
                            fieldType: "UNKNOWN")
             )
@@ -50,11 +60,11 @@ class DependencyAnalysisSyntaxVisitor: SyntaxVisitor {
             let codegenProtocol = inherited.filter({ $0.hasSuffix(CodegenConstants.codegenProtocolSuffix) })
             let dependencyProtocols = inherited.filter({ $0 != FrameworkConstants.requirementsProtocolString &&
                                                         !$0.hasSuffix(CodegenConstants.codegenProtocolSuffix) })
-            precondition(inherited.count >= 2 && modifiers?.count ?? 0 <= 1 && codegenProtocol.count == 1,
+            precondition(inherited.count >= 2 && modifiers.count <= 1 && codegenProtocol.count == 1,
                          "Requirements must be declared in the form: \n" +
                          "[public] protocol MyRequirements: Requirements, MyReqStubFor_\(CodegenConstants.codegenProtocolSuffix), MyDependency1, MyDependency2, MyDependencyEtc {}")
             requirements.insert(
-                Requirement(access: modifiers?.first,
+                Requirement(access: modifiers.first,
                             identifier: identifier,
                             dependencyIdentifiers: dependencyProtocols,
                             codegenProtocolIdentifier: codegenProtocol.first!)
@@ -92,6 +102,7 @@ class DependencyAnalysisSyntaxVisitor: SyntaxVisitor {
                   }
               }) ?? [],
               case let identifier = token.identifier.text,
+              // The generic name, e.g. T, is an Identifier and is present in the tokens collected. Remove.
               case let inheritedSet = Set<String>(inheritedTypesTokens),
               case let genericsSet = Set<String>(genericTypeTokens),
               case let t = inheritedSet.intersection(genericsSet),
@@ -117,11 +128,6 @@ class DependencyAnalysisSyntaxVisitor: SyntaxVisitor {
         
         return super.visit(token)
     }
-
-    override func visit(_ token: FunctionCallExprSyntax) -> SyntaxVisitorContinueKind {
-        return super.visit(token)
-    }
-    
 }
 
 extension DependencyAnalysisSyntaxVisitor: CustomStringConvertible {
