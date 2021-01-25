@@ -1,5 +1,13 @@
 import Foundation
 
+struct ModuleDeclarations {
+    let config: ModuleConfiguration
+    let imports: Set<Module>
+    let dependencies: Set<Dependency>
+    let requirements: Set<Requirement>
+    let resources: Set<Resource>
+}
+
 struct Module: Hashable, CustomStringConvertible {
 	let identifier: String
     

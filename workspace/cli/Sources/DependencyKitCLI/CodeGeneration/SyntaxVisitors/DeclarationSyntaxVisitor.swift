@@ -1,7 +1,7 @@
 import Foundation
 import SwiftSyntax
 
-class DependencyAnalysisSyntaxVisitor: SyntaxVisitor {
+class DeclarationSyntaxVisitor: SyntaxVisitor {
     
     private let config: ModuleConfiguration
     
@@ -156,7 +156,7 @@ class DependencyAnalysisSyntaxVisitor: SyntaxVisitor {
     }
 }
 
-extension DependencyAnalysisSyntaxVisitor: CustomStringConvertible {
+extension DeclarationSyntaxVisitor: CustomStringConvertible {
     var description: String {
         let header = "module: \(config.module.identifier)"
         return String(repeating: "#", count: header.count + 4) + "\n"
