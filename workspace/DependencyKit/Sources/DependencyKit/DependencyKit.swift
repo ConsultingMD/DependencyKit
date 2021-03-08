@@ -7,7 +7,7 @@ public protocol Requirements {
     associatedtype I
     var injected: I { get }
 }
-public protocol NilRequirement: Requirements {}
+public protocol NilRequirements: Requirements {}
 
 public protocol ResourceType: Requirements {}
 
@@ -17,7 +17,7 @@ open class Resource<I: Requirements>: ResourceType {
         self.injected = injected
     }
 }
-public class NilResource: ResourceType, NilRequirement {
+public class NilResource: ResourceType, NilRequirements {
     public lazy var injected = self
     public init(){}
 }

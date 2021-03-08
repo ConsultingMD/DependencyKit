@@ -16,8 +16,15 @@ extension ResourceType where I == LevelOneResource<RootResource<NilResource>> {
 }
 
 // MARK: Extensions for requirements
+
+extension Requirements where I: NilRequirements {
+}
+
 extension Requirements where I: LevelOneRequirements {
     public var explicitPassthrough: String { injected.explicitPassthrough }
     public var modified: String { injected.modified }
 //    public var implicitPassthrough: String { injected.implicitPassthrough }
+}
+
+extension Requirements where I: LevelTwoRequirements {
 }

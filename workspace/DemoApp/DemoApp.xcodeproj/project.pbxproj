@@ -85,14 +85,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		235FB58E2569CF85000B575A /* DI */ = {
-			isa = PBXGroup;
-			children = (
-				23B7759B2564424300D5CC4B /* __generated__ */,
-			);
-			path = DI;
-			sourceTree = "<group>";
-		};
 		23A1A8C225663CED009E847C /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,9 +142,9 @@
 		23FF9EC725643C3800266ABE /* App */ = {
 			isa = PBXGroup;
 			children = (
+				23B7759B2564424300D5CC4B /* __generated__ */,
 				F7C1E67725F5C8D100B7F419 /* App */,
 				F7C1E67625F5C8C000B7F419 /* Utilities */,
-				235FB58E2569CF85000B575A /* DI */,
 				23FF9EE925643C5D00266ABE /* Resources */,
 				23FF9F1625643FBF00266ABE /* DIUsage.swift */,
 			);

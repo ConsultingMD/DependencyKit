@@ -15,7 +15,7 @@ class DIUsage: ObservableObject {
         print(levelTwo.explicitPassthrough)
         print(levelTwo.modified)
         print(levelTwo.recreated)
-        //print(levelTwo.implicitPassthrough)
+//        print(levelTwo.implicitPassthrough)
         output.append(
             """
                 init
