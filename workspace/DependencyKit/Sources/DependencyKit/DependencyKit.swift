@@ -9,13 +9,15 @@ public protocol Requirements {
 }
 public protocol NilRequirement: Requirements {}
 
-open class Resource<I: Requirements>: Requirements {
+public protocol ResourceType: Requirements {}
+
+open class Resource<I: Requirements>: ResourceType {
     public let injected: I
     public init(injecting injected: I) {
         self.injected = injected
     }
 }
-public class NilResource: NilRequirement {
+public class NilResource: ResourceType, NilRequirement {
     public lazy var injected = self
     public init(){}
 }
