@@ -3,7 +3,10 @@ import Foundation
 import Foundation
 
 public protocol LevelTwoRequirements: Requirements {
-    var appName: String { get }
+    var explicitPassthrough: String { get }
+    var modified: String { get }
+    var recreated: String { get }
+//    var implicitPassthrough: String { get }
 }
 
 
