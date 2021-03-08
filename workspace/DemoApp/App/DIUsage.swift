@@ -31,7 +31,7 @@ class DIUsage: ObservableObject {
         output.append("recreated: " + levelTwo.recreated)
         output.append("implicitPassthrough (made available to satisfy LevelThreeRequirements): " + levelThree.implicitPassthrough)
         output.append("")
-        output.append("_____ Root _____")
+        output.append("_____ Level Three _____")
         output.append("explicitPassthrough: " + levelThree.explicitPassthrough)
         output.append("modified: " + levelThree.modified)
         output.append("recreated: " + levelThree.recreated)
