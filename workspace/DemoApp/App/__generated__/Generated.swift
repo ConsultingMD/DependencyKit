@@ -15,7 +15,11 @@ extension ResourceType where I: LevelTwoRequirements {
 
 // MARK: Declare implicit (transitive) Requirements
 public protocol CODEGEN_LevelOneRequirements {
-    var CODEGEN_implicitPassthrough: String { get }
+    @available(*, deprecated, message: "codegen only")
+    func _CODEGEN_implicitPassthrough() -> String
+}
+private protocol CODEGEN_ACCESS_LevelOneRequirements {
+    func _CODEGEN_implicitPassthrough() -> String
 }
 
 public protocol CODEGEN_LevelTwoRequirements {
@@ -23,11 +27,10 @@ public protocol CODEGEN_LevelTwoRequirements {
 
 // MARK: Surface implicit Requirements once explicitly required
 extension LevelOneResource where I: CODEGEN_LevelOneRequirements {
-    public var implicitPassthrough: String { injected.CODEGEN_implicitPassthrough }
+    public var implicitPassthrough: String { injected._CODEGEN_implicitPassthrough() }
 }
 
 // MARK: Carry through implicit Requirements
-extension RootResource {
-    public var CODEGEN_implicitPassthrough: String { implicitPassthrough }
+extension RootResource: CODEGEN_LevelOneRequirements {
+    public func _CODEGEN_implicitPassthrough() -> String { implicitPassthrough }
 }
-
