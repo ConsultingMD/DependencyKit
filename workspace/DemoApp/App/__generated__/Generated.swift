@@ -22,9 +22,6 @@ extension ResourceType where I: LevelThreeRequirements {
 public protocol CODEGEN_LevelOneRequirements {
     func _CODEGEN_implicitPassthrough() -> String
 }
-//private protocol CODEGEN_ACCESS_LevelOneRequirements {
-//    func _CODEGEN_implicitPassthrough() -> String
-//}
 
 public protocol CODEGEN_LevelTwoRequirements {
     func _CODEGEN_implicitPassthrough() -> String
