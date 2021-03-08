@@ -20,6 +20,7 @@
 		F71F075C25B64E5C00E633A0 /* DependencyKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F71F074E25B64D0800E633A0 /* DependencyKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F7C1E67425F5C7FD00B7F419 /* LevelTwoResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C1E67225F5C7FD00B7F419 /* LevelTwoResource.swift */; };
 		F7C1E67525F5C7FD00B7F419 /* LevelOneResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C1E67325F5C7FD00B7F419 /* LevelOneResource.swift */; };
+		F7C1E67E25F6A2BA00B7F419 /* LevelThreeResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C1E67D25F6A2BA00B7F419 /* LevelThreeResource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 		F71F074925B64D0800E633A0 /* DependencyKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DependencyKit.xcodeproj; path = DependencyKit/DependencyKit.xcodeproj; sourceTree = "<group>"; };
 		F7C1E67225F5C7FD00B7F419 /* LevelTwoResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelTwoResource.swift; sourceTree = "<group>"; };
 		F7C1E67325F5C7FD00B7F419 /* LevelOneResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelOneResource.swift; sourceTree = "<group>"; };
+		F7C1E67D25F6A2BA00B7F419 /* LevelThreeResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelThreeResource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +167,7 @@
 				23FF9F0325643CB400266ABE /* RootResource.swift */,
 				F7C1E67325F5C7FD00B7F419 /* LevelOneResource.swift */,
 				F7C1E67225F5C7FD00B7F419 /* LevelTwoResource.swift */,
+				F7C1E67D25F6A2BA00B7F419 /* LevelThreeResource.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				23FF9EDB25643C3900266ABE /* DIDemoApp.swift in Sources */,
 				235FB5942569D032000B575A /* TimingNetworkMonitor.swift in Sources */,
 				F7C1E67425F5C7FD00B7F419 /* LevelTwoResource.swift in Sources */,
+				F7C1E67E25F6A2BA00B7F419 /* LevelThreeResource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
