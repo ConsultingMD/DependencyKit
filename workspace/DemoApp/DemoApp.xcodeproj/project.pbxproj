@@ -68,8 +68,8 @@
 		23FF9F0325643CB400266ABE /* RootResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootResource.swift; sourceTree = "<group>"; };
 		23FF9F1625643FBF00266ABE /* DIUsage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DIUsage.swift; sourceTree = "<group>"; };
 		F71F074925B64D0800E633A0 /* DependencyKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DependencyKit.xcodeproj; path = DependencyKit/DependencyKit.xcodeproj; sourceTree = "<group>"; };
-		F7C1E67225F5C7FD00B7F419 /* LevelTwoResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LevelTwoResource.swift; path = ../../../../AlternateAPITest.playground/Sources/LevelTwoResource.swift; sourceTree = "<group>"; };
-		F7C1E67325F5C7FD00B7F419 /* LevelOneResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LevelOneResource.swift; path = ../../../../AlternateAPITest.playground/Sources/LevelOneResource.swift; sourceTree = "<group>"; };
+		F7C1E67225F5C7FD00B7F419 /* LevelTwoResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelTwoResource.swift; sourceTree = "<group>"; };
+		F7C1E67325F5C7FD00B7F419 /* LevelOneResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelOneResource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,9 +162,9 @@
 		23FF9EE925643C5D00266ABE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				23FF9F0325643CB400266ABE /* RootResource.swift */,
 				F7C1E67325F5C7FD00B7F419 /* LevelOneResource.swift */,
 				F7C1E67225F5C7FD00B7F419 /* LevelTwoResource.swift */,
-				23FF9F0325643CB400266ABE /* RootResource.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";

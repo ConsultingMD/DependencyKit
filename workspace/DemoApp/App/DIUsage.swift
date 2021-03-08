@@ -11,11 +11,12 @@ class DIUsage: ObservableObject {
         var output: [String] = []
         let root = RootResource(injecting: NilResource())
         let levelOne = root.levelOneResource
+        print(levelOne.implicitPassthrough)
         let levelTwo = levelOne.levelTwoResource
         print(levelTwo.explicitPassthrough)
         print(levelTwo.modified)
         print(levelTwo.recreated)
-//        print(levelTwo.implicitPassthrough)
+//        print(levelTwo.injected.implicitPassthrough)
         output.append(
             """
                 init
