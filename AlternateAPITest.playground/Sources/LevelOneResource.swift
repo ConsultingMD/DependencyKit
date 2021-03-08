@@ -1,3 +1,4 @@
+import DependencyKit
 import Foundation
 
 public protocol LevelOneRequirements: Requirements {

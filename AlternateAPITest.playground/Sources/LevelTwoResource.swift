@@ -1,5 +1,4 @@
-import Foundation
-
+import DependencyKit
 import Foundation
 
 public protocol LevelTwoRequirements: Requirements {

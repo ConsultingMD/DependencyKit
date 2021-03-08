@@ -1,9 +1,9 @@
 import DependencyKit
 import Foundation
 
-public protocol NetworkClientRequirements:
-    Requirements, NetworkClientRequirements_CODEGEN,
-    NetworkMonitorInterfaceDependency {}
+public protocol NetworkClientRequirements: Requirements {
+    var networkMonitor: NetworkMonitorInterface? { get }
+}
 
 public class NetworkClientResource<I: NetworkClientRequirements>: Resource<I> {
     public func buildClient() -> NetworkClient {

@@ -14,14 +14,12 @@
 		23FF9EDB25643C3900266ABE /* DIDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9EC825643C3800266ABE /* DIDemoApp.swift */; };
 		23FF9EDD25643C3900266ABE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9EC925643C3800266ABE /* ContentView.swift */; };
 		23FF9EDF25643C3900266ABE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23FF9ECA25643C3800266ABE /* Assets.xcassets */; };
-		23FF9F0625643CB400266ABE /* LevelOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F0225643CB400266ABE /* LevelOne.swift */; };
 		23FF9F0825643CB400266ABE /* RootResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F0325643CB400266ABE /* RootResource.swift */; };
-		23FF9F0A25643CB400266ABE /* LevelTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F0425643CB400266ABE /* LevelTwo.swift */; };
-		23FF9F0C25643CB400266ABE /* LevelThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F0525643CB400266ABE /* LevelThree.swift */; };
-		23FF9F1425643D0500266ABE /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F1325643D0500266ABE /* Types.swift */; };
 		23FF9F1725643FBF00266ABE /* DIUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F1625643FBF00266ABE /* DIUsage.swift */; };
 		F71F075B25B64E5C00E633A0 /* DependencyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F71F074E25B64D0800E633A0 /* DependencyKit.framework */; };
 		F71F075C25B64E5C00E633A0 /* DependencyKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F71F074E25B64D0800E633A0 /* DependencyKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F7C1E67425F5C7FD00B7F419 /* LevelTwoResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C1E67225F5C7FD00B7F419 /* LevelTwoResource.swift */; };
+		F7C1E67525F5C7FD00B7F419 /* LevelOneResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C1E67325F5C7FD00B7F419 /* LevelOneResource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,13 +65,11 @@
 		23FF9ECA25643C3800266ABE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		23FF9ECF25643C3900266ABE /* DemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23FF9ED225643C3900266ABE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		23FF9F0225643CB400266ABE /* LevelOne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelOne.swift; sourceTree = "<group>"; };
 		23FF9F0325643CB400266ABE /* RootResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootResource.swift; sourceTree = "<group>"; };
-		23FF9F0425643CB400266ABE /* LevelTwo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelTwo.swift; sourceTree = "<group>"; };
-		23FF9F0525643CB400266ABE /* LevelThree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelThree.swift; sourceTree = "<group>"; };
-		23FF9F1325643D0500266ABE /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		23FF9F1625643FBF00266ABE /* DIUsage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DIUsage.swift; sourceTree = "<group>"; };
 		F71F074925B64D0800E633A0 /* DependencyKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DependencyKit.xcodeproj; path = DependencyKit/DependencyKit.xcodeproj; sourceTree = "<group>"; };
+		F7C1E67225F5C7FD00B7F419 /* LevelTwoResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LevelTwoResource.swift; path = ../../../../AlternateAPITest.playground/Sources/LevelTwoResource.swift; sourceTree = "<group>"; };
+		F7C1E67325F5C7FD00B7F419 /* LevelOneResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LevelOneResource.swift; path = ../../../../AlternateAPITest.playground/Sources/LevelOneResource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,42 +89,8 @@
 			isa = PBXGroup;
 			children = (
 				23B7759B2564424300D5CC4B /* __generated__ */,
-				23FF9F1225643CF800266ABE /* Types */,
 			);
 			path = DI;
-			sourceTree = "<group>";
-		};
-		235FB58F2569CF97000B575A /* Root */ = {
-			isa = PBXGroup;
-			children = (
-				23FF9F0325643CB400266ABE /* RootResource.swift */,
-				235FB5932569D032000B575A /* TimingNetworkMonitor.swift */,
-			);
-			path = Root;
-			sourceTree = "<group>";
-		};
-		235FB5902569CFCA000B575A /* LevelOne */ = {
-			isa = PBXGroup;
-			children = (
-				23FF9F0225643CB400266ABE /* LevelOne.swift */,
-			);
-			path = LevelOne;
-			sourceTree = "<group>";
-		};
-		235FB5912569CFD8000B575A /* LevelTwo */ = {
-			isa = PBXGroup;
-			children = (
-				23FF9F0425643CB400266ABE /* LevelTwo.swift */,
-			);
-			path = LevelTwo;
-			sourceTree = "<group>";
-		};
-		235FB5922569CFE5000B575A /* LevelThree */ = {
-			isa = PBXGroup;
-			children = (
-				23FF9F0525643CB400266ABE /* LevelThree.swift */,
-			);
-			path = LevelThree;
 			sourceTree = "<group>";
 		};
 		23A1A8C225663CED009E847C /* Libraries */ = {
@@ -188,10 +150,10 @@
 		23FF9EC725643C3800266ABE /* App */ = {
 			isa = PBXGroup;
 			children = (
+				F7C1E67725F5C8D100B7F419 /* App */,
+				F7C1E67625F5C8C000B7F419 /* Utilities */,
 				235FB58E2569CF85000B575A /* DI */,
-				23FF9EE925643C5D00266ABE /* Components */,
-				23FF9EC825643C3800266ABE /* DIDemoApp.swift */,
-				23FF9EC925643C3800266ABE /* ContentView.swift */,
+				23FF9EE925643C5D00266ABE /* Resources */,
 				23FF9F1625643FBF00266ABE /* DIUsage.swift */,
 			);
 			path = App;
@@ -205,23 +167,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		23FF9EE925643C5D00266ABE /* Components */ = {
+		23FF9EE925643C5D00266ABE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				235FB58F2569CF97000B575A /* Root */,
-				235FB5902569CFCA000B575A /* LevelOne */,
-				235FB5912569CFD8000B575A /* LevelTwo */,
-				235FB5922569CFE5000B575A /* LevelThree */,
+				F7C1E67325F5C7FD00B7F419 /* LevelOneResource.swift */,
+				F7C1E67225F5C7FD00B7F419 /* LevelTwoResource.swift */,
+				23FF9F0325643CB400266ABE /* RootResource.swift */,
 			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		23FF9F1225643CF800266ABE /* Types */ = {
-			isa = PBXGroup;
-			children = (
-				23FF9F1325643D0500266ABE /* Types.swift */,
-			);
-			path = Types;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		F71F074A25B64D0800E633A0 /* Products */ = {
@@ -230,6 +183,23 @@
 				F71F074E25B64D0800E633A0 /* DependencyKit.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F7C1E67625F5C8C000B7F419 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				235FB5932569D032000B575A /* TimingNetworkMonitor.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		F7C1E67725F5C8D100B7F419 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				23FF9EC825643C3800266ABE /* DIDemoApp.swift */,
+				23FF9EC925643C3800266ABE /* ContentView.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -333,13 +303,11 @@
 				23FF9EDD25643C3900266ABE /* ContentView.swift in Sources */,
 				23FF9F1725643FBF00266ABE /* DIUsage.swift in Sources */,
 				23FF9F0825643CB400266ABE /* RootResource.swift in Sources */,
-				23FF9F1425643D0500266ABE /* Types.swift in Sources */,
+				F7C1E67525F5C7FD00B7F419 /* LevelOneResource.swift in Sources */,
 				23B775972564421200D5CC4B /* Generated.swift in Sources */,
 				23FF9EDB25643C3900266ABE /* DIDemoApp.swift in Sources */,
-				23FF9F0C25643CB400266ABE /* LevelThree.swift in Sources */,
 				235FB5942569D032000B575A /* TimingNetworkMonitor.swift in Sources */,
-				23FF9F0A25643CB400266ABE /* LevelTwo.swift in Sources */,
-				23FF9F0625643CB400266ABE /* LevelOne.swift in Sources */,
+				F7C1E67425F5C7FD00B7F419 /* LevelTwoResource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
