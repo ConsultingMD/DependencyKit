@@ -8,6 +8,7 @@ public protocol LevelOneRequirements: Requirements, CODEGEN_LevelOneRequirements
 
 public class LevelOneResource<I: LevelOneRequirements>: Resource<I>,
                                                         LevelTwoRequirements {
+    
     public lazy var modified = "Value modified based on source: '\(injected.modified)'"
     public let recreated = "Value recreated independent of original"
     
