@@ -1,7 +1,7 @@
 ![Icon](https://raw.githubusercontent.com/adam-zethraeus/DependencyKit/main/icon.svg)
 # DependencyKit
 
-DependencyKit is an attempt to make a fully typesafe, lightweight, dependency injection framework for Swift.
+DependencyKit is a typesafe codegenerated dependency injection framework for Swift.
 
 ## Requirement / Resource Setup
 
@@ -75,37 +75,33 @@ let levelOne = root.levelOneResource
 let levelTwo = levelOne.levelTwoResource
 let levelThree = levelTwo.levelThreeResource
 
-print("""
+print(
+    """
     _____ Root _____
     explicitPassthrough: <\(root.explicitPassthrough)>
     modified: <\(root.modified)>
     recreated: <\(root.recreated)>
     implicitPassthrough: <\(root.implicitPassthrough)>
-""")
 
-print("""
     _____ Level One _____
     explicitPassthrough: <\(levelOne.explicitPassthrough)>
     modified: <\(levelOne.modified)>
     recreated: <\(levelOne.recreated)>
     implicitPassthrough (not available): <N/A>
-""")
 
-print("""
     _____ Level Two _____
     explicitPassthrough: <\(levelTwo.explicitPassthrough)>
     modified: <\(levelTwo.modified)>
     recreated: <\(levelTwo.recreated)>
     implicitPassthrough (made available to satisfy LevelThreeRequirements): <\(levelThree.implicitPassthrough)>
-""")
 
-print("""
     _____ Level Three _____
     explicitPassthrough: <\(levelThree.explicitPassthrough)>
     modified: <\(levelThree.modified)>
     recreated: <\(levelThree.recreated)>
     implicitPassthrough: <\(levelThree.implicitPassthrough)>
-""")
+    """
+)
 ```
 
 ## Output
