@@ -36,11 +36,6 @@ class DIUsage: ObservableObject {
         output.append("modified: <\(levelThree.modified)>")
         output.append("recreated: <\(levelThree.recreated)>")
         output.append("implicitPassthrough: <\(levelThree.implicitPassthrough)>")
-//        output.append("implicitPassthrough: <\(levelTwo.implicitPassthrough)
-//        root.networkClient.get(url: URL(string: "https://google.com")!)
-//            .sink { _ in }
-//                receiveValue: { _ in }
-//            .store(in: &disposeBag)
         return output
     }
 }
