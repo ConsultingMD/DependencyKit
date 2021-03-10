@@ -12,7 +12,7 @@ DependencyKit has three tenants:
 
 DependencyKit also aims to have a low binary-size footprint and to be fast at code-generation-time, compile-time, and runtime—but will not compromise on the three tenants for these aims.
 
-<b id="f1">1</b> Both framework code and generated code are typesafe. This distinguishes DependencyKit from many other Swift dependency injection frameworks. The code you use DependencyKit to inject is as typesafe as you make it :). [↩](#a1)
+<sup>[[1]](#a1) Both framework code and generated code are typesafe. This distinguishes DependencyKit from many other Swift dependency injection frameworks. The code you use DependencyKit to inject is as typesafe as you make it :).</sup>
 
 ## Nomenclature & Conceptual Model 
 
@@ -80,7 +80,13 @@ protocol LegacyUserInfo {
 
 **TL;DR:** `Requirements` define dependencies. `Resources` provide requirements.
 
-## Requirement / Resource Setup
+## Proof of concepts
+
+These code blocks show different types of values passed across multiple Requirements & Resources:
+* Values passes explicitly in each Requirements definition.
+* Values passes implicitly (skipping some requirements definitions).
+* Values modification by subsequent Resources.
+* Values replaced by subsequent Resources.
 
 ### Root
 ```swift
