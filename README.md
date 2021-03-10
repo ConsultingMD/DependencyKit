@@ -16,8 +16,9 @@ DependencyKit also aims to have a low binary-size footprint and to be fast at co
 
 ## Nomenclature & Conceptual Model 
 
-DependencyKit's model has 'Requirements' and 'Resources'. 
+DependencyKit's model is of 'Requirements' and 'Resources'. 
 
+### Requirements
 **Requirements are your declared API**. They describe what's required to instantiate a specific part of your app.
 
 An early stage of your app might designate that a logged in user and session token are pre-defined.
@@ -28,7 +29,7 @@ protocol LoggedInRequirements: Requirements {
 }
 ```
 
-A later stage of your app might also require data models representing things to show in the UI and a pre-configured network service.
+A later stage of your app might also require data models representing things to show in its UI and a pre-configured network service.
 ```swift
 protocol ChatThreadListRequirements: Requirements {
     var chatThreadSource: AnyPublisher<[ChatThread], Error> { get }
@@ -37,10 +38,12 @@ protocol ChatThreadListRequirements: Requirements {
 }
 ```
 
-**Resources provide things to your app**. They're the source of the data structures you use in your application code and are used to satisfy the Requirements your code has declared.
+### Resources
+**Resources provide things to your app**. They are used to satisfy the Requirements your code has declared, and as a source for other contructs that your app needs at their stage.
 
-Resources specify the Requirements they need as a generic parameter. The properties are made available on its `injected` property. 
-Resources can also satisfy *other* Resource's DependencyKit Requirements—and indicate that they do so through protocol conformance.
+Resources can only be created with their Requirements pre-satisfied. Their Requirements's properties are made available the `injected` property. 
+
+Resources are also used to satisfy *other* Resource's DependencyKit Requirements—and indicate that they do so through protocol conformance.
 
 A Resource might require state from a earlier stage of your app and build out state and data structures required for later stages.
 ```swift
@@ -66,7 +69,7 @@ class LoggedInResource<I: LoggedInRequirements>: Resource<I>, ChatThreadRequirem
 }
 ```
 
-Since this is *Simply Swift* a resource can just as easily satisfy any other non-DependencyKit protocol you have in your app.
+Since DependencyKit code is *Simply Swift* a resource can just as easily satisfy any other non-DependencyKit protocol you have in your app.
 ```swift
 extension LoggedInResource: LegacyUserInfo {}
 ```
@@ -78,7 +81,7 @@ protocol LegacyUserInfo {
 }
 ```
 
-**TL;DR:** `Requirements` define dependencies. `Resources` provide requirements.
+**TL;DR:** `Requirements` define things your app needs. `Resources` satisfy these requirements.
 
 ## Proof of concepts
 
