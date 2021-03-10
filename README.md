@@ -72,7 +72,7 @@ protocol ChatThreadListRequirements: Requirements {
 ```
 
 ### Resources
-**`Resource`s *provide* things a scope of your app needs—and may build them**. There is one `Resource` per scope. They are the source for the entities that the *current scope* uses, and they help build their *child-scopes* by satisfying the child's declared *Requirements*.
+**`Resource`s *provide* things a scope of your app needs—and may build them**. There is one `Resource` per scope. They are the source for the entities that *their scope* uses, and they help build their *child-scopes* by satisfying the child's declared `Requirements`.
 
 `Resource`s should be used to *provide* all of what's needed by any construct in their scope.
 They can *pass* things they've received from their parent-scopes through a structure their scope. They can also *build* things that are needed but not directly provided to them by their parent. (They often combine multiple things passed from their parents to make new entities that their parents don't need to know about.)
