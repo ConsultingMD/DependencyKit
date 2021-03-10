@@ -25,7 +25,7 @@ DependencyKit has three tenants:
     
     Your code you write with DependencyKit is idiomatic Swift.
 
-DependencyKit also aims to have *low code-size and binary-size footprints* and to be *fast at code-generation-time, compile-time, and runtime*—but not at the expense of the three tenants.
+DependencyKit aims to have *low code-size and binary-size footprints* and to be *fast at code-generation-time, compile-time, and runtime*—but not at the expense of the three tenants.
 
 ## Nomenclature & Conceptual Model 
 
