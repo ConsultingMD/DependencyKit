@@ -3,25 +3,40 @@
 
 DependencyKit is a typesafe codegenerated dependency injection framework for Swift.
 
+
+
 ## Philosophy
 
 DependencyKit has three tenants:
-1. Typesafety. *All* code should be typechecked by the compiler and can not crash at runtime. <sup id="a1">[1](#f1)</sup>
-2. No magic. The framework and generated code should be easily understood.
-3. Simply Swift. Your code written with DependencyKit is idiomatic Swift.
 
-DependencyKit also aims to have a low binary-size footprint and to be fast at code-generation-time, compile-time, and runtime—but will not compromise on the three tenants for these aims.
+1. Stay typesafe.
+    
+    *All* code is typechecked by the compiler and can not crash at runtime.<sup id="a1">[1](#f1)</sup>
+    Many Swift dependency injection setups either require you to manage potentially crashy runtime behavior or to trust the framework developers to do so for you.
+    
+    The Swift compiler has an advanced typesystem written by smart people. We should use it.
 
-<sup>[[1]](#a1) Both framework code and generated code are typesafe. This distinguishes DependencyKit from many other Swift dependency injection frameworks. The code you use DependencyKit to inject is as typesafe as you make it :).</sup>
+2. Don't get fancy.
+    
+    The code you write with DependencyKit is simple.
+    The framework and generated code are simple.
+    
+    You're the one shipping the code. You should be able to read it.
+
+3. It's just Swift.
+    
+    Your code you write with DependencyKit is idiomatic Swift.
+
+DependencyKit also aims to have a low binary-size footprint and to be fast at code-generation-time, compile-time, and runtime—but not at the expense of the three tenants.
 
 ## Nomenclature & Conceptual Model 
 
 DependencyKit's model is of 'Requirements' and 'Resources'. 
 
 ### Requirements
-**Requirements are your declared API**. They describe what's required to instantiate a specific part of your app.
+**Requirements declare what you need**. They describe what's required to instantiate a section of your app.
 
-An early stage of your app might designate that a logged in user and session token are pre-defined.
+An early stage of your app might designate that an id and session token for a logged in user pre-defined.
 ```swift
 protocol LoggedInRequirements: Requirements {
     var sessionToken: String { get }
@@ -29,7 +44,7 @@ protocol LoggedInRequirements: Requirements {
 }
 ```
 
-A later stage of your app might also require data models representing things to show in its UI and a pre-configured network service.
+A later stage of your app might require data models representing things to show in its UI, a pre-configured network service, and a User model.
 ```swift
 protocol ChatThreadListRequirements: Requirements {
     var chatThreadSource: AnyPublisher<[ChatThread], Error> { get }
