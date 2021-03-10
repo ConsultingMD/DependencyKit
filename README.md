@@ -9,8 +9,8 @@ DependencyKit has three tenants:
 
 1. Stay typesafe.
     
-    *All* code is typechecked by the compiler and can not crash at runtime.<sup id="a1">[1](#f1)</sup>
-    Many Swift dependency injection setups either require you to manage potentially crashy runtime behavior or to trust the framework developers to do so for you.
+    *All* code is typechecked by the compiler and can not crash at runtime.
+    Many Swift dependency injection setups either require you to manage potentially crashy runtime behavior or to trust the framework developers to do so for you. DependencyKit does neither.
     
     The Swift compiler has an advanced typesystem written by smart people. We should use it.
 
