@@ -45,7 +45,9 @@ Scopes contain child-scopes which:
 * Create and use more specialized entities than their parents—a parent scope should usually avoid creating an entity it doesn't use, it should delegate creation to the child-scope which does use it
 
 The value of careful scoping is well illustrated by considering its antithesis: pervasive use of global state or Singletons.
-Singletons, by design, make an entity available to the whole application—the full 'app scope'. This can be convenient in the short term but usually introduces hazardous potential complexity. When an entity isn't in a usable state for the whole app lifecycle but is nevertheless available its easy to use inappropriately. If it's always accessible how can you know not to use it? Will you be able to tell if a usage is appropriate when stumble on it a year from now? Will your co-authors be able to? The compiler certainly won't.
+Singletons, by design, make an entity available to the whole application—the full 'app scope'. This can be convenient in the short term but usually introduces hazardous potential complexity.
+
+When an entity isn't in a usable state for the whole app lifecycle but is nevertheless available its easy to use inappropriately. If it's always accessible how can you know not to use it? Will you be able to tell if a usage is appropriate when stumble on it a year from now? Will your co-authors be able to? The compiler certainly won't.
 
 Scoping enforced by the compiler makes this a non-issue. DependencyKit makes handling scopes easy.
 
