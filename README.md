@@ -1,7 +1,7 @@
 ![Icon](https://raw.githubusercontent.com/adam-zethraeus/DependencyKit/main/icon.svg)
 # DependencyKit
 
-DependencyKit is a typesafe codegenerated dependency injection framework for Swift. It's is under development and isn't ready for use.
+DependencyKit is a typesafe codegenerated dependency injection framework for Swift. It's under development and isn't ready for use.
 
 ## Philosophy
 
