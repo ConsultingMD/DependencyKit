@@ -160,60 +160,71 @@ These code blocks show values pass in different useful ways across multiple `Req
 ### Definitions
 
 ```swift
-public class RootResource<I: NilRequirements>: Resource<I>,
-                                               LevelOneRequirements {
+class ScopeZeroResource<I: NilRequirements>: Resource<I>,
+                                             ScopeOneRequirements {
+    let explicit = "s0-explicit"
+    let implicit = "s0-implicit"
+    let modified = "s0-modified"
+    let recreated = "s0-recreated"
+    let dropped = "s0-dropped"
     
-    public let explicitPassthrough = "Root value passed through explicitly"
-    public let implicitPassthrough = "Root value passed implicitly"
-    public let modified = "Root value to be modified"
-    public let recreated = "Root value to be recreated"
-    
-    public var levelOneResource: LevelOneResource<RootResource> { LevelOneResource(injecting: self) }
+    func buildScopeOne() -> ScopeOneResource<ScopeZeroResource> { ScopeOneResource(injecting: self) }
 }
 ```
 
 ```swift
-public protocol LevelOneRequirements: Requirements, CODEGEN_LevelOneRequirements {
-    var explicitPassthrough: String { get }
+protocol ScopeOneRequirements: Requirements, CODEGEN_ScopeOneRequirements {
+    var explicit: String { get }
     var modified: String { get }
 }
 
-public class LevelOneResource<I: LevelOneRequirements>: Resource<I>,
-                                                        LevelTwoRequirements {
+class ScopeOneResource<I: ScopeOneRequirements>: Resource<I>,
+                                                 ScopeTwoRequirements {
+    // Must be lazy to access `injected`.
+    // Must access injected as this var overrides `modified` passed from injected.
+    lazy var modified = "s1-modified-\(injected.modified)"
+    let createdLater = "s1-createdLater"
+    let recreated = "s1-recreated"
     
-    public lazy var modified = "Value modified based on source: '\(injected.modified)'"
-    public let recreated = "Value recreated independent of original"
-    
-    public var levelTwoResource: LevelTwoResource<LevelOneResource> { LevelTwoResource(injecting: self) }
+    func buildScopeTwo() -> ScopeTwoResource<ScopeOneResource> {
+        ScopeTwoResource(injecting: self)
+    }
 }
 
 ```
 
 ```swift
-public protocol LevelTwoRequirements: Requirements, CODEGEN_LevelTwoRequirements {
-    var explicitPassthrough: String { get }
-    var modified: String { get }
-    var recreated: String { get }
-}
-
-
-public class LevelTwoResource<I: LevelTwoRequirements>: Resource<I>,
-                                                        LevelThreeRequirements{
-    public var levelThreeResource: LevelThreeResource<LevelTwoResource> { LevelThreeResource(injecting: self) }
-}
-
-```
-
-```swift
-public protocol LevelThreeRequirements: Requirements, CODEGEN_LevelThreeRequirements {
-    var explicitPassthrough: String { get }
+protocol ScopeTwoRequirements: Requirements, CODEGEN_ScopeTwoRequirements {
+    var explicit: String { get }
     var modified: String { get }
     var recreated: String { get }
-    var implicitPassthrough: String { get }
+    var createdLater: String { get }
 }
 
 
-public class LevelThreeResource<I: LevelThreeRequirements>: Resource<I> {
+class ScopeTwoResource<I: ScopeTwoRequirements>: Resource<I>,
+                                                 ScopeThreeRequirements{
+    var duplicated: String { explicit }
+
+    func buildScopeThree() -> ScopeThreeResource<ScopeTwoResource> {
+        ScopeThreeResource(injecting: self)
+    }
+}
+
+```
+
+```swift
+protocol ScopeThreeRequirements: Requirements, CODEGEN_ScopeThreeRequirements {
+    var explicit: String { get }
+    var implicit: String { get }
+    var modified: String { get }
+    var recreated: String { get }
+    var createdLater: String { get }
+    var duplicated: String { get }
+}
+
+
+class ScopeThreeResource<I: ScopeThreeRequirements>: Resource<I> {
 }
 
 ```
@@ -221,65 +232,97 @@ public class LevelThreeResource<I: LevelThreeRequirements>: Resource<I> {
 ### Usage 
 
 ```swift
-let root = RootResource(injecting: NilResource())
-let levelOne = root.levelOneResource
-let levelTwo = levelOne.levelTwoResource
-let levelThree = levelTwo.levelThreeResource
+var output: [String] = []
+let root = ScopeZeroResource(injecting: NilResource())
+let one = root.buildScopeOne()
+let two = one.buildScopeTwo()
+let three = two.buildScopeThree()
+output += [
+    "_____ Root _____",
+    "explicit: '\(root.explicit)'",
+    "implicit: '\(root.implicit)'",
+    "modified: '\(root.modified)'",
+    "recreated: '\(root.recreated)'",
+    "createdLater: < N/A, created in later scope >",
+    "duplicated: < N/A, created in later scope >",
+    "dropped: '\(root.dropped)'",
+    "",
+]
+output += [
+    "_____ One _____",
+    "explicit: '\(one.explicit)'",
+    "implicit: < Unavailable, not in Requirements. (Passed only implicitly to descendent explicit uses) >",
+    "modified: '\(one.modified)'",
+    "recreated: '\(one.recreated)'",
+    "createdLater: '\(one.createdLater)'",
+    "duplicated: < N/A, created in later scope >",
+    "dropped: < Unavailable, not in Requirements >",
+    "",
+]
+output += [
+    "_____ Two _____",
+    "explicit: '\(two.explicit)'",
+    "implicit: '\(two.implicit)'",
+    "modified: '\(two.modified)'",
+    "recreated: '\(two.recreated)'",
+    "createdLater: '\(two.createdLater)'",
+    "duplicated: '\(two.duplicated)'",
+    "dropped: < Unavailable, not in Requirements >",
+    "",
+]
+output += [
+    "_____ Three _____",
+    "explicit: '\(three.explicit)'",
+    "implicit: '\(three.implicit)'",
+    "modified: '\(three.modified)'",
+    "recreated: '\(three.recreated)'",
+    "createdLater: '\(three.createdLater)'",
+    "duplicated: '\(three.duplicated)'",
+    "dropped: < Unavailable, not in Requirements >",
+    "",
+]
 
-print(
-    """
-    _____ Root _____
-    explicitPassthrough: <\(root.explicitPassthrough)>
-    modified: <\(root.modified)>
-    recreated: <\(root.recreated)>
-    implicitPassthrough: <\(root.implicitPassthrough)>
-
-    _____ Level One _____
-    explicitPassthrough: <\(levelOne.explicitPassthrough)>
-    modified: <\(levelOne.modified)>
-    recreated: <\(levelOne.recreated)>
-    implicitPassthrough: <N/A, access would not compile>
-
-    _____ Level Two _____
-    explicitPassthrough: <\(levelTwo.explicitPassthrough)>
-    modified: <\(levelTwo.modified)>
-    recreated: <\(levelTwo.recreated)>
-    implicitPassthrough: <\(levelThree.implicitPassthrough)>
-
-    _____ Level Three _____
-    explicitPassthrough: <\(levelThree.explicitPassthrough)>
-    modified: <\(levelThree.modified)>
-    recreated: <\(levelThree.recreated)>
-    implicitPassthrough: <\(levelThree.implicitPassthrough)>
-    """
-)
+print(output)
 ```
 
 ### Output
 
 ```
 _____ Root _____
-explicitPassthrough: <Root value passed through explicitly>
-modified: <Root value to be modified>
-recreated: <Root value to be recreated>
-implicitPassthrough: <Root value passed implicitly>
+explicit: 's0-explicit'
+implicit: 's0-implicit'
+modified: 's0-modified'
+recreated: 's0-recreated'
+createdLater: < N/A, created in later scope >
+duplicated: < N/A, created in later scope >
+dropped: 's0-dropped'
 
-_____ Level One _____
-explicitPassthrough: <Root value passed through explicitly>
-modified: <Value modified based on source: 'Root value to be modified'>
-recreated: <Value recreated independent of original>
-implicitPassthrough: <N/A, access would not compile>
+_____ One _____
+explicit: 's0-explicit'
+implicit: < Unavailable, not in Requirements. (Passed only implicitly to descendent explicit uses) >
+modified: 's1-modified-s0-modified'
+recreated: 's1-recreated'
+createdLater: 's1-createdLater'
+duplicated: < N/A, created in later scope >
+dropped: < Unavailable, not in Requirements >
 
-_____ Level Two _____
-explicitPassthrough: <Root value passed through explicitly>
-modified: <Value modified based on source: 'Root value to be modified'>
-recreated: <Value recreated independent of original>
-implicitPassthrough (made available to satisfy LevelThreeRequirements): <Root value passed implicitly>
+_____ Two _____
+explicit: 's0-explicit'
+implicit: 's0-implicit'
+modified: 's1-modified-s0-modified'
+recreated: 's1-recreated'
+createdLater: 's1-createdLater'
+duplicated: 's0-explicit'
+dropped: < Unavailable, not in Requirements >
 
-_____ Level Three _____
-explicitPassthrough: <Root value passed through explicitly>
-modified: <Value modified based on source: 'Root value to be modified'>
-recreated: <Value recreated independent of original>
-implicitPassthrough: <Root value passed implicitly>
+_____ Three _____
+explicit: 's0-explicit'
+implicit: 's0-implicit'
+modified: 's1-modified-s0-modified'
+recreated: 's1-recreated'
+createdLater: 's1-createdLater'
+duplicated: 's0-explicit'
+dropped: < Unavailable, not in Requirements >
+
 
 ```

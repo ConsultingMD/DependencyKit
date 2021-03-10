@@ -14,13 +14,13 @@
 		23FF9EDB25643C3900266ABE /* DIDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9EC825643C3800266ABE /* DIDemoApp.swift */; };
 		23FF9EDD25643C3900266ABE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9EC925643C3800266ABE /* ContentView.swift */; };
 		23FF9EDF25643C3900266ABE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23FF9ECA25643C3800266ABE /* Assets.xcassets */; };
-		23FF9F0825643CB400266ABE /* RootResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F0325643CB400266ABE /* RootResource.swift */; };
+		23FF9F0825643CB400266ABE /* ScopeZeroResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F0325643CB400266ABE /* ScopeZeroResource.swift */; };
 		23FF9F1725643FBF00266ABE /* DIUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FF9F1625643FBF00266ABE /* DIUsage.swift */; };
 		F71F075B25B64E5C00E633A0 /* DependencyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F71F074E25B64D0800E633A0 /* DependencyKit.framework */; };
 		F71F075C25B64E5C00E633A0 /* DependencyKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F71F074E25B64D0800E633A0 /* DependencyKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F7C1E67425F5C7FD00B7F419 /* LevelTwoResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C1E67225F5C7FD00B7F419 /* LevelTwoResource.swift */; };
-		F7C1E67525F5C7FD00B7F419 /* LevelOneResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C1E67325F5C7FD00B7F419 /* LevelOneResource.swift */; };
-		F7C1E67E25F6A2BA00B7F419 /* LevelThreeResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C1E67D25F6A2BA00B7F419 /* LevelThreeResource.swift */; };
+		F7C1E67425F5C7FD00B7F419 /* ScopeTwoResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C1E67225F5C7FD00B7F419 /* ScopeTwoResource.swift */; };
+		F7C1E67525F5C7FD00B7F419 /* ScopeOneResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C1E67325F5C7FD00B7F419 /* ScopeOneResource.swift */; };
+		F7C1E67E25F6A2BA00B7F419 /* ScopeThreeResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C1E67D25F6A2BA00B7F419 /* ScopeThreeResource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,12 +66,12 @@
 		23FF9ECA25643C3800266ABE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		23FF9ECF25643C3900266ABE /* DemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23FF9ED225643C3900266ABE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		23FF9F0325643CB400266ABE /* RootResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootResource.swift; sourceTree = "<group>"; };
+		23FF9F0325643CB400266ABE /* ScopeZeroResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScopeZeroResource.swift; sourceTree = "<group>"; };
 		23FF9F1625643FBF00266ABE /* DIUsage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DIUsage.swift; sourceTree = "<group>"; };
 		F71F074925B64D0800E633A0 /* DependencyKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DependencyKit.xcodeproj; path = DependencyKit/DependencyKit.xcodeproj; sourceTree = "<group>"; };
-		F7C1E67225F5C7FD00B7F419 /* LevelTwoResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelTwoResource.swift; sourceTree = "<group>"; };
-		F7C1E67325F5C7FD00B7F419 /* LevelOneResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelOneResource.swift; sourceTree = "<group>"; };
-		F7C1E67D25F6A2BA00B7F419 /* LevelThreeResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelThreeResource.swift; sourceTree = "<group>"; };
+		F7C1E67225F5C7FD00B7F419 /* ScopeTwoResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScopeTwoResource.swift; sourceTree = "<group>"; };
+		F7C1E67325F5C7FD00B7F419 /* ScopeOneResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScopeOneResource.swift; sourceTree = "<group>"; };
+		F7C1E67D25F6A2BA00B7F419 /* ScopeThreeResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScopeThreeResource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,10 +164,10 @@
 		23FF9EE925643C5D00266ABE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				23FF9F0325643CB400266ABE /* RootResource.swift */,
-				F7C1E67325F5C7FD00B7F419 /* LevelOneResource.swift */,
-				F7C1E67225F5C7FD00B7F419 /* LevelTwoResource.swift */,
-				F7C1E67D25F6A2BA00B7F419 /* LevelThreeResource.swift */,
+				23FF9F0325643CB400266ABE /* ScopeZeroResource.swift */,
+				F7C1E67325F5C7FD00B7F419 /* ScopeOneResource.swift */,
+				F7C1E67225F5C7FD00B7F419 /* ScopeTwoResource.swift */,
+				F7C1E67D25F6A2BA00B7F419 /* ScopeThreeResource.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -297,13 +297,13 @@
 			files = (
 				23FF9EDD25643C3900266ABE /* ContentView.swift in Sources */,
 				23FF9F1725643FBF00266ABE /* DIUsage.swift in Sources */,
-				23FF9F0825643CB400266ABE /* RootResource.swift in Sources */,
-				F7C1E67525F5C7FD00B7F419 /* LevelOneResource.swift in Sources */,
+				23FF9F0825643CB400266ABE /* ScopeZeroResource.swift in Sources */,
+				F7C1E67525F5C7FD00B7F419 /* ScopeOneResource.swift in Sources */,
 				23B775972564421200D5CC4B /* Generated.swift in Sources */,
 				23FF9EDB25643C3900266ABE /* DIDemoApp.swift in Sources */,
 				235FB5942569D032000B575A /* TimingNetworkMonitor.swift in Sources */,
-				F7C1E67425F5C7FD00B7F419 /* LevelTwoResource.swift in Sources */,
-				F7C1E67E25F6A2BA00B7F419 /* LevelThreeResource.swift in Sources */,
+				F7C1E67425F5C7FD00B7F419 /* ScopeTwoResource.swift in Sources */,
+				F7C1E67E25F6A2BA00B7F419 /* ScopeThreeResource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
