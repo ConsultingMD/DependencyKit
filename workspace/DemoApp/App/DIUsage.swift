@@ -36,6 +36,8 @@ class DIUsage: ObservableObject {
             "createdLater: '\(one.createdLater)'",
             "duplicated: < N/A, created in later scope >",
             "dropped: < Unavailable, not in Requirements >",
+            "conformance to external module resource requirement: '\(String(describing: one.networkMonitor))'",
+            "resource from external module: '\(one.buildNetworkClientResource())'",
             "",
         ]
         output += [

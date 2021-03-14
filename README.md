@@ -179,17 +179,31 @@ protocol ScopeOneRequirements: Requirements, CODEGEN_ScopeOneRequirements {
 }
 
 class ScopeOneResource<I: ScopeOneRequirements>: Resource<I>,
+                                                 NetworkClientRequirements,
                                                  ScopeTwoRequirements {
+
+    // Recreate a resource using the ancestor-scope value.
     // Must be lazy to access `injected`.
     // Must access injected as this var overrides `modified` passed from injected.
     lazy var modified = "s1-modified-\(injected.modified)"
     let createdLater = "s1-createdLater"
     let recreated = "s1-recreated"
-    
+
     func buildScopeTwo() -> ScopeTwoResource<ScopeOneResource> {
         ScopeTwoResource(injecting: self)
     }
+
+    // MARK: NetworkClient Module
+
+    // Network Monitor conforming to a value in another module.
+    let networkMonitor: NetworkMonitorInterface? = TimingNetworkMonitor()
+
+    // Build resource from external module.
+    func buildNetworkClientResource() -> NetworkClientResource<ScopeOneResource> {
+        NetworkClientResource(injecting: self)
+    }
 }
+
 
 ```
 
@@ -257,6 +271,8 @@ output += [
     "createdLater: '\(one.createdLater)'",
     "duplicated: < N/A, created in later scope >",
     "dropped: < Unavailable, not in Requirements >",
+    "conformance to external module resource requirement: '\(String(describing: one.networkMonitor))'",
+    "resource from external module: '\(one.buildNetworkClientResource())'",
     "",
 ]
 output += [
@@ -305,6 +321,8 @@ recreated: 's1-recreated'
 createdLater: 's1-createdLater'
 duplicated: < N/A, created in later scope >
 dropped: < Unavailable, not in Requirements >
+conformance to external module resource requirement: 'Optional(DemoApp.TimingNetworkMonitor)'
+resource from external module: 'NetworkClient.NetworkClientResource<DemoApp.ScopeOneResource<DemoApp.ScopeZeroResource<DependencyKit.NilResource>>>'
 
 _____ Two _____
 explicit: 's0-explicit'

@@ -6,7 +6,7 @@ public protocol NetworkClientRequirements: Requirements {
 }
 
 public class NetworkClientResource<I: NetworkClientRequirements>: Resource<I> {
-    public func buildClient() -> NetworkClient {
+    public func buildNetworkClient() -> NetworkClient {
         if let monitor = injected.networkMonitor {
             return MonitoredNetworkClient(monitor: monitor)
         } else {
@@ -14,3 +14,4 @@ public class NetworkClientResource<I: NetworkClientRequirements>: Resource<I> {
         }
     }
 }
+
