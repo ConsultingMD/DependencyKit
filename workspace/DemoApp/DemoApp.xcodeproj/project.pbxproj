@@ -72,6 +72,7 @@
 		F7C1E67225F5C7FD00B7F419 /* ScopeTwoResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScopeTwoResource.swift; sourceTree = "<group>"; };
 		F7C1E67325F5C7FD00B7F419 /* ScopeOneResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScopeOneResource.swift; sourceTree = "<group>"; };
 		F7C1E67D25F6A2BA00B7F419 /* ScopeThreeResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScopeThreeResource.swift; sourceTree = "<group>"; };
+		F7C1E69125FEA70700B7F419 /* DIConfig.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = DIConfig.yaml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +108,7 @@
 		23A1A9E12567794C009E847C /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				F7C1E69125FEA70700B7F419 /* DIConfig.yaml */,
 				23FF9ECA25643C3800266ABE /* Assets.xcassets */,
 				23A1A9BD25668591009E847C /* DIDemoApp.entitlements */,
 				23FF9ED225643C3900266ABE /* Info.plist */,
