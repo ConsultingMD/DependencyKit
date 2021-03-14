@@ -1,19 +1,20 @@
 import Foundation
 
 struct ModuleDeclarations {
-    let config: ModuleConfiguration
-    let imports: Set<Module>
+    let parsingConfig: ModuleCodeParsingConfiguration
+    let name: String
+    let imports: Set<ModuleImportStatement>
     let requirements: Set<Requirements>
     let resources: Set<Resource>
 }
 
-struct Module: Hashable, CustomStringConvertible {
+struct ModuleImportStatement: Hashable, CustomStringConvertible {
 	let identifier: String
     
     var description: String { identifier }
 }
 
-struct FieldDeclaration: Hashable, CustomStringConvertible {
+struct FieldDefinition: Hashable, CustomStringConvertible {
 	let identifier: String
 	let type: String
 	let access: String?
@@ -26,7 +27,7 @@ struct Requirements: Hashable, CustomStringConvertible {
     let access: String?
     let identifier: String
 	let implicitGeneratedProtocol: String?
-    let fields: [FieldDeclaration]
+    let fields: [FieldDefinition]
 
     private func fieldDescriptions() -> String {
         "\(fields.reduce("") { $0 + "\n " + $1.description })\n"
@@ -80,8 +81,27 @@ struct Resource: Hashable, CustomStringConvertible {
     }
 }
 
-struct ResourceInstantiation {
-	let module: Module
-	let constructedResource: Resource
-	let injectedResource: Resource
+extension ModuleDeclarations: CustomStringConvertible {
+    var description: String {
+        let module = "# module: " + name + " #"
+        let moduleLine = module + "\n"
+        let hashLine = String(repeating: "#", count: module.count) + "\n"
+        let dashLine = "#" + String(repeating: "-", count: module.count) + "\n"
+        let importsBlock = imports.reduce("") { $0 + "# - " + String(describing: $1) + "\n" }
+        let requirementsBlock = requirements.reduce("") { $0 + "# - " + String(describing: $1) + "\n" }
+        let resourcesBlock = resources.reduce("") { $0 + "# - " + String(describing: $1) + "\n" }
+        return hashLine
+            + moduleLine
+            + hashLine
+            + "# imports: \n"
+            + importsBlock
+            + dashLine
+            + "# requirements: \n"
+            + requirementsBlock
+            + dashLine
+            + "# resources: \n"
+            + resourcesBlock
+            + dashLine
+    }
 }
+

@@ -11,19 +11,22 @@ class ConfigurationReader {
         self.configURL = configURL
     }
     
-    func readModuleConfigurations() -> [ModuleConfiguration] {
+    func getParsingConfiguration() -> [ModuleCodeParsingConfiguration] {
         guard let data = try? Data(contentsOf: configURL)
         else { fatalError("Could not open YAML file at: \(configURL)") }
-        guard let config = try? decoder.decode(ConfigFileModel.self, from: data)
+        guard let config = try? decoder.decode(ConfigurationFile.self, from: data)
         else { fatalError("Could not decode YAML config from file data from: \(configURL)") }
         
-        return config.modules.map { configuration(for: $0) }
+        return config.modules.map { parsingConfiguration(module: $0) }
     }
-    
-    private func configuration(for module: ModuleDefinition) -> ModuleConfiguration {
+
+    private func parsingConfiguration(module: ModuleConfigurationFileInformation) -> ModuleCodeParsingConfiguration {
         let workingDir = FS.pwd()
         let modulePath = workingDir.appendingPathComponent(module.path)
-        let codegenFile = module.codegenFileURL(from: workingDir)
+        let codegenFile = workingDir
+            .appendingPathComponent(module.path)
+            .appendingPathComponent(module.codegenDirectory ?? CodegenConstants.codegenDirectory)
+            .appendingPathComponent(module.codegenFile ?? CodegenConstants.codegenFile)
         let files = FileSystem.find(modulePath)
             .filter { $0.pathExtension == CodegenConstants.swiftFileExtension }
             .reduce(into: (application: [URL](), codegen: [URL]())) { (out, curr) in
@@ -36,9 +39,9 @@ class ConfigurationReader {
             }
         assert(files.application.count == Set(files.application).count)
         assert(files.codegen.count <= 1)
-        return ModuleConfiguration(module: Module(identifier: module.name),
-                                   files: files.application,
-                                   codegenFile: files.codegen.first ?? codegenFile)
+        return ModuleCodeParsingConfiguration(name: module.name,
+                                              files: files.application,
+                                              codegenFile: files.codegen.first ?? codegenFile)
     }
     
 }

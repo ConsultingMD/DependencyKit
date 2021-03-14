@@ -3,19 +3,19 @@ import SwiftSyntax
 
 class DeclarationSyntaxVisitor: SyntaxVisitor {
     
-    private let config: ModuleConfiguration
+    private let moduleConfig: ModuleCodeParsingConfiguration
     
-    init(config: ModuleConfiguration) {
-        self.config = config
+    init(config: ModuleCodeParsingConfiguration) {
+        self.moduleConfig = config
     }
     
-    var imports = Set<Module>()
+    var imports = Set<ModuleImportStatement>()
     var requirements = Set<Requirements>()
     var resources = Set<Resource>()
 
     override func visit(_ token: ImportDeclSyntax) -> SyntaxVisitorContinueKind {
         if let text = token.path.first?.name.text {
-            imports.insert(Module(identifier: text))
+            imports.insert(ModuleImportStatement(identifier: text))
         }
         return super.visit(token)
     }
@@ -62,14 +62,14 @@ class DeclarationSyntaxVisitor: SyntaxVisitor {
                     return (acc.var, acc.type, acc.optional, curr.tokenKind)
                 }
             }
-        }.map { acc -> FieldDeclaration in
+        }.map { acc -> FieldDefinition in
             guard let varIdentifier = acc.var,
                   let typeIdentifier = acc.type
             else { fatalError("unparseable field") }
-            return FieldDeclaration(identifier: varIdentifier,
-                                    type: typeIdentifier,
-                                    access: nil,
-                                    optional: acc.optional)
+            return FieldDefinition(identifier: varIdentifier,
+                                   type: typeIdentifier,
+                                   access: nil,
+                                   optional: acc.optional)
         }
 
         if inherited.contains(FrameworkConstants.requirementsProtocolString) {
@@ -156,29 +156,5 @@ class DeclarationSyntaxVisitor: SyntaxVisitor {
         )
         
         return super.visit(token)
-    }
-}
-
-extension DeclarationSyntaxVisitor: CustomStringConvertible {
-    var description: String {
-        let module = config.module.identifier
-        let moduleLine = "# module: " + module + " #" + "\n"
-        let hashLine = String(repeating: "#", count: moduleLine.count) + "\n"
-        let dashLine = "#" + String(repeating: "-", count: module.count) + "\n"
-        let importsBlock = imports.reduce("") { $0 + "# - " + String(describing: $1) + "\n" }
-        let requirementsBlock = requirements.reduce("") { $0 + "# - " + String(describing: $1) + "\n" }
-        let resourcesBlock = resources.reduce("") { $0 + "# - " + String(describing: $1) + "\n" }
-        return hashLine
-            + moduleLine
-            + hashLine
-            + "# imports: \n"
-            + importsBlock
-            + dashLine
-            + "# requirements: \n"
-            + requirementsBlock
-            + dashLine
-            + "# resources: \n"
-            + resourcesBlock
-            + dashLine
     }
 }
