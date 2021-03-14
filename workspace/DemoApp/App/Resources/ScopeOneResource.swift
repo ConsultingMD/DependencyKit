@@ -2,7 +2,7 @@ import DependencyKit
 import NetworkClient
 import Foundation
 
-protocol ScopeOneRequirements: Requirements, CODEGEN_ScopeOneRequirements {
+protocol ScopeOneRequirements: Requirements, GENERATED_IMPLICIT_ScopeOneRequirements {
     var explicit: String { get }
     var modified: String { get }
 }

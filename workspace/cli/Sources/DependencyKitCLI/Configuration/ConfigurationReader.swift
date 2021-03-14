@@ -18,7 +18,6 @@ class ConfigurationReader {
         else { fatalError("Could not decode YAML config from file data from: \(configURL)") }
         
         return config.modules.map { configuration(for: $0) }
-        
     }
     
     private func configuration(for module: ModuleDefinition) -> ModuleConfiguration {

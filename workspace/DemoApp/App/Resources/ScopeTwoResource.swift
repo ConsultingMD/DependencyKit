@@ -1,7 +1,7 @@
 import DependencyKit
 import Foundation
 
-protocol ScopeTwoRequirements: Requirements, CODEGEN_ScopeTwoRequirements {
+protocol ScopeTwoRequirements: Requirements, GENERATED_IMPLICIT_ScopeTwoRequirements {
     var explicit: String { get }
     var modified: String { get }
     var recreated: String { get }

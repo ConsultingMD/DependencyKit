@@ -9,5 +9,6 @@ readers.forEach {
     $0.read()
 }
 let declarations = readers.map(\.visitedDeclarations)
-let 
-
+declarations.forEach {
+    print(String(describing: $0))
+}

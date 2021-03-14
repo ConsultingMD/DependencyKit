@@ -30,7 +30,6 @@ class ModuleDeclarationReader {
     var visitedDeclarations: ModuleDeclarations {
         ModuleDeclarations(config: config,
                            imports: declarationVisitor.imports,
-                           dependencies: declarationVisitor.dependencies,
                            requirements: declarationVisitor.requirements,
                            resources: declarationVisitor.resources)
     }

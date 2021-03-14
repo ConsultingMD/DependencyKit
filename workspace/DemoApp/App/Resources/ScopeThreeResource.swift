@@ -1,7 +1,7 @@
 import DependencyKit
 import Foundation
 
-protocol ScopeThreeRequirements: Requirements, CODEGEN_ScopeThreeRequirements {
+protocol ScopeThreeRequirements: Requirements, GENERATED_IMPLICIT_ScopeThreeRequirements {
     var explicit: String { get }
     var implicit: String { get }
     var modified: String { get }

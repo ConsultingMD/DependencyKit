@@ -10,8 +10,7 @@ class DeclarationSyntaxVisitor: SyntaxVisitor {
     }
     
     var imports = Set<Module>()
-    var dependencies = Set<Dependency>()
-    var requirements = Set<Requirement>()
+    var requirements = Set<Requirements>()
     var resources = Set<Resource>()
 
     override func visit(_ token: ImportDeclSyntax) -> SyntaxVisitorContinueKind {
@@ -63,36 +62,34 @@ class DeclarationSyntaxVisitor: SyntaxVisitor {
                     return (acc.var, acc.type, acc.optional, curr.tokenKind)
                 }
             }
-        }.map { acc -> Field in
+        }.map { acc -> FieldDeclaration in
             guard let varIdentifier = acc.var,
                   let typeIdentifier = acc.type
             else { fatalError("unparseable field") }
-            return Field(identifier: varIdentifier, type: typeIdentifier + (acc.optional ? "?" : ""), access: nil)
-        }
-
-        if inherited.contains(FrameworkConstants.dependencyProtocolString) {
-            precondition(inherited.count <= 1 && modifiers.count <= 1,
-                         "Dependencies should only be declared in the form: \n" +
-                         "[public] protocol Identifier: Dependency { var name: Type { get } }")
-            dependencies.insert(
-                Dependency(identifier: identifier,
-                           access: modifiers.first,
-                           fields: fields)
-            )
+            return FieldDeclaration(identifier: varIdentifier,
+                                    type: typeIdentifier,
+                                    access: nil,
+                                    optional: acc.optional)
         }
 
         if inherited.contains(FrameworkConstants.requirementsProtocolString) {
-            let codegenProtocol = inherited.filter({ $0.hasSuffix(CodegenConstants.codegenProtocolSuffix) })
-            let dependencyProtocols = inherited.filter({ $0 != FrameworkConstants.requirementsProtocolString &&
-                                                        !$0.hasSuffix(CodegenConstants.codegenProtocolSuffix) })
-            precondition(inherited.count >= 2 && modifiers.count <= 1 && codegenProtocol.count == 1,
-                         "Requirements must be declared in the form: \n" +
-                         "[public] protocol MyRequirements: Requirements, MyReqStubFor_\(CodegenConstants.codegenProtocolSuffix), MyDependency1, MyDependency2, MyDependencyEtc {}")
+            let codegenProtocol = inherited
+                .filter({ $0.hasPrefix(CodegenConstants.implicitGeneratedProtocolPrefix) })
+            precondition(inherited.count > 0
+                            && inherited.count <= 2
+                            && modifiers.count <= 1
+                            && codegenProtocol.count <= 1,
+                         "Requirements must be declared with the form: \n"
+                            + "(public|internal|fileprivate|private)? "
+                            + "protocol TheScopeRequirements: Requirements "
+                            + "(, GENERATED_IMPLICIT_TheScopeRequirements)? {\n"
+                            + "\t(var requirementName: RequirementType { get })*?\n"
+                            + "}")
             requirements.insert(
-                Requirement(access: modifiers.first,
-                            identifier: identifier,
-                            dependencyIdentifiers: dependencyProtocols,
-                            codegenProtocolIdentifier: codegenProtocol.first!)
+                Requirements(access: modifiers.first,
+                             identifier: identifier,
+                             implicitGeneratedProtocol: codegenProtocol.first,
+                             fields: fields)
             )
         }
 
@@ -139,9 +136,14 @@ class DeclarationSyntaxVisitor: SyntaxVisitor {
               case let genericConstraint = Array(genericsSet.symmetricDifference(t))
         else { return super.visit(token) }
 
-        precondition(modifiers.count <= 1 && genericConstraint.count == 1,
-                     "Requirements must be declared in the form: \n" +
-                     "[public] protocol MyRequirements: Requirements, MyReqStubFor_\(CodegenConstants.codegenProtocolSuffix), MyDependency1, MyDependency2, MyDependencyEtc {}")
+        precondition(modifiers.count <= 1
+                        && genericConstraint.count == 1,
+                     "Resources must be declared in the form: \n"
+                        + "(public|internal|fileprivate|private)?"
+                        + "class TheScopeResource<I: TheScopeRequirements>: Resource<I> "
+                        + "(, Conformances)? {"
+                        + "\t(var requirementName: RequirementType { /*implementation*/ })*?\n"
+                        + "}")
         
         typealias TypeAccumulator = (var: String?, type: String?, optional: Bool, kind: SwiftSyntax.TokenKind?)
         
@@ -149,7 +151,8 @@ class DeclarationSyntaxVisitor: SyntaxVisitor {
             Resource(access: modifiers.first,
                      identifier: identifier,
                      genericIdentifier: genericConstraint.first!,
-                     conformanceIdentifiers: protocolConformance)
+                     conformanceIdentifiers: protocolConformance,
+                     fields: [])
         )
         
         return super.visit(token)
@@ -158,21 +161,24 @@ class DeclarationSyntaxVisitor: SyntaxVisitor {
 
 extension DeclarationSyntaxVisitor: CustomStringConvertible {
     var description: String {
-        let header = "module: \(config.module.identifier)"
-        return String(repeating: "#", count: header.count + 4) + "\n"
-            + "# \(header) #\n"
-            + String(repeating: "#", count: header.count + 4) + "\n"
+        let module = config.module.identifier
+        let moduleLine = "# module: " + module + " #" + "\n"
+        let hashLine = String(repeating: "#", count: moduleLine.count) + "\n"
+        let dashLine = "#" + String(repeating: "-", count: module.count) + "\n"
+        let importsBlock = imports.reduce("") { $0 + "# - " + String(describing: $1) + "\n" }
+        let requirementsBlock = requirements.reduce("") { $0 + "# - " + String(describing: $1) + "\n" }
+        let resourcesBlock = resources.reduce("") { $0 + "# - " + String(describing: $1) + "\n" }
+        return hashLine
+            + moduleLine
+            + hashLine
             + "# imports: \n"
-            + imports.reduce("") { "\($0)# - \($1)\n" }
-            + "# \(String(repeating: "-", count: header.count))\n"
-            + "# dependencies: \n"
-            + dependencies.reduce("") { "\($0)# - \($1)\n" }
-            + "# \(String(repeating: "-", count: header.count))\n"
+            + importsBlock
+            + dashLine
             + "# requirements: \n"
-            + requirements.reduce("") { "\($0)# - \($1)\n" }
-            + "# \(String(repeating: "-", count: header.count))\n"
+            + requirementsBlock
+            + dashLine
             + "# resources: \n"
-            + resources.reduce("") { "\($0)# - \($1)\n" }
-            + "# \(String(repeating: "-", count: header.count))\n"
+            + resourcesBlock
+            + dashLine
     }
 }

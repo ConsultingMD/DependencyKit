@@ -22,27 +22,27 @@ extension ResourceType where I: ScopeThreeRequirements {
 }
 
 // MARK: Declare implicit (transitive) Requirements
-protocol CODEGEN_ScopeOneRequirements {
-    func _CODEGEN_implicit() -> String
+protocol GENERATED_IMPLICIT_ScopeOneRequirements {
+    func _GENERATED_IMPLICIT_implicit() -> String
 }
 
-protocol CODEGEN_ScopeTwoRequirements {
-    func _CODEGEN_implicit() -> String
+protocol GENERATED_IMPLICIT_ScopeTwoRequirements {
+    func _GENERATED_IMPLICIT_implicit() -> String
 }
 
-protocol CODEGEN_ScopeThreeRequirements {
+protocol GENERATED_IMPLICIT_ScopeThreeRequirements {
 }
 
 // MARK: Surface implicit Requirements once explicitly required
-extension ScopeTwoResource where I: CODEGEN_ScopeTwoRequirements {
-    var implicit: String { injected._CODEGEN_implicit() }
+extension ScopeTwoResource where I: GENERATED_IMPLICIT_ScopeTwoRequirements {
+    var implicit: String { injected._GENERATED_IMPLICIT_implicit() }
 }
 
 // MARK: Carry through implicit Requirements
-extension ScopeZeroResource: CODEGEN_ScopeOneRequirements {
-    func _CODEGEN_implicit() -> String { implicit }
+extension ScopeZeroResource: GENERATED_IMPLICIT_ScopeOneRequirements {
+    func _GENERATED_IMPLICIT_implicit() -> String { implicit }
 }
 
-extension ScopeOneResource: CODEGEN_ScopeTwoRequirements {
-    func _CODEGEN_implicit() -> String { injected._CODEGEN_implicit() }
+extension ScopeOneResource: GENERATED_IMPLICIT_ScopeTwoRequirements {
+    func _GENERATED_IMPLICIT_implicit() -> String { injected._GENERATED_IMPLICIT_implicit() }
 }
