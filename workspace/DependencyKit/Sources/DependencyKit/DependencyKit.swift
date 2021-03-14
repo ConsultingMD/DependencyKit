@@ -1,8 +1,5 @@
 import Foundation
 
-public protocol Dependency {}
-public protocol NilDependency: Dependency {}
-
 public protocol Requirements {
     associatedtype I
     var injected: I { get }
