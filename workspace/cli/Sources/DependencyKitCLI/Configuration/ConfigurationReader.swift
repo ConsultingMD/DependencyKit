@@ -5,19 +5,21 @@ import Yams
 class ConfigurationReader {
     
     private let configURL: URL
+    private let debugDump: Bool
     private let decoder = YAMLDecoder()
     
-    init(configURL: URL) {
+    init(configURL: URL, debugDump: Bool) {
         self.configURL = configURL
+        self.debugDump = debugDump
     }
     
-    func getParsingConfiguration() -> [ModuleCodeParsingConfiguration] {
+    func getParsingConfiguration() -> CodeParsingConfiguration {
         guard let data = try? Data(contentsOf: configURL)
         else { fatalError("Could not open YAML file at: \(configURL)") }
         guard let config = try? decoder.decode(ConfigurationFile.self, from: data)
         else { fatalError("Could not decode YAML config from file data from: \(configURL)") }
-        
-        return config.modules.map { parsingConfiguration(module: $0) }
+        return CodeParsingConfiguration(debugDump: debugDump,
+                                        modules: config.modules.map { parsingConfiguration(module: $0) })
     }
 
     private func parsingConfiguration(module: ModuleConfigurationFileInformation) -> ModuleCodeParsingConfiguration {

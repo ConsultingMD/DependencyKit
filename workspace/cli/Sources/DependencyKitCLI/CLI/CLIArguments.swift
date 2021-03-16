@@ -7,10 +7,8 @@ struct CLIArguments {
         @Option(name: [.customShort("c"), .long], help: "A YAML config file")
         var config: String
 
-        static func parseConfigFileURL() -> URL {
-            let args = DependencyKit.parseOrExit()
-            let yamlConfigPath = args.config
-            return URL(fileURLWithPath: yamlConfigPath)
-        }
+        @Flag(name: [.customShort("d"), .long], help: "Debug Dump")
+        var debugDump: Bool = false
+
     }
 }

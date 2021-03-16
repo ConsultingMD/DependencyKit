@@ -4,9 +4,11 @@ import SwiftSyntax
 class DeclarationSyntaxVisitor: SyntaxVisitor {
     
     private let moduleConfig: ModuleCodeParsingConfiguration
+    private let debugDump: Bool
     
-    init(config: ModuleCodeParsingConfiguration) {
+    init(config: ModuleCodeParsingConfiguration, debugDump: Bool) {
         self.moduleConfig = config
+        self.debugDump = debugDump
     }
     
     var imports = Set<ModuleImportStatement>()

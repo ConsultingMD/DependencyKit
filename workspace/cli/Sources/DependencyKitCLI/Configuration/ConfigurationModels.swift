@@ -11,6 +11,11 @@ struct ModuleConfigurationFileInformation: Codable {
     let codegenFile: String?
 }
 
+struct CodeParsingConfiguration {
+    let debugDump: Bool
+    let modules: [ModuleCodeParsingConfiguration]
+}
+
 struct ModuleCodeParsingConfiguration {
     let name: String
     let files: [URL]
