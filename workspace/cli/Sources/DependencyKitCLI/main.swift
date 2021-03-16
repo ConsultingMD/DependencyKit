@@ -1,6 +1,6 @@
 import Foundation
 
-let configURL = CLIArguments.parseConfigFileURL()
+let configURL = CLIArguments.DependencyKit.parseConfigFileURL()
 let configReader = ConfigurationReader(configURL: configURL)
 let moduleConfigurations = configReader.getParsingConfiguration()
 let readers = moduleConfigurations.map(DeclarationAndImplementationReader.init(config:))
