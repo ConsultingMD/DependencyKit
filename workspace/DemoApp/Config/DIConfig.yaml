@@ -1,5 +1,0 @@
-modules:
-  - name: DemoApp
-    path: workspace/DemoApp/App
-  - name: NetworkClient
-    path: workspace/DemoApp/Libraries/NetworkClient/NetworkClient
