@@ -1,4 +1,0 @@
-#!/bin/bash
-
-ln -s $(xcrun --find swift)/../../lib/swift/macosx/lib_InternalSwiftSyntaxParser.dylib lib_InternalSwiftSyntaxParser.dylib
-
