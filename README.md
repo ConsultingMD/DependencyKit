@@ -3,6 +3,10 @@
 
 DependencyKit is a typesafe codegenerated dependency injection framework for Swift. It's under development and isn't ready for use.
 
+* The [DependencyKit library](https://github.com/DependencyKit/DependencyKit) (this repo) is included in the project using DependencyKit.
+* The [DependencyKit command line tool](https://github.com/DependencyKit/DependencyKitCLI) is used to generate the code which handles dependencies.
+* A proof of concept [Demo Project using DependencyKit](https://github.com/DependencyKit/DependencyKitDemoApp) exists for development.
+
 ## Philosophy
 
 DependencyKit has three tenants:
@@ -29,26 +33,7 @@ DependencyKit aims to have *low code-size and binary-size footprints* and to be 
 
 ## Nomenclature & Conceptual Model 
 
-DependencyKit helps you model application 'scopes' through `Requirements` and `Resource`s. 
-
-### Scopes
-There is no `Scope` entity in DependencyKit. 'Scopes' are a conceptual framework which improve our ability to model app logic by facilitating clear ownership and separation of concerns.
-
-A 'scope' is a grouping of entities which: 
-* Share a lifecycle boundary—when the scope ends all entities in the scope are deinitialized
-* Share access to their dependencies—entities in the same scope can reach the same things
-
-Scopes contain child-scopes which:
-* Have shorter or equal lifetimes—a child scope never outlives its parent
-* Have *potential* access to only a subset of the entities their parent-scopes have—a parent scope can always create a sub-scope with some or all of the context it has
-* Have a more specialized purpose than their parents
-* Create and use more specialized entities than their parents—a parent scope should usually avoid creating an entity it doesn't use, it should delegate creation to the child-scope which does use it
-
-The value of careful scoping is well illustrated by considering its antithesis: pervasive use of global state or Singletons.
-
-Singletons, by design, make an entity available to the whole application—the full 'app scope'. This can be convenient in the short term but usually introduces hazardous potential complexity.
-
-When an entity isn't in a usable state for the whole app lifecycle but is nevertheless available its easy to use inappropriately. If it's always accessible how can you know not to use it? Will you be able to tell if a usage is appropriate when stumble on it a year from now? Will your co-authors be able to? The compiler certainly won't.
+DependencyKit helps you model application scopes through `Requirements` and `Resource`s. 
 
 Scoping enforced by the compiler helps access, ownership, and lifecycle concerns. DependencyKit makes scoping easy.
 
@@ -103,11 +88,10 @@ class LoggedInResource<I: LoggedInRequirements>: Resource<I>, ChatThreadRequirem
     var chatThreadSource: AnyPublisher<[ChatThread], Error> {
         self.webSocketMessagingService.streamingChatThreadSource
     }
-    
+
     var chatThreadResource: ChatThreadResource {
         ChatThreadResource<LoggedInResource>(injecting: self)
     }
-
 }
 ```
 
@@ -140,207 +124,3 @@ extension LoggedInResource: MyThreadsViewControllerParameters {
 }
 ```
 
-DependencyKit itself is not prescriptive about how you use `Resource`s. We've found that using `Resources` primarily as builders for entities (like view controllers, manager classes, views, and view models) within their scopes works well. We intend to add more real world examples to the demo app.
-
-### TL;DR
-DependencyKit helps you model explicit 'scopes' in your app and reduces the boilerplate needed to manage passing dependencies into them.
-
-`Requirements` describe things your scopes need. `Resource`s satisfy requirements needed to build things in a scope—including their sub-scopes' `Resource`s.
-
------
-
-## Proof of concepts
-
-These code blocks show values pass in different useful ways across multiple `Requirements` & `Resource`s:
-* Explicitly in each `Requirements` definition
-* Implicitly, leaning on typesafe code generation to remove boiler plate by skipping intermediate `Requirements`
-* Explicitly, but modified by a sub-scope `Resource`
-* Un-passed, and explicitly replaced by a sub-scope `Resource`
-
-### Definitions
-
-```swift
-class ScopeZeroResource<I: NilRequirements>: Resource<I>,
-                                             ScopeOneRequirements {
-    let explicit = "s0-explicit"
-    let implicit = "s0-implicit"
-    let modified = "s0-modified"
-    let recreated = "s0-recreated"
-    let dropped = "s0-dropped"
-    
-    func buildScopeOne() -> ScopeOneResource<ScopeZeroResource> { ScopeOneResource(injecting: self) }
-}
-```
-
-```swift
-protocol ScopeOneRequirements: Requirements, CODEGEN_ScopeOneRequirements {
-    var explicit: String { get }
-    var modified: String { get }
-}
-
-class ScopeOneResource<I: ScopeOneRequirements>: Resource<I>,
-                                                 NetworkClientRequirements,
-                                                 ScopeTwoRequirements {
-
-    // Recreate a resource using the ancestor-scope value.
-    // Must be lazy to access `injected`.
-    // Must access injected as this var overrides `modified` passed from injected.
-    lazy var modified = "s1-modified-\(injected.modified)"
-    let createdLater = "s1-createdLater"
-    let recreated = "s1-recreated"
-
-    func buildScopeTwo() -> ScopeTwoResource<ScopeOneResource> {
-        ScopeTwoResource(injecting: self)
-    }
-
-    // MARK: NetworkClient Module
-
-    // Network Monitor conforming to a value in another module.
-    let networkMonitor: NetworkMonitorInterface? = TimingNetworkMonitor()
-
-    // Build resource from external module.
-    func buildNetworkClientResource() -> NetworkClientResource<ScopeOneResource> {
-        NetworkClientResource(injecting: self)
-    }
-}
-
-
-```
-
-```swift
-protocol ScopeTwoRequirements: Requirements, CODEGEN_ScopeTwoRequirements {
-    var explicit: String { get }
-    var modified: String { get }
-    var recreated: String { get }
-    var createdLater: String { get }
-}
-
-
-class ScopeTwoResource<I: ScopeTwoRequirements>: Resource<I>,
-                                                 ScopeThreeRequirements{
-    var duplicated: String { explicit }
-
-    func buildScopeThree() -> ScopeThreeResource<ScopeTwoResource> {
-        ScopeThreeResource(injecting: self)
-    }
-}
-
-```
-
-```swift
-protocol ScopeThreeRequirements: Requirements, CODEGEN_ScopeThreeRequirements {
-    var explicit: String { get }
-    var implicit: String { get }
-    var modified: String { get }
-    var recreated: String { get }
-    var createdLater: String { get }
-    var duplicated: String { get }
-}
-
-
-class ScopeThreeResource<I: ScopeThreeRequirements>: Resource<I> {
-}
-
-```
-
-### Usage 
-
-```swift
-var output: [String] = []
-let root = ScopeZeroResource(injecting: NilResource())
-let one = root.buildScopeOne()
-let two = one.buildScopeTwo()
-let three = two.buildScopeThree()
-output += [
-    "_____ Root _____",
-    "explicit: '\(root.explicit)'",
-    "implicit: '\(root.implicit)'",
-    "modified: '\(root.modified)'",
-    "recreated: '\(root.recreated)'",
-    "createdLater: < N/A, created in later scope >",
-    "duplicated: < N/A, created in later scope >",
-    "dropped: '\(root.dropped)'",
-    "",
-]
-output += [
-    "_____ One _____",
-    "explicit: '\(one.explicit)'",
-    "implicit: < Unavailable, not in Requirements. (Passed only implicitly to descendent explicit uses) >",
-    "modified: '\(one.modified)'",
-    "recreated: '\(one.recreated)'",
-    "createdLater: '\(one.createdLater)'",
-    "duplicated: < N/A, created in later scope >",
-    "dropped: < Unavailable, not in Requirements >",
-    "conformance to external module resource requirement: '\(String(describing: one.networkMonitor))'",
-    "resource from external module: '\(one.buildNetworkClientResource())'",
-    "",
-]
-output += [
-    "_____ Two _____",
-    "explicit: '\(two.explicit)'",
-    "implicit: '\(two.implicit)'",
-    "modified: '\(two.modified)'",
-    "recreated: '\(two.recreated)'",
-    "createdLater: '\(two.createdLater)'",
-    "duplicated: '\(two.duplicated)'",
-    "dropped: < Unavailable, not in Requirements >",
-    "",
-]
-output += [
-    "_____ Three _____",
-    "explicit: '\(three.explicit)'",
-    "implicit: '\(three.implicit)'",
-    "modified: '\(three.modified)'",
-    "recreated: '\(three.recreated)'",
-    "createdLater: '\(three.createdLater)'",
-    "duplicated: '\(three.duplicated)'",
-    "dropped: < Unavailable, not in Requirements >",
-    "",
-]
-
-print(output)
-```
-
-### Output
-
-```
-_____ Root _____
-explicit: 's0-explicit'
-implicit: 's0-implicit'
-modified: 's0-modified'
-recreated: 's0-recreated'
-createdLater: < N/A, created in later scope >
-duplicated: < N/A, created in later scope >
-dropped: 's0-dropped'
-
-_____ One _____
-explicit: 's0-explicit'
-implicit: < Unavailable, not in Requirements. (Passed only implicitly to descendent explicit uses) >
-modified: 's1-modified-s0-modified'
-recreated: 's1-recreated'
-createdLater: 's1-createdLater'
-duplicated: < N/A, created in later scope >
-dropped: < Unavailable, not in Requirements >
-conformance to external module resource requirement: 'Optional(DemoApp.TimingNetworkMonitor)'
-resource from external module: 'NetworkClient.NetworkClientResource<DemoApp.ScopeOneResource<DemoApp.ScopeZeroResource<DependencyKit.NilResource>>>'
-
-_____ Two _____
-explicit: 's0-explicit'
-implicit: 's0-implicit'
-modified: 's1-modified-s0-modified'
-recreated: 's1-recreated'
-createdLater: 's1-createdLater'
-duplicated: 's0-explicit'
-dropped: < Unavailable, not in Requirements >
-
-_____ Three _____
-explicit: 's0-explicit'
-implicit: 's0-implicit'
-modified: 's1-modified-s0-modified'
-recreated: 's1-recreated'
-createdLater: 's1-createdLater'
-duplicated: 's0-explicit'
-dropped: < Unavailable, not in Requirements >
-
-
-```
