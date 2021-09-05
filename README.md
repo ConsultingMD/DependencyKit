@@ -1,11 +1,13 @@
 ![DependencyKit Icon](https://raw.githubusercontent.com/adam-zethraeus/DependencyKit/main/Images/DependencyKit.png)
 # DependencyKit
 
-DependencyKit is a typesafe codegenerated dependency injection framework for Swift. It's under development and isn't ready for use.
+DependencyKit is a typesafe dependency injection framework for Swift.
 
-* The [DependencyKit library](https://github.com/DependencyKit/DependencyKit) (this repo) is included in the project using DependencyKit.
-* The [DependencyKit command line tool](https://github.com/DependencyKit/DependencyKitCLI) is used to generate the code which handles dependencies.
-* A proof of concept [Demo Project using DependencyKit](https://github.com/DependencyKit/DependencyKitDemoApp) exists for development.
+## State of project
+
+The DependencyKit library, this repo, which provides the API and the fundamentals is stable at version 1.0.0.
+
+A [DependencyKit command line tool](https://github.com/DependencyKit/DependencyKitCLI) is under development, and is intended to reduce builderplate in passthrough dependencies. Without it, the library is still usable. Breaking changes to the library API are not anticipated.
 
 ## Philosophy
 
