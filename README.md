@@ -234,7 +234,7 @@ class CurrentScope<I: CurrentScopeRequirements>: Resource<I, ()>, ChildScopeRequ
 
 This is nicely achieved by passing builder functions from the `Resource` into the structures it creates.
 
-```
+```swift
 
 protocol MVVMScopeRequirements {
     var dataSource: AnyPublisher<Models, Never> { get }
