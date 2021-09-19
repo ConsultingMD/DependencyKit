@@ -15,11 +15,37 @@ open class Resource<I: Requirements, P>: ResourceType {
         self.injected = injected
         self.parameters = parameters
     }
+
+    public final func cached<T>(function: String = #function, _ builder: () -> T) -> T {
+        cachedStorageLock.lock()
+        defer { cachedStorageLock.unlock() }
+        let value: T
+        if let stored = cachedStorage[function] as? T {
+            value = stored
+        } else {
+            value = builder()
+            cachedStorage[function] = value
+        }
+        return value
+    }
+
+
+    // MARK: - Private
+    private let cachedStorageLock = NSRecursiveLock()
+    private var cachedStorage = [String: Any]()
+
 }
+
 
 public extension Resource where P == Void {
     convenience init(injecting injected: I) {
         self.init(injecting: injected, parameters: ())
+    }
+}
+
+public extension Resource where I == NilResource, P == Void {
+    convenience init() {
+        self.init(injecting: NilResource(), parameters: ())
     }
 }
 

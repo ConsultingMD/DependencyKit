@@ -60,7 +60,7 @@ protocol ChatThreadListRequirements: Requirements {
 ```
 
 ### Resources
-**`Resource`s *provide* things a scope of your app needs—and may build them**. There is one `Resource` per scope. They are the source for the entities that *their scope* uses, and they help build their *child-scopes* by satisfying the child's declared `Requirements`.
+**`Resource`s *provide* things a scope of your app needs—and may build them**. There is one `Resource` per scope. It is the source for the entities that *its scope* uses, and it helps build its *child-scopes* by satisfying the child's declared `Requirements`.
 
 `Resource`s should be used to *provide* all of what's needed by any construct in their scope.
 They can *pass* things they've received from their parent-scopes through a structure their scope. They can also *build* things that are needed but not directly provided to them by their parent. (They often combine multiple things passed from their parents to make new entities that their parents don't need to know about.)
@@ -72,7 +72,7 @@ When building a child-scope you need to satisfy its `Requirements`. `Resource`s 
 
 A `LoggedInResource` might require state from parent-scope as `LoggedInRequirements` and build out state required to instantiate a child-scope, conforming to its `ChatThreadRequirements`. It could build its child-scope's `ChatThreadResource` directly, passing itself as the required generic `init(injecting:)` parameter.
 ```swift
-class LoggedInResource<I: LoggedInRequirements>: Resource<I>, ChatThreadRequirements {
+class LoggedInResource<I: LoggedInRequirements>: Resource<I, ()>, ChatThreadRequirements {
 
     var currentUser: User {
         User(id: injected.userId, sessionToken: injected.sessionToken)
@@ -124,5 +124,131 @@ extension LoggedInResource: MyThreadsViewControllerParameters {
     }
 
 }
+```
+
+### Resources Part 2: Runtime Parameters
+
+A `Resource` may also have runtime `parameters`. These are runtime dependencies—which are likely not directly available to the parent scope, and so are not modeled as `Requirements`.
+
+They are likely to be configuration for the scope based on user input or network responses.
+
+Parameters are the `Resource` superclass's second generic parameter, and are referenced as `parameters`.
+
+e.g. If the `LoggedInResource` represents the earliest scope after authentication, its parent may not be able to *directly* provide a session token.
+
+```swift
+
+protocol LoggedInRequirements: Requirements {
+    var userId: String { get }
+}
+
+struct LoggedInParameters {
+    let sessionToken: String
+}
+
+class LoggedInResource<I: LoggedInRequirements>: Resource<I, LoggedInParameters>, ChatThreadRequirements {
+
+    var currentUser: User {
+        User(id: injected.userId, sessionToken: parameters.sessionToken)
+    }
+}
+```
+
+`LoggedInResource`'s parent `Resource` can now be refactored to use the `init(injecting:parameters:)` initializer.
+
+```swift
+
+protocol ReLoginRequirements: Requirements {
+    var cachedUserId: String { get }
+}
+
+class ReLoginResource<I: PreAuthenticationRequirements>: Resource<I, ()>, LoggedInRequirements {
+
+    var userId: String { injected.cachedUserId }
+
+    func buildLoggedInResourceOnceAuthenticated(token: String) -> LoggedInResource {
+        LoggedInResource(injecting: self,
+                         paramaters: LoggedInParameters(sessionToken: token))
+    }
+}
+```
+
+### Cached Fields
+
+It is often necessary to persist entities created in a scope across the scope's lifecycle. If a scope contains multiple constructs which should share state, they must all be able to reference it.
+
+The ideal way to do this is to use a `let`—but `let` properties don't have access to `self`. `lazy var`s run after `init` as so have access to `self`—but they lack thread safety.
+
+The `cached` helper function can provide a `lazy var`'s behavior while maintaining thread safety.
+
+
+```swift
+
+class CurrentScope<I: CurrentScopeRequirements>: Resource<I, ()>, ChildScopeRequirements {
+
+    // If no access to the enclosing type is required a `let` is preferrable.
+    let aConstant = UUID().uuidString
+
+    // If your value is a constant data type you could also use a computed value
+    var justData: String { "A constant piece of data" }
+
+    // When you need to access other fields on the Resource a `lazy var` is safe only on a single thread.
+    lazy var unsafeForMultithreadedAccess = "Requires access to `self` to compose with \(self.aConstant)."
+
+    // The `cached(builder:)`, accessed as `cached { /*...*/ }`, will be evaluated and stored as a lazy var would.
+    // But access is thread-safe.
+    var safeLazyCachedValue: String {
+        cached {
+            "This can access \(String(describing: self)), and will return a constant value across accesses. \(UUID().uuidString)"
+        }
+    }
+
+
+    // Note that this is particularly useful for shared state.
+
+
+    var sharedSubject: PassthroughSubject<String, Never> {
+        cached {
+            PassthroughSubject<String, Never>()
+        }
+    }
+
+    var broadcastPublisher: AnyPublisher<String, Never> {
+        sharedSubject.eraseToAnyPublisher()
+    }
+
+    func buildBroadcaster() -> BroadcastingObject {
+        BroadcastingObject(messaging: sharedSubject)
+    }
+
+    func buildReceiver() -> ListeningObject {
+        ListeningObject(monitoring: broadcastPublisher)
+    }
+
+}
+```
+
+### Usage
+
+`Resource`s are intended to be used as the 'Builder' layer of an application. They shouldn't be retained by the objects they create.
+
+This is nicely achieved by passing builder functions from the `Resource` into the structures it creates.
+
+```
+
+protocol MVVMScopeRequirements {
+    var dataSource: AnyPublisher<Models, Never> { get }
+}
+
+class MVVMScopeResource<I: MVVMScopeRequirements>: Resource<I, ()>, ChildScopeRequirements {
+
+    var viewModel: ViewModel { ViewModel(dataSource: injected.dataSource) }
+    var viewController: MyUIViewController { MyUIViewController(viewModel: viewModel, childBuilder: buildChildScope) }
+
+    func buildChildScope() -> ChildScopeResource {
+        ChildScopeResource(injecting: self)
+    }
+}
+
 ```
 

@@ -2,13 +2,86 @@ import XCTest
 @testable import DependencyKit
 
 final class DependencyKitTests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
+    
+    func testCache_BuildsOnce() {
+        let holder = CacheTestResource()
+        let value = holder.value
+        XCTAssertEqual(holder.accessCount, 1)
+        XCTAssertEqual(holder.value, value)
+        XCTAssertEqual(holder.accessCount, 1)
+    }
+
+    func testCache_IsLazy() {
+        let holder = CacheTestResource()
+        XCTAssertEqual(holder.accessCount, 0)
+        XCTAssertEqual(holder.value, holder.innerValue)
+        XCTAssertEqual(holder.accessCount, 1)
+    }
+
+    func testCache_HasUniqueValuesAcrossVars() {
+        let holder = CacheTestResource()
+        let uuids = holder.uuids
+        let uuidSet = Set(uuids)
+        XCTAssertEqual(uuids.count, uuidSet.count)
+    }
+
+    func testCache_IsThreadSafe() {
+        let group = DispatchGroup()
+        let holder = CacheTestResource()
+        for _ in 0...10000 {
+            group.enter()
+            DispatchQueue.global().async {
+                XCTAssertEqual(holder.value, holder.innerValue)
+                group.leave()
+            }
+        }
+        let result = group.wait(timeout: DispatchTime.now() + 10)
+        XCTAssertEqual(holder.accessCount, 1)
+        XCTAssert(result == .success)
     }
 
     static var allTests = [
-        ("testExample", testExample),
+        ("testCache_BuildsOnce", testCache_BuildsOnce),
+        ("testCache_IsLazy", testCache_IsLazy),
+        ("testCache_IsThreadSafe", testCache_IsThreadSafe),
+        ("testCache_HasUniqueValuesAcrossVars", testCache_HasUniqueValuesAcrossVars),
     ]
+}
+
+class CacheTestResource: Resource<NilResource, ()> {
+
+    let innerValue = "Hello"
+    var accessCount = 0
+
+    var value: String {
+        cached {
+            accessCount += 1
+            return innerValue
+        }
+    }
+
+    var uuid1: String {
+        cached { UUID().uuidString }
+    }
+
+    var uuid2: String {
+        cached { UUID().uuidString }
+    }
+
+    var uuid3: String {
+        cached { UUID().uuidString }
+    }
+
+    var uuid4: String {
+        cached { UUID().uuidString }
+    }
+
+    var uuid5: String {
+        cached { UUID().uuidString }
+    }
+
+    var uuids: [String] {
+        [uuid1, uuid2, uuid3, uuid4, uuid5]
+    }
+
 }
