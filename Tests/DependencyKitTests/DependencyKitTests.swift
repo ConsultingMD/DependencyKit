@@ -40,6 +40,14 @@ final class DependencyKitTests: XCTestCase {
         XCTAssert(result == .success)
     }
 
+    func testCache_distinguishesWeirdlyNamedFunctions() {
+        // cached {} uses function names as keys. check this for simple failure cases.
+        let holder = CacheTestResource()
+        let emojiGroup = [holder.👍, holder.👍🏻, holder.👍🏽, holder.👯]
+        let emojiSet = Set(emojiGroup)
+        XCTAssertEqual(emojiGroup.count, emojiSet.count)
+    }
+
     static var allTests = [
         ("testCache_BuildsOnce", testCache_BuildsOnce),
         ("testCache_IsLazy", testCache_IsLazy),
@@ -82,6 +90,22 @@ class CacheTestResource: Resource<NilResource, ()> {
 
     var uuids: [String] {
         [uuid1, uuid2, uuid3, uuid4, uuid5]
+    }
+
+    var 👍: String {
+        cached { UUID().uuidString }
+    }
+
+    var 👍🏽: String {
+        cached { UUID().uuidString }
+    }
+
+    var 👍🏻: String {
+        cached { UUID().uuidString }
+    }
+
+    var 👯: String {
+        cached { UUID().uuidString }
     }
 
 }
