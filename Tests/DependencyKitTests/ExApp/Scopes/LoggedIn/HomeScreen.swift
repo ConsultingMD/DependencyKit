@@ -5,11 +5,14 @@ final class HomeScreen: EXView {
 
     private let profileScreenBuilder: (ProfileScreenListener) -> EXViewType
     private let logOutScreenBuilder: (LogOutScreenListener) -> EXViewType
+    private let supportScreenBuilder: (SupportScreenListener) -> EXViewType
 
     init(profileScreenBuilder: @escaping (ProfileScreenListener) -> EXViewType,
-         logOutScreenBuilder: @escaping (LogOutScreenListener) -> EXViewType) {
+         logOutScreenBuilder: @escaping (LogOutScreenListener) -> EXViewType,
+         supportScreenBuilder: @escaping (SupportScreenListener) -> EXViewType) {
         self.profileScreenBuilder = profileScreenBuilder
         self.logOutScreenBuilder = logOutScreenBuilder
+        self.supportScreenBuilder = supportScreenBuilder
     }
 
     /// MARK: View Lifecycle Behavior
@@ -28,8 +31,12 @@ final class HomeScreen: EXView {
                 case .showLogOutScreenAction:
                     let view = self.logOutScreenBuilder(self)
                     self.push(child: view)
+                case .showSupportAction:
+                    let view = self.supportScreenBuilder(self)
+                    self.push(child: view)
                 case .dismissLogOutScreenAction,
-                     .dismissProfileScreenAction:
+                        .dismissSupportAction,
+                        .dismissProfileScreenAction:
                     // We only needed to pop the log out screen.
                     break
                 }
@@ -46,8 +53,10 @@ final class HomeScreen: EXView {
     enum UserInput {
         case showProfileAction
         case showLogOutScreenAction
+        case showSupportAction
         case dismissLogOutScreenAction
         case dismissProfileScreenAction
+        case dismissSupportAction
     }
 
     private let userInputSubject = PassthroughSubject<UserInput, Never>()
@@ -66,5 +75,11 @@ extension HomeScreen: ProfileScreenListener {
 extension HomeScreen: LogOutScreenListener {
     func cancelLogout() {
         userInputSubject.send(.dismissLogOutScreenAction)
+    }
+}
+
+extension HomeScreen: SupportScreenListener {
+    func cancelSupport() {
+        userInputSubject.send(.dismissSupportAction)
     }
 }

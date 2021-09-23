@@ -8,7 +8,10 @@ protocol AppRequirements: Requirements {
 }
 
 final class AppResource<I: AppRequirements>: Resource<I, ()>,
-                                             LoggedInRequirements {
+                                             LoggedInRequirements,
+                                             SupportRequirements {
+
+    let supportIdentifier: SupportIdentifier = .anonymousUser
 
     let authSubject = CurrentValueSubject<AuthToken?, Never>(nil)
 
@@ -33,6 +36,7 @@ extension AppResource {
     func buildAppStartScreen() -> EXViewType {
         AppStartScreen(loginScreenBuilder: buildLoginScreen,
                        homeScreenBuilder: buildHomeScreen(token:),
+                       supportScreenBuilder: buildSupportScreen(listener:),
                        authPublisher: authPublisher)
     }
 
@@ -45,11 +49,21 @@ extension AppResource {
         let resource = loggedInResource(token: token)
         return resource.buildHomeScreen()
     }
+
+    func buildSupportScreen(listener: SupportScreenListener) -> EXViewType {
+        let resource = supportResource()
+        return resource.buildSupportScreen(listener: listener)
+    }
 }
 
 extension AppResource {
+
+    func supportResource() -> SupportResource<AppResource> {
+        SupportResource(injecting: self)
+    }
+
     func loggedInResource(token: AuthToken) -> LoggedInResource<AppResource> {
         LoggedInResource(injecting: self,
-                           parameters: LoggedInParameters(token: token))
+                         parameters: LoggedInParameters(token: token))
     }
 }

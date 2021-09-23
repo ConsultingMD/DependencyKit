@@ -12,7 +12,11 @@ struct LoggedInParameters{
     let token: String
 }
 
-final class LoggedInResource<I: LoggedInRequirements>: Resource<I, LoggedInParameters> {
+final class LoggedInResource<I: LoggedInRequirements>: Resource<I, LoggedInParameters>,
+                                                       SupportRequirements {
+    var supportIdentifier: SupportIdentifier {
+        .loggedInUser(token: parameters.token)
+    }
 
     private let networkCache = NetworkCacheImpl()
 
@@ -37,12 +41,23 @@ extension LoggedInResource {
 
     func buildHomeScreen() -> EXViewType {
         HomeScreen(profileScreenBuilder: buildProfileScreen(listener:),
-                   logOutScreenBuilder: buildLogOutScreen(listener:))
+                   logOutScreenBuilder: buildLogOutScreen(listener:),
+                   supportScreenBuilder: buildSupportScreen(listener:))
     }
 
     func buildLogOutScreen(listener: LogOutScreenListener) -> EXViewType {
         LogOutScreen(networkClient: authenticatedClient,
                      authSubject: injected.authSubject,
                      listener: listener)
+    }
+}
+
+extension LoggedInResource {
+    func supportResource() -> SupportResource<LoggedInResource> {
+        SupportResource(injecting: self)
+    }
+
+    func buildSupportScreen(listener: SupportScreenListener) -> SupportScreen {
+        supportResource().buildSupportScreen(listener: listener)
     }
 }

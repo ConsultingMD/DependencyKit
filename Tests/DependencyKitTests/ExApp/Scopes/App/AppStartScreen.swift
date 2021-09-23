@@ -5,14 +5,17 @@ final class AppStartScreen: EXView {
 
     private let loginScreenBuilder: () -> EXViewType
     private let homeScreenBuilder: (AuthToken) -> EXViewType
+    private let supportScreenBuilder: (SupportScreenListener) -> EXViewType
     private let authPublisher: AnyPublisher<AuthToken?, Never>
 
     init(loginScreenBuilder: @escaping () -> EXViewType,
          homeScreenBuilder: @escaping (AuthToken) -> EXViewType,
+         supportScreenBuilder: @escaping (SupportScreenListener) -> EXViewType,
          authPublisher: AnyPublisher<AuthToken?, Never>) {
-        self.loginScreenBuilder = loginScreenBuilder
-        self.homeScreenBuilder = homeScreenBuilder
-        self.authPublisher = authPublisher
+             self.loginScreenBuilder = loginScreenBuilder
+             self.homeScreenBuilder = homeScreenBuilder
+             self.supportScreenBuilder = supportScreenBuilder
+             self.authPublisher = authPublisher
     }
 
     /// MARK: View Lifecycle Behavior
@@ -31,9 +34,12 @@ final class AppStartScreen: EXView {
                 case (.none, .goToLoginAction):
                     let view = self.loginScreenBuilder()
                     self.push(child: view)
-                case (.none, .goToRegisterAction):
-                    fatalError("unimplemented!")
-                case (.none, .none):
+                case (.none, .goToSupportAction):
+                    let view = self.supportScreenBuilder(self)
+                    self.push(child: view)
+                case
+                    (.none, .none),
+                    (.none, .cancelSupportAction):
                     // We only had to pop
                     break
                 }
@@ -48,7 +54,8 @@ final class AppStartScreen: EXView {
     /// MARK: User Input Modeling
     enum UserInput {
         case goToLoginAction
-        case goToRegisterAction
+        case goToSupportAction
+        case cancelSupportAction
     }
 
     private let userInputSubject = PassthroughSubject<UserInput?, Never>()
@@ -60,4 +67,10 @@ final class AppStartScreen: EXView {
         userInputSubject.send(input)
     }
 
+}
+
+extension AppStartScreen: SupportScreenListener {
+    func cancelSupport() {
+        userInputSubject.send(.cancelSupportAction)
+    }
 }
