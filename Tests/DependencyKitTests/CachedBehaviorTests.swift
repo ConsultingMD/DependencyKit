@@ -53,6 +53,7 @@ final class CachedBehaviorTests: XCTestCase {
         ("testCache_IsLazy", testCache_IsLazy),
         ("testCache_IsThreadSafe", testCache_IsThreadSafe),
         ("testCache_HasUniqueValuesAcrossVars", testCache_HasUniqueValuesAcrossVars),
+        ("testCache_distinguishesWeirdlyNamedFunctions", testCache_distinguishesWeirdlyNamedFunctions),
     ]
 }
 
