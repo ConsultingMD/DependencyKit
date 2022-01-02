@@ -5,9 +5,9 @@ DependencyKit is a typesafe dependency injection framework for Swift.
 
 ## State of project
 
-The DependencyKit library, this repo, which provides the API and the fundamentals is stable at version 1.0.0.
+The DependencyKit library (this repo) is stable at version 1.1.0. It provides the API and fundamental tools for safe DI.
 
-A [DependencyKit command line tool](https://github.com/DependencyKit/DependencyKitCLI) is under development, and is intended to reduce builderplate in passthrough dependencies. Without it, the library is still usable. Breaking changes to the library API are not anticipated.
+A [DependencyKit command line tool](https://github.com/DependencyKit/DependencyKitCLI) is under development, and is intended to reduce boilerplate in passthrough dependencies. Without it, the library is still usable. Breaking changes to the library API are not anticipated.
 
 ## Philosophy
 
